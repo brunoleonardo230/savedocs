@@ -6,10 +6,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "dompdf/dompdf": "^1.2",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/cashier": "^12.12",
+        "laravel/cashier": "^13.11",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5"
     },

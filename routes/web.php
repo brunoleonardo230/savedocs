@@ -20,3 +20,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+
+Route::get('laravel-version', function() {
+    $laravel = app();
+    return "Your Laravel version is ".$laravel::VERSION;
+});
