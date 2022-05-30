@@ -1,8 +1,14 @@
 <?php
 
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\PortalController;
 use App\Http\Controllers\Subscription\SubscriptionController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/', [PortalController::class, 'index'])->name('portal.index');
+Route::get('/parasuacasa', [PortalController::class, 'parasuacasa'])->name('parasuacasa');
+Route::get('/about', [PortalController::class, 'about'])->name('about');
+
 
 Route::get('subscriptions/resume', [SubscriptionController::class, 'resume'])->name('subscriptions.resume');
 Route::get('subscriptions/cancel', [SubscriptionController::class, 'cancel'])->name('subscriptions.cancel');
@@ -13,7 +19,7 @@ Route::get('subscriptions/checkout', [SubscriptionController::class, 'index'])->
 Route::get('subscriptions/premium', [SubscriptionController::class, 'premium'])->name('subscriptions.premium')->middleware(['subscribed']);
 
 Route::get('/assinar/{url}', [SiteController::class, 'createSessionPlan'])->name('choice.plan');
-Route::get('/', [SiteController::class, 'index'])->name('site.home');
+//Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
