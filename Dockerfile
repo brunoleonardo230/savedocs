@@ -6,6 +6,7 @@ ARG uid
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    nano \
     git \
     curl \
     libpng-dev \
@@ -13,6 +14,9 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip
+
+# Setting default editor
+RUN export EDITOR=/usr/bin/nano
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
