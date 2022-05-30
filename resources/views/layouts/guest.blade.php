@@ -11,14 +11,20 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('themes/css/sb-admin-2.css') }}">
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        
     </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
-        </div>
+    <body class="bg-gradient-primary">
+        
+        {{ $slot }}
+        
+        <!-- Bootstrap core JavaScript-->
+        <script src="{{ asset('themes/vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('themes/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="{{ asset('themes/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="{{ asset('themes/js/sb-admin-2.min.js') }}"></script>
     </body>
 </html>
