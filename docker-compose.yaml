@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      args:
+        user: savedocs
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /var/www/
+    container_name: savedocs_app
+    volumes:
+      - ./:/var/www
+    restart: always
+    networks:
+      - network_svd1
+
+  nginx:
+    image: nginx:alpine
+    container_name: savedocs_nginx
+    restart: always
+    ports:
+      - 8085:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - network_svd1    
+
+  mysql:
+    image: mysql:5.7.22
+    restart: always
+    container_name: savedocs_mysql
+    ports:
+      - 3309:3306
+    volumes:
+      - ./.docker/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - network_svd1
+
+networks:
+  network_svd1:
+    driver: bridge
