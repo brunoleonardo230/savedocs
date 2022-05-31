@@ -11,3 +11,4 @@ Homestead.json
 Homestead.yaml
 *.log
 /.docker
+package-lock.json
