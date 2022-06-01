@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Checkout') }}
+            {{ __('PAGAMENTO') }}
         </h2>
     </x-slot>
 
@@ -12,23 +12,27 @@
 
                     <div id="show-errors" style="display: none;" class="mt-2 text-sm text-red-600"></div>
 
-                    <p>Assinando o: {{ $plan->name }}</p>
-                    <form action="{{ route('subscriptions.store') }}" method="post" id="form">
-                        @csrf
+                    <div class="container">
+                        <p style="margin-top: 1%;"> <b> Você está adquirindo o {{ $plan->name }} </b> </p>
 
-                        <div class="col-span-6 sm:col-span-4 py-2">
-                            <input type="text" name="card-holder-name" id="card-holder-name" placeholder="Nome no cartão" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
-                        </div>
+                        <form action="{{ route('subscriptions.store') }}" method="post" id="form">
+                            @csrf
+    
+                            <div class="col-span-6 sm:col-span-4 py-2 form-group">
+                                <input type="text" name="card-holder-name" id="card-holder-name" placeholder="Nome no cartão" class="form-control w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
+                            </div>
+    
+                            <div class="col-span-6 sm:col-span-4 py-2 form-group">
+                                <div id="card-element"></div>
+                            </div>
+    
+                            <div class="col-span-6 sm:col-span-4 py-2 form-group">
+                                <button id="card-buttom" data-secret="{{ $intent->client_secret }}" type="submit" class="btn btn-success inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"> Enviar </button>
+                            </div>
+    
+                        </form>
 
-                        <div class="col-span-6 sm:col-span-4 py-2">
-                            <div id="card-element"></div>
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-4 py-2">
-                            <button id="card-buttom" data-secret="{{ $intent->client_secret }}" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Enviar</button>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
