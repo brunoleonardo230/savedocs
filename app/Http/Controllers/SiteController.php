@@ -11,13 +11,13 @@ class SiteController extends Controller
     {
         $plans = $plan->with('features')->get();
 
-        return view('home.index', compact('plans'));
+        return view('portal.index', compact('plans'));
     }
 
     public function createSessionPlan(Plan $plan, $urlPlan)
     {
         if (!$plan = $plan->where('url', $urlPlan)->first()) {
-            return redirect()->route('site.home');
+            return redirect()->route('portal.index');
         }
 
         session()->put('plan', $plan);
