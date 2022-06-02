@@ -17,7 +17,7 @@ class CheckChoicePlan
     public function handle(Request $request, Closure $next)
     {
         if (!session()->has('plan')) {
-            return redirect()->route('site.home');
+            return redirect()->route('portal.index');
         }
 
         return $next($request);
