@@ -15,6 +15,13 @@
                                     <div class="text-center d-none d-lg-block">
                                         <img src="{{ asset('themes/img/logo.png') }}" alt="Logo SaveDocs">
                                     </div>
+
+                                     <!-- Session Status -->
+                                    <x-auth-session-status class="mb-4 alert alert-success" :status="session('status')" />
+                                    
+                                    <!-- Validation Errors -->
+                                    <x-auth-validation-errors class="mb-4 alert alert-danger" :errors="$errors" />
+
                                     <form class="user" method="POST" action="{{ route('login') }}">
                                         @csrf
 
