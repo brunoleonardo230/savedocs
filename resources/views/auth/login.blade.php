@@ -27,6 +27,7 @@
                                             <input type="password" name="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Senha">
                                         </div>
+
                                         {{-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
@@ -34,6 +35,7 @@
                                                     Me</label>
                                             </div>
                                         </div> --}}
+
                                         <button class="btn btn-primary btn-user btn-block">
                                             Entrar
                                         </button>
@@ -44,7 +46,7 @@
                                         <a class="small" href="{{ route('password.request') }}">Esqueceu sua senha ?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="{{ route('register') }}">Registrar-se</a>
+                                        <a class="small" href="{{ route('register') }}"> Crie sua conta </a>
                                     </div>
                                 </div>
                             </div>
