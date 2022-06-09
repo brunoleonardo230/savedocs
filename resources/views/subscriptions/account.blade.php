@@ -11,12 +11,27 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     @if ($subscription)
-                        <div class="card">
-                            {{-- <div class="card-header">
-                                <p> <small> Assinante:</small> <strong>{{ $user->plan()->name }}</strong> </p>
-                            </div> --}}
+                        <div class="card">                            
                             <div class="card-body">
-                                <h5 class="card-title"><p> <small> Assinante:</small> <strong>{{ $user->plan()->name }}</strong> </p></h5>
+                                <h5 class="card-title">
+                                    <p>
+                                        <strong>{{ $user->plan()->name }}</strong>
+                                        @if($user->access_status ='active' )
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                <i class="fas fa-check"></i> Ativo
+                                            </div>                                    
+                                        @else
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                <i class="fas fa-times"></i> Cancelado
+                                            </div>
+                                        @endif
+                                    </p>
+                                </h5>
+                                
+                                <p> <strong> Data Inicio:</strong> <small>{{ $user->access_begin }} </small></p>
+                                <p> <strong> Data Renovação:</strong> <small>{{ $user->access_renovation }} </small></p>
+                                <p> Caso não queira renovar a sua assinatura e não ter mais acesso a nossos seviços, basta clicar em "Cancelar Assinatura".</p>
+
                                 <p class="card-text">
                                     @if ($subscription->cancelled() && $subscription->onGracePeriod())
                                         <a href="{{ route('subscriptions.resume') }}" class="btn btn-outline-success">

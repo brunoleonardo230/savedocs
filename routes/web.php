@@ -3,11 +3,15 @@
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\Subscription\SubscriptionController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PortalController::class, 'index'])->name('portal.index');
 Route::get('/parasuacasa', [PortalController::class, 'parasuacasa'])->name('parasuacasa');
 Route::get('/about', [PortalController::class, 'about'])->name('about');
+
+Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::get('users/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 
 
 Route::get('subscriptions/resume', [SubscriptionController::class, 'resume'])->name('subscriptions.resume');
