@@ -18,7 +18,7 @@ class ResourcesTableSeeder extends Seeder
         DB::table('resources')->insert([
             'id'   => 1,
             'name' => 'Lista usuários',
-            'resource' => 'users/index',
+            'resource' => 'users.index',
             'is_menu' => true,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -27,7 +27,7 @@ class ResourcesTableSeeder extends Seeder
         DB::table('resources')->insert([
             'id'   => 2,
             'name' => 'Criar usuário',
-            'resource' => 'users/create',
+            'resource' => 'users.create',
             'is_menu' => true,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
