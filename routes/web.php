@@ -48,16 +48,18 @@ Route::group([ 'middleware' => 'access.control.list'], function() {
     Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
     Route::post('/roles/store', [RoleController::class, 'store'])->name('roles.store');
     Route::get('/roles/show/{id}', [RoleController::class, 'show'])->name('roles.show');
+    Route::get('/roles/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
     Route::put('/roles/update/{id}', [RoleController::class, 'update'])->name('roles.update');
     Route::delete('/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
 	Route::get('/roles/{role}/resources', [RoleController::class, 'syncResources'])->name('roles.resources');
 	Route::put('/roles/{role}/resources', [RoleController::class, 'updateSyncResources'])->name('roles.resources.update');
 
-    Route::get('/resources/index', [RoleController::class, 'index'])->name('resources.index');
-    Route::get('/resources/create', [RoleController::class, 'create'])->name('resources.create');
-    Route::post('/resources/store', [RoleController::class, 'store'])->name('resources.store');
-    Route::get('/resources/show/{id}', [RoleController::class, 'show'])->name('resources.show');
-    Route::put('/resources/update/{id}', [RoleController::class, 'update'])->name('resources.update');
-    Route::delete('/resources/destroy/{id}', [RoleController::class, 'destroy'])->name('resources.destroy');   
+    Route::get('/resources/index', [ResourceController::class, 'index'])->name('resources.index');
+    Route::get('/resources/create', [ResourceController::class, 'create'])->name('resources.create');
+    Route::post('/resources/store', [ResourceController::class, 'store'])->name('resources.store');
+    Route::get('/resources/show/{id}', [ResourceController::class, 'show'])->name('resources.show');
+    Route::get('/resources/edit/{id}', [ResourceController::class, 'edit'])->name('resources.edit');
+    Route::put('/resources/update/{id}', [ResourceController::class, 'update'])->name('resources.update');
+    Route::delete('/resources/destroy/{id}', [ResourceController::class, 'destroy'])->name('resources.destroy');   
     
 });
