@@ -14,8 +14,8 @@ class CreateResourceRoleTable extends Migration
     public function up()
     {
         Schema::create('resource_role', function (Blueprint $table) {
-            $table->unsignedBitInteger('role_id');
-            $table->unsignedBitInteger('resource_id');
+            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('resource_id');
 
             $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('resource_id')->references('id')->on('resources');
