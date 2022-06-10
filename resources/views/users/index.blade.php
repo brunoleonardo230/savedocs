@@ -39,6 +39,7 @@
                 </table>
             </p>
         </div>
+        {{ $users->links() }}
     </div>
 
 </x-app-layout>
