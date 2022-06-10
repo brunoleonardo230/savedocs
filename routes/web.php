@@ -3,6 +3,7 @@
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\Subscription\SubscriptionController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PortalController::class, 'index'])->name('portal.index');
@@ -32,4 +33,8 @@ require __DIR__.'/auth.php';
 Route::get('laravel-version', function() {
     $laravel = app();
     return "Your Laravel version is ".$laravel::VERSION;
+});
+
+Route::group([ 'middleware' => 'access.control.list'], function() {
+    Route::get('/user/index', [UserController::class, 'index'])->name('users.index');
 });
