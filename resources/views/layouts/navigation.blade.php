@@ -19,13 +19,22 @@
             <span> Início </span></a>
     </li>
    
-    @foreach($menus as $m)
-
+    @foreach($modules as $key => $m)
         <li class="nav-item">
-            <a class="nav-link" href="{{ route($m->resource) }}">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapse{{$key}}">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>{{ $m->name }}</span>
+                <span> {{$m['name']}} </span>
             </a>
+            <div id="collapse{{$key}}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    {{-- <h6 class="collapse-header">Login Screens:</h6> --}}
+
+                    @foreach ( $m['resources'] as $r)
+                        <a class="collapse-item" href="{{ route($r->resource) }}"> {{$r->name}} </a>                        
+                    @endforeach
+
+                </div>
+            </div>
         </li>
         
     @endforeach
