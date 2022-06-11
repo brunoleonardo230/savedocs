@@ -3,7 +3,12 @@
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\Subscription\SubscriptionController;
+<<<<<<< HEAD
 use App\Http\Controllers\User\UserController;
+=======
+use App\Http\Controllers\Admin\{
+    UserController, RoleController, ResourceController };
+>>>>>>> 61f1d4aba2ef572f8ab2d1abed1fd47fb32cd1d9
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PortalController::class, 'index'])->name('portal.index');
@@ -36,4 +41,32 @@ require __DIR__.'/auth.php';
 Route::get('laravel-version', function() {
     $laravel = app();
     return "Your Laravel version is ".$laravel::VERSION;
+});
+
+
+
+Route::group([ 'middleware' => 'access.control.list'], function() {
+
+    Route::get('/users/index', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
+
+    Route::get('/roles/index', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::post('/roles/store', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/roles/show/{id}', [RoleController::class, 'show'])->name('roles.show');
+    Route::get('/roles/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::put('/roles/update/{id}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+	Route::get('/roles/{role}/resources', [RoleController::class, 'syncResources'])->name('roles.resources');
+	Route::put('/roles/{role}/resources', [RoleController::class, 'updateSyncResources'])->name('roles.resources.update');
+
+    Route::get('/resources/index', [ResourceController::class, 'index'])->name('resources.index');
+    Route::get('/resources/create', [ResourceController::class, 'create'])->name('resources.create');
+    Route::post('/resources/store', [ResourceController::class, 'store'])->name('resources.store');
+    Route::get('/resources/show/{id}', [ResourceController::class, 'show'])->name('resources.show');
+    Route::get('/resources/edit/{id}', [ResourceController::class, 'edit'])->name('resources.edit');
+    Route::put('/resources/update/{id}', [ResourceController::class, 'update'])->name('resources.update');
+    Route::delete('/resources/destroy/{id}', [ResourceController::class, 'destroy'])->name('resources.destroy');   
+    
 });

@@ -77,4 +77,9 @@ class User extends Authenticatable
 
         return Plan::where('stripe_id', $stripePlan)->first();
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
