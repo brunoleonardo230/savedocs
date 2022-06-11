@@ -50,6 +50,27 @@ class User extends Authenticatable
         return Carbon::make($accessEndAt)->format("d/m/Y à\s H:i:s");
     }
 
+    public function getAccessBeginAttribute()
+    {
+        $accessBeginAt = $this->subscription('default')->created_at;
+
+        return Carbon::make($accessBeginAt)->format("d/m/Y à\s H:i:s");
+    }
+
+    public function getAccessRenovationAttribute()
+    {
+        $accessRenovation = $this->subscription('default')->created_at;
+
+        return Carbon::make($accessRenovation)->addMonth()->format("d/m/Y");
+    }
+
+    public function getAccessStatusAttribute()
+    {
+        $accessStatus = $this->subscription('default')->stripe_status;
+
+        return $accessStatus;
+    }
+
     public function plan()
     {
         $stripePlan = $this->subscription('default')->stripe_price;
