@@ -3,12 +3,8 @@
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\Subscription\SubscriptionController;
-<<<<<<< HEAD
-use App\Http\Controllers\User\UserController;
-=======
 use App\Http\Controllers\Admin\{
     UserController, RoleController, ResourceController };
->>>>>>> 61f1d4aba2ef572f8ab2d1abed1fd47fb32cd1d9
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PortalController::class, 'index'])->name('portal.index');

@@ -29,24 +29,14 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-user"></i>
-=======
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
             aria-expanded="true" aria-controls="collapseUsers">
             <i class="fas fa-fw fa-cog"></i>
->>>>>>> 61f1d4aba2ef572f8ab2d1abed1fd47fb32cd1d9
             <span>Usuários</span>
         </a>
         <div id="collapseUsers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 {{-- <h6 class="collapse-header"></h6> --}}
-<<<<<<< HEAD
-                <a class="collapse-item" href="{{ route('users.index')}}">Lista usuários</a>
-                <a class="collapse-item" href="{{ route('dashboard')}}">Criar usuário</a>
-=======
                 <a class="collapse-item" href="{{ route('users.index')}}"> Listar usuários </a>
             </div>
         </div>
@@ -78,7 +68,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 {{-- <h6 class="collapse-header"></h6> --}}
                 <a class="collapse-item" href="{{ route('resources.index')}}"> Listar permissões </a>
->>>>>>> 61f1d4aba2ef572f8ab2d1abed1fd47fb32cd1d9
             </div>
            
         </div>
