@@ -18,6 +18,7 @@ class CreateResourcesTable extends Migration
             $table->string('name');
             $table->string('resource');
             $table->boolean('is_menu');
+            $table->string('icon')->nullable();
             $table->timestamps();
         });
     }

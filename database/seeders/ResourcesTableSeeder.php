@@ -16,12 +16,13 @@ class ResourcesTableSeeder extends Seeder
     public function run()
     {        
         // Users  ---------------------------
-
+        
         DB::table('resources')->insert([
             'id'   => 1,
             'name' => 'Usuários',
             'resource' => 'users.index',
             'is_menu' => true,
+            'icon'  => 'fa-solid fa-users',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -34,6 +35,7 @@ class ResourcesTableSeeder extends Seeder
             'name' => 'Perfis',
             'resource' => 'roles.index',
             'is_menu' => true,
+            'icon'  => 'fa-solid fa-id-badge',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -46,7 +48,22 @@ class ResourcesTableSeeder extends Seeder
             'name' => 'Permissões',
             'resource' => 'resources.index',
             'is_menu' => true,
+            'icon'  => 'fa-solid fa-list-check',
             'module_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+
+        // Callers ------------------------
+
+        DB::table('resources')->insert([
+            'id'   => 4,
+            'name' => 'Chamados',
+            'resource' => 'callers.index',
+            'is_menu' => true,
+            'icon'  => 'fa-solid fa-headset',
+            'module_id' => 2,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

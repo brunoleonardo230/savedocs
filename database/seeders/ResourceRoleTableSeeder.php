@@ -14,21 +14,34 @@ class ResourceRoleTableSeeder extends Seeder
      */
     public function run()
     {
-        // Administrador | Lista usuários
+        // Administrador | Usuários
         DB::table('resource_role')->insert([
             'role_id'     => 1,
             'resource_id' => 1
         ]);
 
-        // Administrador | Criar usuários
+        // Administrador | Perfis
         DB::table('resource_role')->insert([
             'role_id'     => 1,
             'resource_id' => 2
         ]);
 
+        // Administrador | Permissões
         DB::table('resource_role')->insert([
             'role_id'     => 1,
             'resource_id' => 3
+        ]);
+
+        // Administrador | Chamados
+        DB::table('resource_role')->insert([
+            'role_id'     => 1,
+            'resource_id' => 4
+        ]);
+
+        // Técnico | Chamados
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 4
         ]);
     }
 }

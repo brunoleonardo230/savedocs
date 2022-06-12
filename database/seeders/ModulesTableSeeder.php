@@ -18,15 +18,15 @@ class ModulesTableSeeder extends Seeder
         DB::table('modules')->insert([
             'id'   => 1,
             'name' => 'Cadastro',
-            'icon' => 'fa-thin fa-address-card',
+            'icon' => 'fa-solid fa-address-card',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]); 
-      
+        
         DB::table('modules')->insert([
             'id'   => 2,
-            'name' => 'Consulta',
-            'icon' => 'fas fa-fw fa-cog',
+            'name' => 'Atividade',
+            'icon' => 'fa-solid fa-chart-line',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
