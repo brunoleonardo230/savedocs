@@ -23,7 +23,7 @@
     
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapse{{$key}}">
-                <i class="fas fa-fw fa-cog"></i>
+                <i class="{{$m['icon']}}"></i>
                 <span> {{$m['name']}} </span>
             </a>
             <div id="collapse{{$key}}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -31,7 +31,10 @@
                     {{-- <h6 class="collapse-header">Login Screens:</h6> --}}
 
                     @foreach ( $m['resources'] as $r)
-                        <a class="collapse-item" href="{{route($r['resource'])}}"> {{$r['name']}} </a>                        
+                        <a class="collapse-item" href="{{route($r['resource'])}}"> 
+                            <i class="{{$r['icon']}}"></i>
+                            {{$r['name']}} 
+                        </a>                        
                     @endforeach
 
                 </div>

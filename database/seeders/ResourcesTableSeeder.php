@@ -22,7 +22,7 @@ class ResourcesTableSeeder extends Seeder
             'name' => 'Usuários',
             'resource' => 'users.index',
             'is_menu' => true,
-            'icon'  => 'fa-solid fa-users',
+            'icon'  => 'fas fa-fw fa-users',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -35,7 +35,7 @@ class ResourcesTableSeeder extends Seeder
             'name' => 'Perfis',
             'resource' => 'roles.index',
             'is_menu' => true,
-            'icon'  => 'fa-solid fa-id-badge',
+            'icon'  => 'fas fa-fw fa-id-badge',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -48,7 +48,7 @@ class ResourcesTableSeeder extends Seeder
             'name' => 'Permissões',
             'resource' => 'resources.index',
             'is_menu' => true,
-            'icon'  => 'fa-solid fa-list-check',
+            'icon'  => 'fas fa-fw fa-list',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -62,7 +62,7 @@ class ResourcesTableSeeder extends Seeder
             'name' => 'Chamados',
             'resource' => 'callers.index',
             'is_menu' => true,
-            'icon'  => 'fa-solid fa-headset',
+            'icon'  => 'fas fa-fw fa-headset',
             'module_id' => 2,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

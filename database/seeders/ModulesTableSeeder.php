@@ -18,7 +18,7 @@ class ModulesTableSeeder extends Seeder
         DB::table('modules')->insert([
             'id'   => 1,
             'name' => 'Cadastro',
-            'icon' => 'fa-solid fa-address-card',
+            'icon' => 'fas fa-fw fa-address-card',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]); 
@@ -26,7 +26,7 @@ class ModulesTableSeeder extends Seeder
         DB::table('modules')->insert([
             'id'   => 2,
             'name' => 'Atividade',
-            'icon' => 'fa-solid fa-chart-line',
+            'icon' => 'fas fa-fw fa-chart-line',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
