@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Subscription;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Plan;
 
 class SubscriptionController extends Controller
 {
@@ -40,7 +41,7 @@ class SubscriptionController extends Controller
         return view('subscriptions.premium');
     }
 
-    public function account()
+    public function account(Plan $plan)
     {
         $user = auth()->user();
 
@@ -48,7 +49,9 @@ class SubscriptionController extends Controller
 
         $subscription = $user->subscription('default');
 
-        return view('subscriptions.account', compact('invoices', 'user', 'subscription'));
+        $plans = $plan->with('features')->get();
+
+        return view('subscriptions.account', compact('invoices', 'user', 'subscription','plans'));
     }
 
     public function downloadInvoice($invoiceId)

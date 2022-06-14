@@ -54,11 +54,71 @@
             
                             </div>
                         </div>
+
+                        <div class="card">
+     
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <table class="table table-striped">
+                                        <thead class="text-center">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">DATA</th>
+                                            <th scope="col">PREÇO</th>
+                                            <th scope="col">DOWNLOAD</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($invoices as $key => $invoice)
+                                                <tr class="text-center">
+                                                    <th scope="row">{{ $key +1}}</th>
+                                                    <td>{{ $invoice->date()->toFormattedDateString() }}</td>
+                                                    <td>{{ $invoice->total() }}</td>
+                                                    <td>
+                                                        <a href="{{ route('subscriptions.invoice.download', $invoice->id) }}" class="btn btn-secondary">
+                                                            Baixar
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        
+                                        </tbody>
+                                    </table>
+                                </p>
+                            </div>
+                        </div>
                         
                     @else
                         <div class="alert alert-danger text-center" role="alert">
                             Você não possui plano
                         </div>
+                        <!-- <h1>Escolha seu plano</h1> -->
+                        <div class="row">
+                            @foreach ($plans as $plan)
+                                <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <h3 class="text-uppercase">
+                                                        {{ $plan->name }}
+                                                    </h3>
+                                                    <h2 class="text-primary text-uppercase">R$ {{ $plan->price_br }}</h2>                                                    
+                                                </div>
+                                                <div>
+                                                    <a href="{{ route('choice.plan', $plan->url) }}" class="btn btn-success">Assinar</a>
+                                                </div>
+                                               
+                                                @foreach ($plan->features as $feature)
+                                                    <p>* {{ $feature->name }}</p>                                                    
+                                                @endforeach
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>                                      
                     @endif
                 </div>
             </div>
@@ -67,37 +127,6 @@
 
     <br>
 
-    <div class="card">
-     
-        <div class="card-body">
-            <p class="card-text">
-                <table class="table table-striped">
-                    <thead class="text-center">
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">DATA</th>
-                        <th scope="col">PREÇO</th>
-                        <th scope="col">DOWNLOAD</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($invoices as $key => $invoice)
-                            <tr class="text-center">
-                                <th scope="row">{{ $key +1}}</th>
-                                <td>{{ $invoice->date()->toFormattedDateString() }}</td>
-                                <td>{{ $invoice->total() }}</td>
-                                <td>
-                                    <a href="{{ route('subscriptions.invoice.download', $invoice->id) }}" class="btn btn-secondary">
-                                        Baixar
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                     
-                    </tbody>
-                </table>
-            </p>
-        </div>
-    </div>
+    
 
 </x-app-layout>
