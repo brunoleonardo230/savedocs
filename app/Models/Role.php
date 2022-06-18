@@ -29,4 +29,22 @@ class Role extends Model
     {
         return $this->belongsToMany(Module::class);
     }
+
+    public function isEditable()
+    {
+        switch ($this->id) {
+            case self::ROLE_ADMINISTRATOR:
+                return false;
+                break;
+            case self::ROLE_TECHNICIAN:
+                return false;
+                break;
+            case self::ROLE_CLIENT:
+                return false;
+                break;
+            default:
+                return true;
+                break;
+        }
+    }
 }
