@@ -15,7 +15,7 @@
         <div class="row form-group">
             <div class="col-md-6">
                 <label>Nome perfil: <span class="text-danger">*</span> </label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Ex.: Administrador" value="{{$role->name}}">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Ex.: Administrador" value="{{$role->name}}" required>
         
                 @error('name')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -24,7 +24,7 @@
 
             <div class="col-md-6">
                 <label>Perfil (ROLE_*): <span class="text-danger">*</span> </label> 
-                <input type="text" class="form-control @error('role') is-invalid @enderror" name="role" placeholder="Ex.: ROLE_ADMIN" value="{{$role->role}}">
+                <input type="text" class="form-control @error('role') is-invalid @enderror" name="role" placeholder="Ex.: ROLE_ADMIN" value="{{$role->role}}" required>
                 {{-- <small class="form-text text-muted"> Mantenha o padrão deste campo, mudanças poderão impactar na aplicação.</small> --}}
                 
                 @error('role')
@@ -37,6 +37,8 @@
             <a href="{{route('roles.index')}}" class="btn btn-danger"> Cancelar </a>
             <button class="btn btn-success"> Atualizar </button>
         </div>
+
+        <hr>
     </form>
 
 

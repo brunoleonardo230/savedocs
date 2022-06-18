@@ -9,7 +9,7 @@ class Resource extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'resource', 'is_menu'];
+    protected $fillable = ['name', 'resource', 'is_menu', 'icon', 'module_id'];
 
     public function roles()
     {

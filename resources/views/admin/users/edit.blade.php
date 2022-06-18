@@ -51,6 +51,8 @@
             <a href="{{route('users.index')}}" class="btn btn-danger"> Cancelar </a>
             <button class="btn btn-success"> Atualizar </button>
         </div>
+
+        <hr>
     </form>
 
 </x-app-layout>

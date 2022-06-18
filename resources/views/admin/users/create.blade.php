@@ -49,6 +49,8 @@
             <a href="{{route('users.index')}}" class="btn btn-danger"> Cancelar </a>
             <button class="btn btn-success"> Adicionar </button>
         </div>
+
+        <hr>
     </form>
 
 </x-app-layout>

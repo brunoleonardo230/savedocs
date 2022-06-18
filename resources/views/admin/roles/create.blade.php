@@ -37,6 +37,8 @@
             <a href="{{route('roles.index')}}" class="btn btn-danger"> Cancelar </a>
             <button class="btn btn-success"> Adicionar </button>
         </div>
+
+        <hr>
     </form>
 
 </x-app-layout>
