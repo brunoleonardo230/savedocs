@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($users as $user)
+                @forelse($users as $key => $user)
                     <tr>
                         <td>{{$user->name}}</td>
                         <td>
@@ -35,11 +35,23 @@
                                 <span class="badge badge-warning">  Sem perfil associado </span>
                             @endif
                         </td>
-                        <td>{{$user->created_at->format('d/m/Y H:i:s')}}</td>
+                        <td>{{$user->created_at->format('d/m/Y H:i')}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="{{ route('users.edit', $user->id)}}" type="button" class="btn btn-sm btn-outline-primary mr-1" title="Atualize os dados de: {{$user->name}}"> <i class="fas fa-fw fa-edit"></i> Editar</a>
-                                <a href="#" type="button" class="btn btn-sm btn-outline-danger" title="Remova os dados de: {{$user->name}}"> <i class="fas fa-fw fa-eraser"></i> Remover</a>
+                                
+                                <a href="#" class="btn btn-sm btn-outline-danger"
+                                    onclick="event.preventDefault(); 
+                                    if(confirm('Deseja realmente remover {{$user->name}}?')){
+                                        return document.querySelector('form#user-rm{{$key}}').submit();
+                                    }"> <i class="fas fa-fw fa-eraser"></i> 
+                                    Remover
+                                </a>
+                                
+                                <form action="{{route('users.destroy', $user->id)}}" id="user-rm{{$key}}" method="post">
+                                    @csrf 
+                                    @method('DELETE')
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -50,7 +62,7 @@
                 @endforelse
             </tbody>
         </table>
-        {{-- {{$users->links()}} --}}
+        
     </div>
 
 </x-app-layout>

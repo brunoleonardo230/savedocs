@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\{ DB, Hash };
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\UserRequest;
 use App\Models\{ User, Role };
 
@@ -33,7 +32,7 @@ class UserController extends Controller
 		}
 
 		try {
-			//code...
+			
 			DB::beginTransaction();
 
 			$newUser 			 = $request->all();
@@ -93,12 +92,35 @@ class UserController extends Controller
 					->route('users.index')
 					->with('success', 'Usuário atualizado com sucesso!');
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
 			
 			DB::rollBack();
 	        $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
 
 	        return redirect()->back()->with('danger', $message);
+        }
+    }
+
+	public function destroy($id)
+    {
+        try {
+
+			$user = User::find($id);
+			if (!$user) {
+				return redirect()->route('users.index')
+									->with('danger', 'Usuário inexistente!');
+			}
+
+            $user->delete();
+
+            return redirect()->route('users.index')
+								->with('success', 'Usuário removido com sucesso!');
+
+        } catch (\Exception $e) {
+
+			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar remoção...';
+			return redirect()->route('users.index')
+								->with('danger', $message);
         }
     }
 }
