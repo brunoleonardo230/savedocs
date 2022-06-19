@@ -30,4 +30,46 @@
         <hr>
     </form>
 
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Recursos</th>                    
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+            @forelse($features as $key => $feature)
+                <tr>
+                    <td>{{$feature->id}}</td>
+                    <td>{{$feature->name}}</td>                    
+                    <td>
+                        <div class="btn-group">
+                            <a href="{{route('features.edit', $feature->id)}}" class="btn btn-sm btn-outline-primary mr-1"> <i class="fas fa-fw fa-edit"></i> EDITAR</a>
+
+                            <a href="#" class="btn btn-sm btn-outline-danger"
+                                onclick="event.preventDefault(); 
+                                if(confirm('Deseja realmente remover este Recurso ?')){
+                                    return document.querySelector('form#feature-rm{{$key}}').submit();
+                                }"> <i class="fas fa-fw fa-eraser"></i> 
+                                Remover
+                            </a>
+                            
+                            <form action="{{route('features.destroy', $feature->id)}}" id="feature-rm{{$key}}" method="post">
+                                @csrf 
+                                @method('DELETE')
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="3">Nenhum recurso cadastrado!</td>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
+    </div>
+
 </x-app-layout>

@@ -34,7 +34,9 @@ class FeatureController extends Controller
      */
     public function create()
     {
-        return view('admin.features.create');
+        $features = $this->feature->all();
+
+        return view('admin.features.create', compact('features'));
     }
 
     /**
@@ -49,7 +51,7 @@ class FeatureController extends Controller
 	    	$this->feature->create($request->all());
 
 		    return redirect()
-					->route('plans.index')
+					->route('features.create')
 					->with('success', 'Recurso adicionado com sucesso!');
 
 	    }catch (\Exception $e) {
@@ -79,7 +81,8 @@ class FeatureController extends Controller
      */
     public function edit($id)
     {
-        //
+        $feature = $this->feature->find($id);
+	    return view('admin.features.edit', compact('feature'));
     }
 
     /**
@@ -91,7 +94,24 @@ class FeatureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+
+		    $feature = $this->feature->find($id);
+			if (!$feature) {
+				return redirect()->route('features.create')
+									->with('danger', 'Recurso inexistente!');
+			}
+
+		    $feature->update($request->all());
+
+		    return redirect()
+					->route('features.create')
+					->with('success', 'Recurso atualizado com sucesso!');
+
+	    } catch (\Exception $e) {
+		    $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
+		    return redirect()->back()->with('danger', $message);
+	    }
     }
 
     /**
@@ -102,6 +122,23 @@ class FeatureController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+			$feature = $this->feature->find($id);
+			if (!$feature) {
+				return redirect()->route('features.create')
+									->with('danger', 'Recurso inexistente!');
+			}
+
+			$feature->delete();
+
+			return redirect()
+					->route('features.create')
+					->with('success', 'Recurso removido com sucesso!');
+
+		}catch (\Exception $e) {
+			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar remoção...';
+			return redirect()->back()->with('danger', $message);
+		}
     }
 }
