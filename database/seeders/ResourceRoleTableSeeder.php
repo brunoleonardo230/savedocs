@@ -32,6 +32,12 @@ class ResourceRoleTableSeeder extends Seeder
             'resource_id' => 3
         ]);
 
+        // Administrador | Módulos
+        DB::table('resource_role')->insert([
+            'role_id'     => 1,
+            'resource_id' => 5
+        ]);
+
         // Administrador | Chamados
         DB::table('resource_role')->insert([
             'role_id'     => 1,

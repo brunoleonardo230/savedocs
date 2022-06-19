@@ -6,6 +6,8 @@
         </h2>
     </x-slot>
 
+    <hr>
+
     <div class="row mb-4">
         <div class="col-md-12 mt-4 text-right">
             <a href="{{route('roles.create')}}" class="btn btn-success" title="Adicionar perfil"> <i class="fas fa-fw fa-plus"></i> Adicionar</a>
