@@ -9,9 +9,11 @@ class Plan extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','url','stripe_id','price','recomended','description'];
+    
     public function features()
     {
-        return $this->hasMany(Feature::class);
+        return $this->belongsToMany(Feature::class);
     }
 
     public function getPriceBrAttribute()

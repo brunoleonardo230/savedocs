@@ -9,8 +9,15 @@ class Feature extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function plan()
     {
         return $this->belongsTo(Plan::class);
+    }
+
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class);
     }
 }

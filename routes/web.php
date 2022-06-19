@@ -3,7 +3,7 @@
 use App\Http\Controllers\ {
     SiteController, PortalController, CallController };
 use App\Http\Controllers\Admin\{
-        UserController, RoleController, ResourceController, ModuleController };
+        UserController, RoleController, ResourceController, ModuleController, PlanController};
 use App\Http\Controllers\Subscription\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,4 +53,8 @@ Route::group([ 'middleware' => ['auth','access.control.list']], function() {
     Route::resource('modules', ModuleController::class);
 
     Route::resource('callers', CallController::class);
+
+    Route::resource('plans', PlanController::class);
+    Route::get('/plans/{plan}/features', [PlanController::class, 'syncFeatures'])->name('plans.features');
+	Route::put('/plans/{plan}/features', [PlanController::class, 'updateSyncFeatures'])->name('plans.features.update');
 });
