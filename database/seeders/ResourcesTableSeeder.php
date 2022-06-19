@@ -88,7 +88,7 @@ class ResourcesTableSeeder extends Seeder
             'name' => 'Planos',
             'resource' => 'plans.index',
             'is_menu' => true,
-            'icon'  => 'fas fa-fw fa-check',
+            'icon'  => 'fas fa-fw fa-file',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
