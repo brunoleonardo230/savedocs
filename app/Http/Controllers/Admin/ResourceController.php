@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class ResourceController extends Controller
 {
-	/**
-	 * @var Resource
-	 */
+	
 	private $resource;
 
 	public function __construct(Resource $resource)
@@ -19,11 +17,6 @@ class ResourceController extends Controller
 		$this->resource = $resource;
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
 	public function index()
 	{
 		$resources = $this->resource->paginate(10);
@@ -31,107 +24,87 @@ class ResourceController extends Controller
 		return view('admin.resources.index', compact('resources'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
 	public function create()
 	{
-		return view('admin.resources.create');
+		$modules = \App\Models\Module::all(['id', 'name']);
+		return view('admin.resources.create', compact('modules'));
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param ResourceRequest $request
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
 	public function store(ResourceRequest $request)
 	{
 		try {
+
 			$this->resource->create($request->all());
 
-			flash('Recurso atualizado com sucesso!')->success();
-			return redirect()->route('resources.index');
+			return redirect()
+					->route('resources.index')
+					->with('success', 'Permissão adicionada com sucesso!');
 
-		}catch (\Exception $e) {
+		} catch (\Exception $e) {
 			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
 
-			flash($message)->error();
-			return redirect()->back();
+			return redirect()->back()->with('success', $message);
 		}
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
 	public function show($id)
 	{
 		return redirect()->route('resources.edit', $id);
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
 	public function edit($id)
 	{
 		$resource = $this->resource->find($id);
-		return view('admin.resources.edit', compact('resource'));
+		if (!$resource) {
+			return redirect()->route('resources.index')
+								->with('danger', 'Permissão inexistente!');
+		}
+
+		$modules = \App\Models\Module::all(['id', 'name']);
+		
+		return view('admin.resources.edit', compact('resource','modules'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param ResourceRequest $request
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
 	public function update(ResourceRequest $request, $id)
 	{
 		try {
 			$resource = $this->resource->find($id);
+			if (!$resource) {
+				return redirect()->route('resources.index')
+									->with('danger', 'Permissão inexistente!');
+			}
+
 			$resource->update($request->all());
 
-			flash('Recurso atualizado com sucesso!')->success();
-			return redirect()->route('resources.index');
+			return redirect()
+					->route('resources.index')
+					->with('success', 'Permissão atualizada com sucesso!');
 
 		}catch (\Exception $e) {
 			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
-
-			flash($message)->error();
-			return redirect()->back();
+			return redirect()->back()->with('success', $message);
 		}
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
 	public function destroy($id)
 	{
 		try {
+
 			$resource = $this->resource->find($id);
+			if (!$resource) {
+				return redirect()->route('resources.index')
+									->with('danger', 'Permissão inexistente!');
+			}
+
 			$resource->delete();
 
-			flash('Recurso removido com sucesso!')->success();
-			return redirect()->route('resources.index');
+			return redirect()
+					->route('resources.index')
+					->with('success', 'Permissão removida com sucesso!');
 
 		}catch (\Exception $e) {
 			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar remoção...';
-
-			flash($message)->error();
-			return redirect()->back();
+			return redirect()->back()->with('danger', $message);
 		}
 	}
 }

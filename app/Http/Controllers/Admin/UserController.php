@@ -2,70 +2,125 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\{ DB, Hash };
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
-use App\Models\User;
+use App\Models\{ User, Role };
 
 class UserController extends Controller
 {
 
-    private $user;
-
-	public function __construct(User $user)
-	{
-		$this->user = $user;
-	}
-
     public function index()
     {
-        $users = $this->user->paginate(10);
+        $users = User::all();
         return view('admin.users.index', compact('users'));
+    }
+
+	public function create()
+    {
+		$roles = Role::all('id', 'name');
+
+        return view('admin.users.create', compact('roles'));
+    }
+
+	public function store(UserRequest $request)
+    {
+		if( User::whereEmail($request->email)->first() ) {
+			return redirect()->back()
+							->withErrors( $request );
+		}
+
+		try {
+			
+			DB::beginTransaction();
+
+			$newUser 			 = $request->all();
+			$newUser['password'] = Hash::make('savedocs');
+
+			User::create($newUser);
+
+			DB::commit();
+			return redirect()
+					->route('users.index')
+					->with('success', 'Usuário adicionado com sucesso!');
+
+		} catch (\Exception $e) {
+			DB::rollBack();
+
+			return redirect()->back()
+						->withErrors( $request );
+		}
     }
 
     public function edit($id)
     {
-        $user = $this->user->find($id);
-        $roles = \App\Role::all('id', 'name');
-
+        $user = User::find($id);
+		if (!$user) {
+			return redirect()
+					->route('users.index')
+					->with('danger', 'Usuário inexistente!');
+		}
+		
+		$roles = Role::all('id', 'name');
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
     public function update(UserRequest $request, $id)
     {
         try{
-        	$data = $request->all();
 
-        	if($data['password']){
+			DB::beginTransaction();
 
-        		$validator = Validator::make($data, [
-        			'password' => 'required|string|min:8|confirmed'
-		        ]);
+        	$userRequest = $request->all();
 
-        		if($validator->fails())
-        			return redirect()->back()->withErrors($validator);
+			$user = User::find($id);
+			if (!$user) {
+				return redirect()->route('users.index')
+									->with('danger', 'Usuário inexistente!');
+			}
 
-				$data['password'] = bcrypt($data['password']);
+			$user->update($userRequest);
 
-	        } else {
-        		unset($data['password']);
-	        }
-
-			$user = $this->user->find($id);
-			$user->update($data);
-
-			$role = \App\Role::find($data['role']);
+			$role = Role::find($userRequest['role_id']);
 			$user = $user->role()->associate($role);
 			$user->save();
 
-			flash('Usuário atualizado com sucesso!')->success();
-			return redirect()->route('users.index');
+			DB::commit();
 
-        }catch (\Exception $e) {
+			return redirect()
+					->route('users.index')
+					->with('success', 'Usuário atualizado com sucesso!');
+
+        } catch (\Exception $e) {
+			
+			DB::rollBack();
 	        $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
 
-	        flash($message)->error();
-	        return redirect()->back();
+	        return redirect()->back()->with('danger', $message);
+        }
+    }
+
+	public function destroy($id)
+    {
+        try {
+
+			$user = User::find($id);
+			if (!$user) {
+				return redirect()->route('users.index')
+									->with('danger', 'Usuário inexistente!');
+			}
+
+            $user->delete();
+
+            return redirect()->route('users.index')
+								->with('success', 'Usuário removido com sucesso!');
+
+        } catch (\Exception $e) {
+
+			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar remoção...';
+			return redirect()->route('users.index')
+								->with('danger', $message);
         }
     }
 }

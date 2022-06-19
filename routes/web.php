@@ -3,7 +3,7 @@
 use App\Http\Controllers\ {
     SiteController, PortalController, CallController };
 use App\Http\Controllers\Admin\{
-        UserController, RoleController, ResourceController };
+        UserController, RoleController, ResourceController, ModuleController };
 use App\Http\Controllers\Subscription\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +49,8 @@ Route::group([ 'middleware' => ['auth','access.control.list']], function() {
 	Route::put('/roles/{role}/resources', [RoleController::class, 'updateSyncResources'])->name('roles.resources.update');
 
     Route::resource('resources', ResourceController::class);
+
+    Route::resource('modules', ModuleController::class);
 
     Route::resource('callers', CallController::class);
 });

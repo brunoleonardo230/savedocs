@@ -1,42 +1,40 @@
-@extends('layouts.manager')
+<x-app-layout>
 
-@section('content')
-    <div class="row">
-        <div class="col-md-12 mt-4 d-flex justify-content-between align-items-center">
-            <h2>Sincronizar Papél: <strong>{{$role->name}}</strong> e Recursos</h2>
-        </div>
-    </div>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Sincronizar perfil:') }} <strong>{{$role->name}}</strong> e Recursos
+        </h2>
+    </x-slot>
 
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <hr>
-            <form action="{{route('roles.resources.update', $role->id)}}" method="post">
-                @csrf
-                @method('PUT')
-                <div class="row">
-                    @foreach($resources as $resource)
-                        <div class="col-md-4 pt-4 pb-4">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox"
-                                       name="resources[]"
-                                       class="custom-control-input"
-                                       id="customCheck{{$resource->id}}"
-                                       value="{{$resource->id}}"
-                                       @if($role->resources->contains($resource)) checked @endif
-                                >
-                                <label class="custom-control-label" for="customCheck{{$resource->id}}">{{$resource->resource}}</label>
-                            </div>
-                        </div>
-                    @endforeach
+    <hr>
 
-                    <div class="form-group col-md-12">
-                        <div class="">
-                            <hr>
-                            <button class="btn btn-success" type="submit">Adicionar Recursos ao Papél</button>
-                        </div>
+    <form action="{{route('roles.resources.update', $role->id)}}" method="post">
+        @csrf
+        @method('PUT')
+        <div class="row form-group">
+            <div class="col-md-4 pt-4 pb-4">
+                @foreach($resources as $resource)
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox"
+                            name="resources[]"
+                            class="custom-control-input"
+                            id="customCheck{{$resource->id}}"
+                            value="{{$resource->id}}"
+                            @if($role->resources->contains($resource)) checked @endif
+                        >
+                        <label class="custom-control-label" for="customCheck{{$resource->id}}"> <strong>{{$resource->name}}</strong> <small><span class="badge badge-primary">{{$resource->resource}}</span> </small>   </label>
                     </div>
-                </div>
-            </form>
+                @endforeach
+            </div>
+
         </div>
-    </div>
-@endsection
+
+        <hr>
+
+        <div class="form-group text-right">
+            <a href="{{route('roles.index')}}" class="btn btn-danger"> Cancelar </a>
+            <button class="btn btn-success" type="submit"> Sincronizar </button>
+        </div>
+    </form>
+
+</x-app-layout>
