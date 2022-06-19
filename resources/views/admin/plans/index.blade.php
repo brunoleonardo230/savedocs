@@ -9,9 +9,9 @@
     <hr>
 
     <div class="row mb-4">
-        <!-- <div class="col-md-12 mt-4 text-right">
-            <a href="{{route('plans.create')}}" class="btn btn-success" title="Adicionar plano"> <i class="fas fa-fw fa-plus"></i> Adicionar</a>
-        </div> -->
+        <div class="col-md-12 mt-4 text-right">
+            <a href="{{route('features.create')}}" class="btn btn-success" title="Adicionar plano"> <i class="fas fa-fw fa-plus"></i> Adicionar Recursos</a>
+        </div>
     </div>
     <div class="row">
         <table class="table table-striped">
@@ -46,7 +46,7 @@
                             </form> -->
                             
                             <a href="{{route('plans.features', $plan->id)}}" class="btn btn-sm btn-outline-secondary">
-                                <i class="fas fa-fw fa-list"></i> Atribuir serviços
+                                <i class="fas fa-fw fa-list"></i> Atribuir recursos so plano
                             </a>
 
                         </div>
