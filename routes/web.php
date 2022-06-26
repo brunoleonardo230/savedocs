@@ -3,7 +3,7 @@
 use App\Http\Controllers\ {
     SiteController, PortalController, TicketController };
 use App\Http\Controllers\Admin\{
-        UserController, RoleController, ResourceController, ModuleController, PlanController, FeatureController};
+        UserController, RoleController, ResourceController, ModuleController, PlanController, FeatureController, CategoryController};
 use App\Http\Controllers\Subscription\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +57,10 @@ Route::group([ 'middleware' => ['auth','access.control.list']], function() {
     Route::resource('plans', PlanController::class);
     Route::get('/plans/{plan}/features', [PlanController::class, 'syncFeatures'])->name('plans.features');
 	Route::put('/plans/{plan}/features', [PlanController::class, 'updateSyncFeatures'])->name('plans.features.update');
+
+    Route::resource('categories', CategoryController::class);
+    Route::get('/categories/{category}/services', [CategoryController::class, 'syncServices'])->name('categories.services');
+	Route::put('/categories/{category}/services', [CategoryController::class, 'updateSyncServices'])->name('categories.services.update');
 
     Route::resource('features', FeatureController::class);
 });

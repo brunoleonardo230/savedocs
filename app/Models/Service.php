@@ -10,5 +10,16 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    // public function category()
+    // {
+    //     return $this->belongsTo(Category::class);
+    // }
+
         
 }

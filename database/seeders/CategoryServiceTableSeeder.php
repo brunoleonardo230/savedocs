@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class ServiceCategoryTableSeeder extends Seeder
+class CategoryServiceTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,39 +15,39 @@ class ServiceCategoryTableSeeder extends Seeder
      */
     public function run()
     {        
-        DB::table('service_category')->insert([
+        DB::table('category_service')->insert([
             'category_id'     => 1,
             'service_id' => 1
         ]);
-        DB::table('service_category')->insert([
+        DB::table('category_service')->insert([
             'category_id'     => 1,
             'service_id' => 2
         ]);
-        DB::table('service_category')->insert([
+        DB::table('category_service')->insert([
             'category_id'     => 1,
             'service_id' => 3
         ]);
-        DB::table('service_category')->insert([
+        DB::table('category_service')->insert([
             'category_id'     => 2,
             'service_id' => 4
         ]);
-        DB::table('service_category')->insert([
+        DB::table('category_service')->insert([
             'category_id'     => 2,
             'service_id' => 5
         ]);
-        DB::table('service_category')->insert([
+        DB::table('category_service')->insert([
             'category_id'     => 2,
             'service_id' => 6
         ]);
-        DB::table('service_category')->insert([
+        DB::table('category_service')->insert([
             'category_id'     => 3,
             'service_id' => 7
         ]);
-        DB::table('service_category')->insert([
+        DB::table('category_service')->insert([
             'category_id'     => 3,
             'service_id' => 8
         ]);
-        DB::table('service_category')->insert([
+        DB::table('category_service')->insert([
             'category_id'     => 3,
             'service_id' => 9
         ]);

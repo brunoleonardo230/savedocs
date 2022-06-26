@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServiceCategoryTable extends Migration
+class CreateCategoryServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateServiceCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_category', function (Blueprint $table) {
+        Schema::create('category_service', function (Blueprint $table) {
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('service_id');
 
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('service_id')->references('id')->on('services');            
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateServiceCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_category');
+        Schema::dropIfExists('category_service');
     }
 }
