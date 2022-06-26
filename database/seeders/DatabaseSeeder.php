@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             StatusesTableSeeder::class,
             CategoriesTableSeeder::class,
             ServicesTableSeeder::class,
-            CategoryServiceTableSeeder::class
+            CategoryServiceTableSeeder::class,
+            PrioritiesTableSeeder::class
 
         ]);
     }
