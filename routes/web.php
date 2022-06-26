@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ {
-    SiteController, PortalController, CallController };
+    SiteController, PortalController, TicketController };
 use App\Http\Controllers\Admin\{
         UserController, RoleController, ResourceController, ModuleController, PlanController, FeatureController};
 use App\Http\Controllers\Subscription\SubscriptionController;
@@ -52,7 +52,7 @@ Route::group([ 'middleware' => ['auth','access.control.list']], function() {
 
     Route::resource('modules', ModuleController::class);
 
-    Route::resource('callers', CallController::class);
+    Route::resource('tickets', TicketController::class);
 
     Route::resource('plans', PlanController::class);
     Route::get('/plans/{plan}/features', [PlanController::class, 'syncFeatures'])->name('plans.features');

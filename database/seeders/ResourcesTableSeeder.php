@@ -55,12 +55,12 @@ class ResourcesTableSeeder extends Seeder
         ]);
 
 
-        // Callers ------------------------
+        // Tickets ------------------------
 
         DB::table('resources')->insert([
             'id'   => 4,
-            'name' => 'Chamados',
-            'resource' => 'callers.index',
+            'name' => 'Tickets',
+            'resource' => 'tickets.index',
             'is_menu' => true,
             'icon'  => 'fas fa-fw fa-headset',
             'module_id' => 2,

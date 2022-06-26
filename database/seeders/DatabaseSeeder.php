@@ -21,7 +21,12 @@ class DatabaseSeeder extends Seeder
             ResourceRoleTableSeeder::class,
             UsersTableSeeder::class,
             PlansTableSeeder::class,
-            FeaturesTableSeeder::class
+            FeaturesTableSeeder::class,
+            StatusesTableSeeder::class,
+            CategoriesTableSeeder::class,
+            ServicesTableSeeder::class,
+            ServiceCategoryTableSeeder::class
+
         ]);
     }
 }
