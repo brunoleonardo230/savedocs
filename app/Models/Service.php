@@ -16,6 +16,11 @@ class Service extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'service_id', 'id');
+    }
+
     // public function category()
     // {
     //     return $this->belongsTo(Category::class);
