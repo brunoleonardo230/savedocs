@@ -11,10 +11,10 @@ class Feature extends Model
 
     protected $fillable = ['name'];
 
-    public function plan()
-    {
-        return $this->belongsTo(Plan::class);
-    }
+    // public function plan()
+    // {
+    //     return $this->belongsTo(Plan::class);
+    // }
 
     public function plans()
     {

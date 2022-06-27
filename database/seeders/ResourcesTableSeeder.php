@@ -55,12 +55,12 @@ class ResourcesTableSeeder extends Seeder
         ]);
 
 
-        // Callers ------------------------
+        // Tickets ------------------------
 
         DB::table('resources')->insert([
             'id'   => 4,
-            'name' => 'Chamados',
-            'resource' => 'callers.index',
+            'name' => 'Tickets',
+            'resource' => 'tickets.index',
             'is_menu' => true,
             'icon'  => 'fas fa-fw fa-headset',
             'module_id' => 2,
@@ -89,6 +89,19 @@ class ResourcesTableSeeder extends Seeder
             'resource' => 'plans.index',
             'is_menu' => true,
             'icon'  => 'fas fa-fw fa-file',
+            'module_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        // Category ------------------------
+
+        DB::table('resources')->insert([
+            'id'   => 7,
+            'name' => 'Categorias de Serviços ',
+            'resource' => 'categories.index',
+            'is_menu' => true,
+            'icon'  => 'fas fa-fw fa-list',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

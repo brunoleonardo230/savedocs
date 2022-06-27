@@ -48,7 +48,7 @@
                                     @endif
             
                                     @if ($subscription->ended())
-                                        Plano Cancelada
+                                        Plano Cancelado
                                     @endif
                                 </p>
             
