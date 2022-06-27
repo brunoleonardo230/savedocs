@@ -44,7 +44,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7">Nenhum módulo cadastrado!</td>
+                            <td colspan="9">Nenhum módulo cadastrado!</td>
                         </tr>
                     @endforelse 
                     </tbody>
