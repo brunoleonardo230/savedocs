@@ -17,7 +17,7 @@ class StatusesTableSeeder extends Seeder
     {
         DB::table('statuses')->insert([
             'id'   => 1,
-            'name' => 'Open',
+            'name' => 'ABERTO',
             'color' => '#008000',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -25,7 +25,15 @@ class StatusesTableSeeder extends Seeder
 
         DB::table('statuses')->insert([
             'id'   => 2,
-            'name' => 'Closed',
+            'name' => 'EM ANDAMENTO',
+            'color' => '#0000FF',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('statuses')->insert([
+            'id'   => 3,
+            'name' => 'FECHADO',
             'color' => '#FF0000',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

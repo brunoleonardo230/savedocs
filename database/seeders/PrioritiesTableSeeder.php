@@ -25,7 +25,7 @@ class PrioritiesTableSeeder extends Seeder
 
         DB::table('priorities')->insert([
             'id'   => 2,
-            'name' => 'Media',
+            'name' => 'Média',
             'color' => '#FFFF00',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

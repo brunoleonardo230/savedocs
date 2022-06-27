@@ -24,7 +24,9 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return view('ticket-index');
+        $tickets = Ticket::paginate(10);
+        
+        return view('admin.tickets.ticket-index', compact('tickets'));
     }
 
     /**
@@ -91,7 +93,9 @@ class TicketController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ticket = $this->ticket->find($id);
+
+	    return view('admin.tickets.edit', compact('ticket'));
     }
 
     /**
