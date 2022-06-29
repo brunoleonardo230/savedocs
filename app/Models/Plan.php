@@ -20,4 +20,9 @@ class Plan extends Model
     {
         return number_format($this->price, 2, ',', '.');
     }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }

@@ -150,4 +150,29 @@ class PlanController extends Controller
 			return redirect()->back()->with('danger', $message);
 		}
 	}
+
+    public function syncservices(int $plan)
+	{
+		$plan = $this->plan->find($plan);
+		$services = \App\Models\Service::all(['id', 'name']);
+
+		return view('admin.plans.sync-services', compact('plan', 'services'));
+	}
+
+    public function updateSyncServices($plan, Request $request)
+	{
+		try{
+			$plan = $this->plan->find($plan);
+			$plan->services()->sync($request->services);
+
+
+			return redirect()
+						->route('plans.services', $plan)
+						->with('success', 'serviços atribuidos com sucesso!');
+
+		}catch (\Exception $e) {
+			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar adição de serviço...';
+			return redirect()->back()->with('danger', $message);
+		}
+	}
 }

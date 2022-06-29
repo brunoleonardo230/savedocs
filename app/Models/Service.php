@@ -21,10 +21,10 @@ class Service extends Model
         return $this->hasMany(Ticket::class, 'service_id', 'id');
     }
 
-    // public function category()
-    // {
-    //     return $this->belongsTo(Category::class);
-    // }
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class);
+    }
 
         
 }

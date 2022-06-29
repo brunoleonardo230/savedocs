@@ -94,17 +94,5 @@ class ResourcesTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        // Category ------------------------
-
-        DB::table('resources')->insert([
-            'id'   => 7,
-            'name' => 'Categorias de Serviços ',
-            'resource' => 'categories.index',
-            'is_menu' => true,
-            'icon'  => 'fas fa-fw fa-list',
-            'module_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
     }
 }

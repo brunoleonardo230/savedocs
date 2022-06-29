@@ -32,9 +32,9 @@
                             
                             <a href="{{route('categories.edit', $category->id)}}" type="button" class="btn btn-sm btn-outline-primary mr-1"> <i class="fas fa-fw fa-edit"></i>EDITAR</a>                                                        
                             
-                            <a href="{{route('categories.services', $category->id)}}" class="btn btn-sm btn-outline-secondary mr-1">
+                            <!-- <a href="{{route('categories.services', $category->id)}}" class="btn btn-sm btn-outline-secondary mr-1">
                                 <i class="fas fa-fw fa-list"></i> Atribuir serviço a categoria
-                            </a>
+                            </a> -->
 
                             <a href="#" class="btn btn-sm btn-outline-danger mr-1"
                                 onclick="event.preventDefault(); 

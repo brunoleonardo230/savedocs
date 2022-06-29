@@ -11,6 +11,8 @@
     <div class="row mb-4">
         <div class="col-md-12 mt-4 text-right">
             <a href="{{route('features.create')}}" class="btn btn-success" title="Adicionar plano"> <i class="fas fa-fw fa-plus"></i> Adicionar Recursos</a>
+        
+            <a href="{{route('services.create')}}" class="btn btn-success" title="Adicionar plano"> <i class="fas fa-fw fa-plus"></i> Adicionar Serviços</a>
         </div>
     </div>
     <div class="row">
@@ -30,23 +32,14 @@
                     <td>
                         <div class="btn-group">
                             
-                            <a href="{{route('plans.edit', $plan->id)}}" type="button" class="btn btn-sm btn-outline-primary mr-1"> <i class="fas fa-fw fa-edit"></i>EDITAR</a>
+                            <a href="{{route('plans.edit', $plan->id)}}" type="button" class="btn btn-sm btn-outline-primary mr-1"> <i class="fas fa-fw fa-edit"></i>EDITAR</a>                                                        
                             
-                            <!-- <a href="#" class="btn btn-sm btn-outline-danger mr-1"
-                                onclick="event.preventDefault(); 
-                                if(confirm('Deseja realmente remover o perfil {{$plan->name}}?')){
-                                    return document.querySelector('form#plan-rm{{$key}}').submit();
-                                }"> <i class="fas fa-fw fa-eraser"></i> 
-                                Remover
-                            </a> -->
-                            
-                            <!-- <form action="{{route('plans.destroy', $plan->id)}}" id="plan-rm{{$key}}" method="post">
-                                @csrf 
-                                @method('DELETE')
-                            </form> -->
-                            
-                            <a href="{{route('plans.features', $plan->id)}}" class="btn btn-sm btn-outline-secondary">
-                                <i class="fas fa-fw fa-list"></i> Atribuir recursos so plano
+                            <a href="{{route('plans.features', $plan->id)}}" class="btn btn-sm btn-outline-secondary mr-1">
+                                <i class="fas fa-fw fa-list"></i> Atribuir recursos ao plano Site
+                            </a>
+
+                            <a href="{{route('plans.services', $plan->id)}}" class="btn btn-sm btn-outline-secondary mr-1">
+                                <i class="fas fa-fw fa-list"></i> Atribuir serviço a categoria
                             </a>
 
                         </div>

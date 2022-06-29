@@ -2,13 +2,13 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Sincronizar Categoria:') }} <strong>{{$category->name}}</strong> aos serviços
+            {{ __('Sincronizar Planos:') }} <strong>{{$plan->name}}</strong> aos serviços
         </h2>
     </x-slot>
 
     <hr>
 
-    <form action="{{route('categories.services.update', $category->id)}}" method="post">
+    <form action="{{route('plans.services.update', $plan->id)}}" method="post">
         @csrf
         @method('PUT')
         <div class="row form-group">
@@ -20,7 +20,7 @@
                             class="custom-control-input"
                             id="customCheck{{$service->id}}"
                             value="{{$service->id}}"
-                            @if($category->services->contains($service)) checked @endif
+                            @if($plan->services->contains($service)) checked @endif
                         >
                         <label class="custom-control-label" for="customCheck{{$service->id}}"> <strong>{{$service->name}}</strong></label>
                     </div>
@@ -32,7 +32,7 @@
         <hr>
 
         <div class="form-group text-right">
-            <a href="{{route('categories.index')}}" class="btn btn-danger"> Cancelar </a>
+            <a href="{{route('plans.index')}}" class="btn btn-danger"> Cancelar </a>
             <button class="btn btn-success" type="submit"> Sincronizar </button>
         </div>
     </form>

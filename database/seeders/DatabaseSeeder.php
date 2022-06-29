@@ -24,11 +24,10 @@ class DatabaseSeeder extends Seeder
             FeaturesTableSeeder::class,
             FeaturePlanTableSeeder::class,
             StatusesTableSeeder::class,
-            CategoriesTableSeeder::class,
             ServicesTableSeeder::class,
-            CategoryServiceTableSeeder::class,
             PrioritiesTableSeeder::class,
-            TypesTableSeeder::class
+            TypesTableSeeder::class,
+            PlanServiceTableSeeder::class
 
         ]);
     }
