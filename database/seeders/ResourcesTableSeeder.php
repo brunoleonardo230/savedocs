@@ -101,7 +101,7 @@ class ResourcesTableSeeder extends Seeder
             'name' => 'Status',
             'resource' => 'statuses.index',
             'is_menu' => true,
-            'icon'  => 'fas fa-fw fa-circle-thin',
+            'icon'  => 'fas fa-fw fa-circle',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

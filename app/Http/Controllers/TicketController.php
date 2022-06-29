@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{ DB, Hash };
 use App\Http\Requests\Admin\TicketRequest;
 
-use App\Models\{ Priority,Type,Service,Ticket };    
+use App\Models\{ Priority,Type,Service,Ticket,Status};    
 
 class TicketController extends Controller
 {
@@ -94,8 +94,9 @@ class TicketController extends Controller
     public function edit($id)
     {
         $ticket = $this->ticket->find($id);
+        $statuses = Status::all('id', 'name')->whereNotIn('name',$ticket->status->name);
 
-	    return view('admin.tickets.edit', compact('ticket'));
+	    return view('admin.tickets.edit', compact('ticket','statuses'));
     }
 
     /**
