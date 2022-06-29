@@ -10,9 +10,9 @@
 
     <div class="row mb-4">
         <div class="col-md-12 mt-4 text-right">
-            <a href="{{route('features.create')}}" class="btn btn-success" title="Adicionar plano"> <i class="fas fa-fw fa-plus"></i> Adicionar Recursos</a>
+            <a href="{{route('features.create')}}" class="btn btn-success" title="Adicionar plano"> <i class="fas fa-fw fa-plus"></i>Recursos Plano - Site</a>
         
-            <a href="{{route('services.create')}}" class="btn btn-success" title="Adicionar plano"> <i class="fas fa-fw fa-plus"></i> Adicionar Serviços</a>
+            <a href="{{route('services.create')}}" class="btn btn-success" title="Adicionar plano"> <i class="fas fa-fw fa-plus"></i>Serviços Plano</a>
         </div>
     </div>
     <div class="row">
