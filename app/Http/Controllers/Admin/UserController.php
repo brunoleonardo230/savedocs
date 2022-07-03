@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{ DB, Hash };
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
-use App\Models\{ User, Role };
+use App\Models\{ User, Role, Address };
 
 class UserController extends Controller
 {
@@ -37,6 +37,11 @@ class UserController extends Controller
 
 			$newUser 			 = $request->all();
 			$newUser['password'] = Hash::make('savedocs');
+
+			$address = Address::create($request->addressArray);
+			
+			if($address)
+				$newUser['address_id'] = $address->id;
 
 			User::create($newUser);
 
