@@ -55,12 +55,12 @@ class ResourcesTableSeeder extends Seeder
         ]);
 
 
-        // Callers ------------------------
+        // Tickets ------------------------
 
         DB::table('resources')->insert([
             'id'   => 4,
-            'name' => 'Chamados',
-            'resource' => 'callers.index',
+            'name' => 'Tickets',
+            'resource' => 'tickets.index',
             'is_menu' => true,
             'icon'  => 'fas fa-fw fa-headset',
             'module_id' => 2,
@@ -93,5 +93,19 @@ class ResourcesTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+
+        // Status ------------------------
+
+        DB::table('resources')->insert([
+            'id'   => 7,
+            'name' => 'Status',
+            'resource' => 'statuses.index',
+            'is_menu' => true,
+            'icon'  => 'fas fa-fw fa-circle',
+            'module_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
     }
 }

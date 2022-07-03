@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\ {
-    SiteController, PortalController, CallController };
+    SiteController, PortalController, TicketController };
 use App\Http\Controllers\Admin\{
-        UserController, RoleController, ResourceController, ModuleController, PlanController, FeatureController};
+        UserController, RoleController, ResourceController, ModuleController, PlanController, FeatureController, CategoryController, ServiceController,StatusController};
 use App\Http\Controllers\Subscription\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,11 +52,17 @@ Route::group([ 'middleware' => ['auth','access.control.list']], function() {
 
     Route::resource('modules', ModuleController::class);
 
-    Route::resource('callers', CallController::class);
+    Route::resource('tickets', TicketController::class);
 
     Route::resource('plans', PlanController::class);
     Route::get('/plans/{plan}/features', [PlanController::class, 'syncFeatures'])->name('plans.features');
 	Route::put('/plans/{plan}/features', [PlanController::class, 'updateSyncFeatures'])->name('plans.features.update');
-
+    Route::get('/plans/{plan}/services', [PlanController::class, 'syncServices'])->name('plans.services');
+	Route::put('/plans/{plan}/services', [PlanController::class, 'updateSyncServices'])->name('plans.services.update');
+    
     Route::resource('features', FeatureController::class);
+
+    Route::resource('services', ServiceController::class);
+
+    Route::resource('statuses', StatusController::class);
 });

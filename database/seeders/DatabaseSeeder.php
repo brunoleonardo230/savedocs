@@ -22,7 +22,13 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             PlansTableSeeder::class,
             FeaturesTableSeeder::class,
-            FeaturePlanTableSeeder::class
+            FeaturePlanTableSeeder::class,
+            StatusesTableSeeder::class,
+            ServicesTableSeeder::class,
+            PrioritiesTableSeeder::class,
+            TypesTableSeeder::class,
+            PlanServiceTableSeeder::class
+
         ]);
     }
 }

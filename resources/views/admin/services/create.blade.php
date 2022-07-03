@@ -2,13 +2,13 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Adicionar Recurso') }}
+            {{ __('Adicionar Serviço') }}
         </h2>
     </x-slot>
 
     <hr>
 
-    <form action="{{route('features.store')}}"  method="post">
+    <form action="{{route('services.store')}}"  method="post">
         @csrf
 
         <div class="row form-group">
@@ -40,23 +40,23 @@
                 </tr>
             </thead>
             <tbody>
-            @forelse($features as $key => $feature)
+            @forelse($services as $key => $service)
                 <tr>
-                    <td>{{$feature->id}}</td>
-                    <td>{{$feature->name}}</td>                    
+                    <td>{{$service->id}}</td>
+                    <td>{{$service->name}}</td>                    
                     <td>
                         <div class="btn-group">
-                            <a href="{{route('features.edit', $feature->id)}}" class="btn btn-sm btn-outline-primary mr-1"> <i class="fas fa-fw fa-edit"></i> EDITAR</a>
+                            <a href="{{route('services.edit', $service->id)}}" class="btn btn-sm btn-outline-primary mr-1"> <i class="fas fa-fw fa-edit"></i> EDITAR</a>
 
                             <a href="#" class="btn btn-sm btn-outline-danger"
                                 onclick="event.preventDefault(); 
                                 if(confirm('Deseja realmente remover este Recurso ?')){
-                                    return document.querySelector('form#feature-rm{{$key}}').submit();
+                                    return document.querySelector('form#service-rm{{$key}}').submit();
                                 }"> <i class="fas fa-fw fa-eraser"></i> 
                                 Remover
                             </a>
                             
-                            <form action="{{route('features.destroy', $feature->id)}}" id="feature-rm{{$key}}" method="post">
+                            <form action="{{route('services.destroy', $service->id)}}" id="service-rm{{$key}}" method="post">
                                 @csrf 
                                 @method('DELETE')
                             </form>
