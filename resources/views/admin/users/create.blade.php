@@ -161,13 +161,18 @@
         <hr>
     </form>
 
-    <script>
+    @section('scripts')
 
-        function searchZipCode(){
-            const inputZipCode = $('input#zip_code').val();
+        <script>
 
-            console.log(inputZipCode)
-        }
-    </script>
+            function searchZipCode(){
+                const inputZipCode = $('input#zip_code').val();
+
+                alert("test btn search zipcode");
+            }
+        </script>
+        
+    @endsection
+
 
 </x-app-layout>

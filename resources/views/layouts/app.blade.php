@@ -5,12 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'SaveDocs') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('themes/vendor/fontawesome-free/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('themes/vendor/datatables/dataTables.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('themes/css/sb-admin-2.css') }}">
         
 
@@ -58,7 +59,47 @@
         <script src="{{ asset('themes/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>        
 
         <!-- Page level custom scripts -->
-        <script src="{{ asset('themes/js/demo/datatables-demo.js') }}"></script>
+        <!-- <script src="{{ asset('themes/js/demo/datatables-demo.js') }}"></script> -->
+
+        <script>
+            $(document).ready( function () {
+                $('.data-table').DataTable({
+                    "language":{
+                        "decimal":        "",
+                        "emptyTable":     "Tabela limpa",
+                        "info":           "Exibindo _START_ até _END_ de _TOTAL_ registros",
+                        "infoEmpty":      "Sem registros",
+                        "infoFiltered":   "(filtrado por _MAX_ total de registros)",
+                        "infoPostFix":    "",
+                        "thousands":      ",",
+                        "lengthMenu":     "Exibir: _MENU_",
+                        "loadingRecords": "Carregando...",
+                        "processing":     "Processando...",
+                        "search":         "Buscar:",
+                        "zeroRecords":    "Nenhum registro encontrado",
+                        "paginate": {
+                            "first":      "Primeiro",
+                            "last":       "Ultimo",
+                            "next":       "Proximo",
+                            "previous":   "Anterior"
+                        },
+                        "aria": {
+                            "sortAscending":  ": activate to sort column ascending",
+                            "sortDescending": ": activate to sort column descending"
+                        },
+                        "responsive": "true",
+                    }, 
+                    "autoWidth": true
+                }); 
+
+                // const divSearchDataTable = $('.data-table').find('.dataTables_filter');
+                // console.log(divSearchDataTable)
+                // $(divSearchDataTable).css('text-align:rigth')
+            });
+        </script>
+
+
+        @yield('scripts')
 
         {{-- @livewireScripts --}}
 
