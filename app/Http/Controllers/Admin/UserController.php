@@ -26,6 +26,7 @@ class UserController extends Controller
 
 	public function store(UserRequest $request)
     {
+
 		if( User::whereEmail($request->email)->first() ) {
 			return redirect()->back()
 							->withErrors( $request );
@@ -38,10 +39,15 @@ class UserController extends Controller
 			$newUser 			 = $request->all();
 			$newUser['password'] = Hash::make('savedocs');
 
-			$address = Address::create($request->addressArray);
-			
-			if($address)
-				$newUser['address_id'] = $address->id;
+			if( !empty($request->addressArray['zip_code']) ) {
+
+				$address = Address::create($request->addressArray);
+				
+				if($address)
+					$newUser['address_id'] = $address->id;
+
+			}
+
 
 			User::create($newUser);
 

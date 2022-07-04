@@ -18,7 +18,6 @@
         {{-- Lib Stripe --}}
         <script src="https://js.stripe.com/v3/"></script>
 
-        {{-- @livewireStyles --}}
     </head>
     <body id="page-top">
         <div id="wrapper">
@@ -91,17 +90,82 @@
                     }, 
                     "autoWidth": true
                 }); 
-
-                // const divSearchDataTable = $('.data-table').find('.dataTables_filter');
-                // console.log(divSearchDataTable)
-                // $(divSearchDataTable).css('text-align:rigth')
             });
+        </script>
+
+        <!-- Adicionando Javascript -->
+        <script>
+
+            function clearAddressForm() {
+                $("input#zip_code").val("");
+                $("input#address").val("");
+                $("input#number").val("");
+                $("input#complement").val("");
+                $("input#neighborhood").val("");
+                $("input#city").val("");
+                $("input#state").val("");
+            }
+
+            function hideAddressForm() {
+                $("#div_address").css("display", "none");
+            }
+
+            function searchZipCode(isUserEdit) {
+                const inputZipCode = $('input#zip_code').val();
+
+                //Nova variável "CEP" somente com dígitos.
+                var zipCode = $("input#zip_code").val().replace(/\D/g, '');
+
+                //Verifica se campo CEP possui valor informado.
+                if (zipCode != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validateZipCode = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validateZipCode.test(zipCode)) {
+
+                        $("#div_address").css("display", "block");
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/"+ zipCode +"/json/?callback=?", function(data) {
+                            console.log(data)
+                            if (!("erro" in data)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("input#address").val(data.logradouro);
+                                $("input#number").prop('readonly', false);
+                                $("input#complement").val(data.complemento).prop('readonly', false);
+                                $("input#neighborhood").val(data.bairro);
+                                $("input#city").val(data.localidade);
+                                $("input#state").val(data.uf);
+                            }
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                clearAddressForm();
+                                hideAddressForm();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    }
+                    else {
+                        //CEP é inválido.
+                        clearAddressForm();
+                        hideAddressForm();
+                        alert("Formato de CEP inválido.");
+                    }
+                }
+                else {
+                    //CEP sem valor, limpa formulário.
+                    if (!isUserEdit) {
+                        clearAddressForm();
+                        hideAddressForm();
+                    }
+                }
+            }
         </script>
 
 
         @yield('scripts')
-
-        {{-- @livewireScripts --}}
 
     </body>
 </html>
