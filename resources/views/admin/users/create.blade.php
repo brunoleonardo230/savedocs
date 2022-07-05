@@ -12,33 +12,35 @@
         <div class="card">
             <div class="card-body">
 
-                <strong> Dados pessoais </strong>
-                <small class="form-text text-muted">Mantenha os dados atualizados.</small>
-
-                <div class="row form-group mt-2">
+                <div class="row form-group">
                     <div class="col-md-12">
-                        <label>Nome completo: <span class="text-danger">*</span> </label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required>
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                        @enderror
+                        <label> Conta para pessoa:  <span class="text-danger">*</span> </label> <br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="physical_person" name="type_person" class="form-control @error('type_person') is-invalid @enderror" value="1" checked>
+                            <label class="custom-control-label" for="physical_person">Física</label>
+                        </div>
+        
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="legal_person" name="type_person" class="form-control @error('type_person') is-invalid @enderror" value="2">
+                            <label class="custom-control-label" for="legal_person">Jurídica</label>
+                        </div>
                     </div>
                 </div>
-        
+
+                <div id="div_physical_person" class="mt-4">
+                    
+                    @include('admin.users.includes.create-physical-person')
+
+                </div>
+
+                <div id="div_legal_person" class="mt-4" style="display:none">
+
+                    @include('admin.users.includes.create-legal-person')
+            
+                </div>
+
                 <div class="row form-group">
-                    <div class="col-md-6">
-                        <label>E-mail: <span class="text-danger">*</span> </label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
-                        @error('email')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                        @enderror
-                    </div>
-        
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label>Perfil: <span class="text-danger">*</span> </label>
                         <select name="role_id" class="form-control" required>
                             <option value=""> -- Selecione -- </option>
@@ -48,6 +50,7 @@
                         </select>
                     </div>
                 </div>
+
 
                 <hr class="mt-4">
 
@@ -152,7 +155,6 @@
 
                 </div>
         
-
                 <div class="form-group text-right mt-5">
                     <a href="{{route('users.index')}}" class="btn btn-danger"> Cancelar </a>
                     <button class="btn btn-success"> Adicionar </button>
@@ -160,12 +162,27 @@
             </div>
         </div>
 
-
-
-        <hr>
     </form>
 
     @section('scripts')
+        <script>
+            // $(document).ready( function () {
+               
+            // });
+
+            $("#physical_person" ).click(function() {
+                console.log('fisica')
+                $("#div_physical_person").css("display", "block");
+                $("#div_legal_person").css("display", "none");
+            });
+
+            $("#legal_person" ).click(function() {
+                console.log('juridica')
+                $("#div_legal_person").css("display", "block");
+                $("#div_physical_person").css("display", "none");
+            });
+        </script>
+
 
         
     @endsection

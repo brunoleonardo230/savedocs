@@ -14,6 +14,41 @@
         <link rel="stylesheet" href="{{ asset('themes/vendor/datatables/dataTables.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('themes/css/sb-admin-2.css') }}">
         
+        <style>
+            input[type='radio'] {
+                position: absolute;
+                z-index: -1;
+                opacity: 0;
+            }
+        
+            input[type='radio'] + label {
+                position: relative;
+                cursor: pointer;
+                padding-left: 30px;
+            }
+        
+            input[type='radio'] + label::before {
+                content: '';
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                left: 0;
+                bottom: 0;
+                border: solid 2px;
+                vertical-align: bottom;
+            }
+            input[type='radio']:checked + label::after {
+                content: '';
+                position: absolute;
+                left: 10px;
+                bottom: 10px;
+                width: 10px;
+                height: 20px;
+                border-right: solid 3px green;
+                border-bottom: solid 3px green;
+                transform: rotate(45deg);
+            }
+        </style>
 
         {{-- Lib Stripe --}}
         <script src="https://js.stripe.com/v3/"></script>
