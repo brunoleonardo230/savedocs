@@ -18,10 +18,14 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'id'                => 1,
+            'type_user_id'      => 1,
             'name'              => 'Administrador_01',
+            'cpf'               => NULL,
             'email'             => 'admin1@mail.com',
+            'fantasy_name'      => NULL,
+            'cnpj'              => NULL,
             'email_verified_at' => NULL,
-            'password'          => Hash::make('12345678'),
+            'password'          => Hash::make('savedocs'),
             'remember_token'    => NULL,
             'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'        => Carbon::now()->format('Y-m-d H:i:s'),
@@ -29,15 +33,20 @@ class UsersTableSeeder extends Seeder
             'pm_type'           => NULL,
             'pm_last_four'      => NULL,
             'trial_ends_at'     => NULL,
-            'role_id'           => 1
+            'role_id'           => 1,
+            'representative_id' => NULL
         ]);
 
         DB::table('users')->insert([
             'id'                => 2,
+            'type_user_id'      => 1,
             'name'              => 'Tecnico_01',
+            'cpf'               => NULL,
             'email'             => 'tecnico1@mail.com',
+            'fantasy_name'      => NULL,
+            'cnpj'              => NULL,
             'email_verified_at' => NULL,
-            'password'          => Hash::make('12345678'),
+            'password'          => Hash::make('savedocs'),
             'remember_token'    => NULL,
             'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'        => Carbon::now()->format('Y-m-d H:i:s'),
@@ -45,15 +54,20 @@ class UsersTableSeeder extends Seeder
             'pm_type'           => NULL,
             'pm_last_four'      => NULL,
             'trial_ends_at'     => NULL,
-            'role_id'           => 2
+            'role_id'           => 2,
+            'representative_id' => NULL
         ]);
 
         DB::table('users')->insert([
             'id'                => 3,
+            'type_user_id'      => 1,
             'name'              => 'Cliente_01',
+            'cpf'               => NULL,
             'email'             => 'cliente1@mail.com',
+            'fantasy_name'      => NULL,
+            'cnpj'              => NULL,
             'email_verified_at' => NULL,
-            'password'          => Hash::make('12345678'),
+            'password'          => Hash::make('savedocs'),
             'remember_token'    => NULL,
             'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'        => Carbon::now()->format('Y-m-d H:i:s'),
@@ -61,15 +75,20 @@ class UsersTableSeeder extends Seeder
             'pm_type'           => NULL,
             'pm_last_four'      => NULL,
             'trial_ends_at'     => NULL,
-            'role_id'           => 3
+            'role_id'           => 3,
+            'representative_id' => NULL
         ]);
 
         DB::table('users')->insert([
             'id'                => 4,
+            'type_user_id'      => 1,
             'name'              => 'Thiel Serra',
+            'cpf'               => NULL,
             'email'             => 'thiel.serra@gmail.com',
+            'fantasy_name'      => NULL,
+            'cnpj'              => NULL,
             'email_verified_at' => NULL,
-            'password'          => Hash::make('12345678'),
+            'password'          => Hash::make('savedocs'),
             'remember_token'    => NULL,
             'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'        => Carbon::now()->format('Y-m-d H:i:s'),
@@ -77,15 +96,20 @@ class UsersTableSeeder extends Seeder
             'pm_type'           => NULL,
             'pm_last_four'      => NULL,
             'trial_ends_at'     => NULL,
-            'role_id'           => 1
+            'role_id'           => 1,
+            'representative_id' => NULL
         ]);
 
         DB::table('users')->insert([
             'id'                => 5,
+            'type_user_id'      => 1,
             'name'              => 'Bruno Leonardo',
+            'cpf'               => NULL,
             'email'             => 'bruno@mail.com',
+            'fantasy_name'      => NULL,
+            'cnpj'              => NULL,
             'email_verified_at' => NULL,
-            'password'          => Hash::make('12345678'),
+            'password'          => Hash::make('savedocs'),
             'remember_token'    => NULL,
             'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'        => Carbon::now()->format('Y-m-d H:i:s'),
@@ -93,7 +117,29 @@ class UsersTableSeeder extends Seeder
             'pm_type'           => NULL,
             'pm_last_four'      => NULL,
             'trial_ends_at'     => NULL,
-            'role_id'           => 1
+            'role_id'           => 1,
+            'representative_id' => NULL
+        ]);
+
+        DB::table('users')->insert([
+            'id'                => 6,
+            'type_user_id'      => 2,
+            'name'              => '',
+            'cpf'               => NULL,
+            'email'             => NULL,
+            'fantasy_name'      => 'Save Docs',
+            'cnpj'              => '99999999999999',
+            'email_verified_at' => NULL,
+            'password'          => Hash::make('savedocs'),
+            'remember_token'    => NULL,
+            'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'        => Carbon::now()->format('Y-m-d H:i:s'),
+            'stripe_id'         => NULL,
+            'pm_type'           => NULL,
+            'pm_last_four'      => NULL,
+            'trial_ends_at'     => NULL,
+            'role_id'           => 3,
+            'representative_id' => 1
         ]);
     }
 }
