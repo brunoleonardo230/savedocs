@@ -90,7 +90,9 @@
         <script src="{{ asset('themes/js/sb-admin-2.min.js') }}"></script>
         <!-- Page level plugins -->
         <script src="{{ asset('themes/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('themes/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>        
+        <script src="{{ asset('themes/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>     
+        
+        <script src="{{ asset('themes/vendor/jquery-mask/jquery.mask.min.js') }}"></script>
 
         <!-- Page level custom scripts -->
         <!-- <script src="{{ asset('themes/js/demo/datatables-demo.js') }}"></script> -->
@@ -128,8 +130,74 @@
             });
         </script>
 
-        <!-- Adicionando Javascript -->
         <script>
+            //  Adicionando Javascript Para Cadastro de Usuários
+            function searchZipCode(isUserEdit) {
+                const inputZipCode = $('input#zip_code').val();
+
+                errorZipCodeHTML();
+
+                //Nova variável "CEP" somente com dígitos.
+                var zipCode = $("input#zip_code").val().replace(/\D/g, '');
+
+                //Verifica se campo CEP possui valor informado.
+                if (zipCode != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validateZipCode = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if (validateZipCode.test(zipCode)) {
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/"+ zipCode +"/json/?callback=?", function(data) {
+                            
+                            if (!("erro" in data)) {
+
+                                showAddressForm();
+
+                                //Atualiza os campos com os valores da consulta.
+                                $("input#address").val(data.logradouro);
+                                $("input#number").prop('readonly', false);
+                                $("input#complement").val(data.complemento).prop('readonly', false);
+                                $("input#neighborhood").val(data.bairro);
+                                $("input#city").val(data.localidade);
+                                $("input#state").val(data.uf);
+                            } else {
+                                //CEP pesquisado não foi encontrado.
+                                clearAddressForm();
+                                hideAddressForm();
+                                errorZipCodeHTML(true, "CEP não encontrado.");
+                            }
+                        });
+                    }  else {
+                        //CEP é inválido.
+                        clearAddressForm();
+                        hideAddressForm();
+                        errorZipCodeHTML(true, "Formato de CEP inválido.");
+                    }
+                } else {
+                    //CEP sem valor, limpa formulário.
+                    if (!isUserEdit) {
+                        clearAddressForm();
+                        hideAddressForm();
+                    }
+
+                    errorZipCodeHTML(true, "Informe um CEP para busca.");
+                }
+            }
+
+            function addMaskInputs() {
+                $("input#cnpj").mask('00.000.000/0000-00', {reverse: true});
+                
+                $("input#cpf").mask("000.000.000-00", {reverse: true});
+                $("input#representative_cpf").mask("000.000.000-00", {reverse: true});
+
+                $("input#phone").mask('(00) 00000-0000');
+                $("input#representative_fone").mask('(00) 00000-0000');
+
+                $("input#zip_code").mask("00000-000");
+            }
 
             function clearAddressForm() {
                 $("input#zip_code").val("");
@@ -145,58 +213,30 @@
                 $("#div_address").css("display", "none");
             }
 
-            function searchZipCode(isUserEdit) {
-                const inputZipCode = $('input#zip_code').val();
-
-                //Nova variável "CEP" somente com dígitos.
-                var zipCode = $("input#zip_code").val().replace(/\D/g, '');
-
-                //Verifica se campo CEP possui valor informado.
-                if (zipCode != "") {
-
-                    //Expressão regular para validar o CEP.
-                    var validateZipCode = /^[0-9]{8}$/;
-
-                    //Valida o formato do CEP.
-                    if(validateZipCode.test(zipCode)) {
-
-                        $("#div_address").css("display", "block");
-
-                        //Consulta o webservice viacep.com.br/
-                        $.getJSON("https://viacep.com.br/ws/"+ zipCode +"/json/?callback=?", function(data) {
-                            console.log(data)
-                            if (!("erro" in data)) {
-                                //Atualiza os campos com os valores da consulta.
-                                $("input#address").val(data.logradouro);
-                                $("input#number").prop('readonly', false);
-                                $("input#complement").val(data.complemento).prop('readonly', false);
-                                $("input#neighborhood").val(data.bairro);
-                                $("input#city").val(data.localidade);
-                                $("input#state").val(data.uf);
-                            }
-                            else {
-                                //CEP pesquisado não foi encontrado.
-                                clearAddressForm();
-                                hideAddressForm();
-                                alert("CEP não encontrado.");
-                            }
-                        });
-                    }
-                    else {
-                        //CEP é inválido.
-                        clearAddressForm();
-                        hideAddressForm();
-                        alert("Formato de CEP inválido.");
-                    }
-                }
-                else {
-                    //CEP sem valor, limpa formulário.
-                    if (!isUserEdit) {
-                        clearAddressForm();
-                        hideAddressForm();
-                    }
-                }
+            function showAddressForm() {
+                $("#div_address").css("display", "block");
             }
+
+            function errorZipCodeHTML(isVisible = false, msg = '') {
+                const errorZipCodeMessage = $("#errorZipCodeMessage");
+
+                if (isVisible) {
+
+                    const content =  `
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Ops!</strong> ${msg}.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    `;
+
+                   return $(errorZipCodeMessage).html(content);
+                }
+
+                return $(errorZipCodeMessage).text('');
+            }
+
         </script>
 
 

@@ -22,6 +22,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Tipo conta</th>
                             <th>Perfil</th>
                             <th>Criado Em</th>
                             <th width="15%">Ações</th>
@@ -30,7 +31,14 @@
                     <tbody>
                         @forelse($users as $key => $user)
                             <tr>
-                                <td>{{$user->name}}</td>
+                                <td>{{$user->name ? $user->name : $user->fantasy_name}}</td>
+                                <td>
+                                    @if($user->type_user_id == 1)
+                                         PESSOA FÍSICA 
+                                    @else
+                                         PESSOA JURÍDICA
+                                    @endif
+                                </td>
                                 <td>
                                     @if( $user->role()->count()) 
                                         {{ $user->role->name }}

@@ -27,20 +27,24 @@
                     </div>
                 </div>
 
-                <div id="div_physical_person" class="mt-4">
+                <hr class="mt-4">
+
+                <div id="div_physical_person" class="mt-3">
                     
                     @include('admin.users.includes.create-physical-person')
 
                 </div>
 
-                <div id="div_legal_person" class="mt-4" style="display:none">
+                <div id="div_legal_person" class="mt-3" style="display:none">
 
                     @include('admin.users.includes.create-legal-person')
             
                 </div>
 
-                <div class="row form-group">
-                    <div class="col-md-12">
+                <hr class="mt-4">
+
+                <div class="row form-group mt-3">
+                    <div class="col-md-6">
                         <label>Perfil: <span class="text-danger">*</span> </label>
                         <select name="role_id" class="form-control" required>
                             <option value=""> -- Selecione -- </option>
@@ -48,6 +52,19 @@
                                 <option value="{{$role->id}}">{{$role->name}}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label> Este usuário está ativo:  <span class="text-danger">*</span> </label> <br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="active_user" name="status" class="form-control @error('status') is-invalid @enderror" value="1" checked>
+                            <label class="custom-control-label" for="active_user">Sim</label>
+                        </div>
+        
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="inactive_user" name="status" class="form-control @error('status') is-invalid @enderror" value="0">
+                            <label class="custom-control-label" for="inactive_user">Não</label>
+                        </div>
                     </div>
                 </div>
 
@@ -58,13 +75,14 @@
                 <small class="form-text text-muted">Em caso de atendimento presencial, o endereço será obrigatório.</small>
         
                 <div class="row form-group mt-2">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label>CEP: </label>
                         <input type="text" class="form-control @error('zip_code') is-invalid @enderror" name="addressArray[zip_code]" id="zip_code" value="{{ old('addressArray[zip_code]') }}">
+                        <div class="mt-2" id="errorZipCodeMessage"> </div>
                         @error('zip_code')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
                         @enderror
                     </div>
 
@@ -166,9 +184,9 @@
 
     @section('scripts')
         <script>
-            // $(document).ready( function () {
-               
-            // });
+            $(document).ready( function () {
+                addMaskInputs();
+            });
 
             $("#physical_person" ).click(function() {
                 console.log('fisica')
