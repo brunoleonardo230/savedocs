@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{ DB, Hash };
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
-use App\Models\{ User, Role };
+use App\Models\{ User, Role, Address, TypeUser, Representative };
 
 class UserController extends Controller
 {
@@ -24,19 +24,42 @@ class UserController extends Controller
         return view('admin.users.create', compact('roles'));
     }
 
-	public function store(UserRequest $request)
+	public function store(Request $request)
     {
-		if( User::whereEmail($request->email)->first() ) {
-			return redirect()->back()
-							->withErrors( $request );
-		}
 
 		try {
-			
+
 			DB::beginTransaction();
 
-			$newUser 			 = $request->all();
+			$newUser = $request->all();
+			
+			if( $request->type_user_id == TypeUser::PHYSICAL_PERSON ){
+
+				if( User::whereEmail($request->email)->first())
+					return redirect()->back()->withErrors( $request );
+			}
+
+			if( $request->type_user_id == TypeUser::LEGAL_PERSON ){
+
+				if( isset($request->representativeArray) && !empty($request->representativeArray['name']) ) {
+
+					$representative = Representative::create($request->representativeArray);
+					if($representative)
+						$newUser['representative_id'] = $representative->id;
+				}
+				
+			}
+			
 			$newUser['password'] = Hash::make('savedocs');
+
+			if( !empty($request->addressArray['zip_code']) ) {
+
+				$address = Address::create($request->addressArray);
+				if($address)
+					$newUser['address_id'] = $address->id;
+
+			}
+
 
 			User::create($newUser);
 
@@ -46,16 +69,19 @@ class UserController extends Controller
 					->with('success', 'Usuário adicionado com sucesso!');
 
 		} catch (\Exception $e) {
+			dd($e->getMessage());
 			DB::rollBack();
 
 			return redirect()->back()
 						->withErrors( $request );
 		}
+		
     }
 
     public function edit($id)
     {
         $user = User::find($id);
+		// dd($user->representative);
 		if (!$user) {
 			return redirect()
 					->route('users.index')

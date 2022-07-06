@@ -6,40 +6,42 @@
         </h2>
     </x-slot>
 
-    <hr>
-   
-    <form action="{{route('roles.update', $role->id)}}" method="post">
-        @csrf
-        @method('PUT')
+    <div class="card">
+        <div class="card-body">
 
-        <div class="row form-group">
-            <div class="col-md-6">
-                <label>Nome perfil: <span class="text-danger">*</span> </label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Ex.: Administrador" value="{{$role->name}}" required>
+            <form action="{{route('roles.update', $role->id)}}" method="post">
+                @csrf
+                @method('PUT')
         
-                @error('name')
-                    <div class="invalid-feedback">{{$message}}</div>
-                @enderror
-            </div>
-
-            <div class="col-md-6">
-                <label>Perfil (ROLE_*): <span class="text-danger">*</span> </label> 
-                <input type="text" class="form-control @error('role') is-invalid @enderror" name="role" placeholder="Ex.: ROLE_ADMIN" value="{{$role->role}}" required>
-                {{-- <small class="form-text text-muted"> Mantenha o padrão deste campo, mudanças poderão impactar na aplicação.</small> --}}
+                <div class="row form-group mt-3">
+                    <div class="col-md-6">
+                        <label>Nome perfil: <span class="text-danger">*</span> </label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Ex.: Administrador" value="{{$role->name}}" required>
                 
-                @error('role')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
-            </div>
+                        @error('name')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+        
+                    <div class="col-md-6">
+                        <label>Perfil (ROLE_*): <span class="text-danger">*</span> </label> 
+                        <input type="text" class="form-control @error('role') is-invalid @enderror" name="role" placeholder="Ex.: ROLE_ADMIN" value="{{$role->role}}" required>
+                        {{-- <small class="form-text text-muted"> Mantenha o padrão deste campo, mudanças poderão impactar na aplicação.</small> --}}
+                        
+                        @error('role')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                </div>
+        
+                <div class="form-group text-right mt-5">
+                    <a href="{{route('roles.index')}}" class="btn btn-danger"> Cancelar </a>
+                    <button class="btn btn-success"> Atualizar </button>
+                </div>
+        
+            </form>
+
         </div>
-
-        <div class="form-group text-right">
-            <a href="{{route('roles.index')}}" class="btn btn-danger"> Cancelar </a>
-            <button class="btn btn-success"> Atualizar </button>
-        </div>
-
-        <hr>
-    </form>
-
+    </div>
 
 </x-app-layout>

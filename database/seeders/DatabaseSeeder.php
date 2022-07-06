@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             ModuleRoleTableSeeder::class,
             ResourceRoleTableSeeder::class,
+            TypeUsersTableSeeder::class,
+            RepresentativesTableSeeder::class,
             UsersTableSeeder::class,
             PlansTableSeeder::class,
             FeaturesTableSeeder::class,
@@ -28,7 +30,6 @@ class DatabaseSeeder extends Seeder
             PrioritiesTableSeeder::class,
             TypesTableSeeder::class,
             PlanServiceTableSeeder::class
-
         ]);
     }
 }

@@ -20,9 +20,17 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'cpf',
         'email',
+        'fantasy_name',
+        'cnpj',
         'password',
+        'is_active',
+        'phone',
         'role_id',
+        'address_id',
+        'type_user_id',
+        'representative_id'
     ];
 
     /**
@@ -87,5 +95,15 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role->id == Role::ROLE_ADMINISTRATOR;
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    public function representative()
+    {
+        return $this->belongsTo(Representative::class);
     }
 }
