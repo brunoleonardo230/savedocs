@@ -48,6 +48,15 @@
                 border-bottom: solid 3px green;
                 transform: rotate(45deg);
             }
+
+            .isVisible {
+                display: block;
+            }
+
+            .isInvisible {
+                display: none;
+            }
+
         </style>
 
         {{-- Lib Stripe --}}
@@ -210,11 +219,11 @@
             }
 
             function hideAddressForm() {
-                $("#div_address").css("display", "none");
+                $("#div_address").removeClass('isVisible').addClass('isInvisible');
             }
 
             function showAddressForm() {
-                $("#div_address").css("display", "block");
+                $("#div_address").removeClass('isInvisible').addClass('isVisible');
             }
 
             function errorZipCodeHTML(isVisible = false, msg = '') {
@@ -236,6 +245,60 @@
 
                 return $(errorZipCodeMessage).text('');
             }
+
+            function validateRequiredInputs(input) {
+
+                const form = $(input).closest('form');
+                
+                $(form).find('.error_required_input').remove();
+                $(form).find('.isInvisible').remove();
+
+                const inputs = $(form).find('input:required');
+                const selects = $(form).find('select:required');
+
+
+                let toSubmit = true;
+
+                $.each(inputs, function(i, input){
+                    if( !$(input).val() ) {
+                        
+                        var div = $(input).closest('div');
+
+                        if(div.hasClass('form-group')){
+                            $(div).parent().find('.error_required_input').remove();
+                            
+                            $(div).parent().append('<span class="error_required_input text-danger">Este campo é obrigatório</span>');
+                        } else {
+                            $(div).append('<span class="error_required_input text-danger">Este campo é obrigatório</span>');
+                        }
+
+                        toSubmit = false;
+                    }
+                });
+
+                $.each(selects, function(i, select){
+                    if( !$(select).val().length ) {
+                        
+                        var div = $(select).closest('div');
+
+                        if(div.hasClass('form-group')){
+                            div = $(div).closest('div');
+                        }
+
+                        $(div).append('<span class="error_required_input text-danger">Este campo é obrigatório</span>');
+                        toSubmit = false;
+                    }
+                });
+
+                if (toSubmit) {
+                    console.log('boooom!')
+                    $(form).submit(); 
+                }
+
+                return toSubmit;
+
+            }
+
 
         </script>
 

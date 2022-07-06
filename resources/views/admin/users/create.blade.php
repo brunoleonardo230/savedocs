@@ -16,12 +16,12 @@
                     <div class="col-md-12">
                         <label> Conta para pessoa:  <span class="text-danger">*</span> </label> <br>
                         <div class="form-check form-check-inline">
-                            <input type="radio" id="physical_person" name="type_person" class="form-control @error('type_person') is-invalid @enderror" value="1" checked>
+                            <input type="radio" id="physical_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="1" checked>
                             <label class="custom-control-label" for="physical_person">Física</label>
                         </div>
         
                         <div class="form-check form-check-inline">
-                            <input type="radio" id="legal_person" name="type_person" class="form-control @error('type_person') is-invalid @enderror" value="2">
+                            <input type="radio" id="legal_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="2">
                             <label class="custom-control-label" for="legal_person">Jurídica</label>
                         </div>
                     </div>
@@ -29,13 +29,13 @@
 
                 <hr class="mt-4">
 
-                <div id="div_physical_person" class="mt-3">
+                <div id="div_physical_person" class="mt-3 isVisible">
                     
                     @include('admin.users.includes.create-physical-person')
 
                 </div>
 
-                <div id="div_legal_person" class="mt-3" style="display:none">
+                <div id="div_legal_person" class="mt-3 isInvisible">
 
                     @include('admin.users.includes.create-legal-person')
             
@@ -57,12 +57,12 @@
                     <div class="col-md-3">
                         <label> Este usuário está ativo:  <span class="text-danger">*</span> </label> <br>
                         <div class="form-check form-check-inline">
-                            <input type="radio" id="active_user" name="status" class="form-control @error('status') is-invalid @enderror" value="1" checked>
+                            <input type="radio" id="active_user" name="is_active" class="form-control @error('is_active') is-invalid @enderror" value="1" checked>
                             <label class="custom-control-label" for="active_user">Sim</label>
                         </div>
         
                         <div class="form-check form-check-inline">
-                            <input type="radio" id="inactive_user" name="status" class="form-control @error('status') is-invalid @enderror" value="0">
+                            <input type="radio" id="inactive_user" name="is_active" class="form-control @error('is_active') is-invalid @enderror" value="0">
                             <label class="custom-control-label" for="inactive_user">Não</label>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
 
-                <div id="div_address" style="display:none">
+                <div id="div_address" class="isInvisible">
 
                     <div class="row form-group">
                         <div class="col-md-9">
@@ -175,7 +175,7 @@
         
                 <div class="form-group text-right mt-5">
                     <a href="{{route('users.index')}}" class="btn btn-danger"> Cancelar </a>
-                    <button class="btn btn-success"> Adicionar </button>
+                    <button type="button" class="btn btn-success" onclick="validateRequiredInputs(this);"> Adicionar </button>
                 </div>
             </div>
         </div>
@@ -189,15 +189,15 @@
             });
 
             $("#physical_person" ).click(function() {
-                console.log('fisica')
-                $("#div_physical_person").css("display", "block");
-                $("#div_legal_person").css("display", "none");
+
+                $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
+                $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
             });
 
             $("#legal_person" ).click(function() {
-                console.log('juridica')
-                $("#div_legal_person").css("display", "block");
-                $("#div_physical_person").css("display", "none");
+
+                $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
+                $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
             });
         </script>
 

@@ -30,7 +30,7 @@
 <div class="row form-group mt-3">
     <div class="col-md-8">
         <label>Nome completo: <span class="text-danger">*</span> </label>
-        <input type="text" class="form-control @error('representative_name') is-invalid @enderror" name="representative_name" value="{{ old('representative_name') }}" required>
+        <input type="text" class="form-control @error('representative_name') is-invalid @enderror" name="representativeArray[representative_name]" value="{{ old('representativeArray[representative_name]') }}" required>
         @error('representative name')
             <div class="invalid-feedback">
                 {{$message}}
@@ -40,7 +40,7 @@
 
     <div class="col-md-4">
         <label>CPF: <span class="text-danger">*</span> </label>
-        <input type="text" class="form-control @error('representative_cpf') is-invalid @enderror" name="representative_cpf" id="representative_cpf" value="{{ old('representative_cpf') }}" required>
+        <input type="text" class="form-control @error('representative_cpf') is-invalid @enderror" name="representativeArray[representative_cpf]" id="representative_cpf" value="{{ old('representativeArray[representative_cpf]') }}" required>
         @error('representative_cpf')
             <div class="invalid-feedback">
                 {{$message}}
@@ -52,7 +52,7 @@
 <div class="row form-group">
     <div class="col-md-8">
         <label>E-mail: <span class="text-danger">*</span> </label>
-        <input type="email" class="form-control @error('representative_email') is-invalid @enderror" name="representative_email" value="{{ old('representative_email') }}" required>
+        <input type="email" class="form-control @error('representative_email') is-invalid @enderror" name="representativeArray[representative_email]" value="{{ old('representativeArray[representative_email]') }}" required>
         @error('representative_email')
             <div class="invalid-feedback">
                 {{$message}}
@@ -62,7 +62,7 @@
 
     <div class="col-md-4">
         <label>Fone: <small>(Preferencialmente WhatsApp)</small> <span class="text-danger">*</span> </label> 
-        <input type="text" class="form-control @error('representative_fone') is-invalid @enderror" name="representative_fone" id="representative_fone" value="{{ old('representative_fone') }}" required>
+        <input type="text" class="form-control @error('representative_fone') is-invalid @enderror" name="representativeArray[representative_fone]" id="representative_fone" value="{{ old('representativeArray[representative_fone]') }}" required>
         @error('representative_fone')
             <div class="invalid-feedback">
                 {{$message}}

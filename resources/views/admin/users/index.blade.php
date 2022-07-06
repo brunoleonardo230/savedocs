@@ -24,6 +24,7 @@
                             <th>Nome</th>
                             <th>Tipo conta</th>
                             <th>Perfil</th>
+                            <th>Status</th>
                             <th>Criado Em</th>
                             <th width="15%">Ações</th>
                         </tr>
@@ -31,19 +32,28 @@
                     <tbody>
                         @forelse($users as $key => $user)
                             <tr>
-                                <td>{{$user->name ? $user->name : $user->fantasy_name}}</td>
+                                <td>
+                                    {{ mb_convert_case( $user->name ? $user->name : $user->fantasy_name , MB_CASE_UPPER, "UTF-8") }}    
+                                </td>
                                 <td>
                                     @if($user->type_user_id == 1)
-                                         PESSOA FÍSICA 
+                                        PESSOA FÍSICA 
                                     @else
-                                         PESSOA JURÍDICA
+                                        PESSOA JURÍDICA
                                     @endif
                                 </td>
                                 <td>
                                     @if( $user->role()->count()) 
-                                        {{ $user->role->name }}
+                                        {{ mb_convert_case( $user->role->name , MB_CASE_UPPER, "UTF-8") }}
                                     @else
                                         <span class="badge badge-warning">  Sem perfil associado </span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($user->is_active == 1)
+                                        ATIVO
+                                    @else
+                                        INATIVO
                                     @endif
                                 </td>
                                 <td>{{$user->created_at->format('d/m/Y H:i')}}</td>
