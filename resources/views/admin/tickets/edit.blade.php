@@ -30,27 +30,30 @@
         </div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-8 col-md-8 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    LUCROS (MENSAIS)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+    @forelse($comments as $key => $comment)                                   
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-8 col-md-8 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        {{$comment->status->name}} -{{$comment->created_at->format('d/m/Y H:i:s')}}
+                                    </div>                                    
+                                    <p>{{$comment->comment_text}}</p>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endforeach
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -63,8 +66,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('services.store')}}"  method="post">
+                    <form action="{{route('comments.store')}}"  method="post" id="mail_form">
                     @csrf
+                        <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
                         <div class="row form-group">            
                             <div class="col-md-12">
                                 <label>Status: <span class="text-danger">*</span> </label>
@@ -86,7 +90,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <a href="{{route('tickets.edit', $ticket->id)}}" class="btn btn-outline-success">
+                    <!-- <button class="btn btn-success"> Confirmar </button> -->
+                    <a href="#" onClick="document.getElementById('mail_form').submit();" class="btn btn-outline-success">
                         Confirmar
                     </a>
                 </div>
