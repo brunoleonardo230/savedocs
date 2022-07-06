@@ -36,7 +36,7 @@
 
     <div class="col-md-4">
         <label>Fone: <small>(Preferencialmente WhatsApp)</small> <span class="text-danger">*</span> </label> 
-        <input type="text" class="form-control @error('fone') is-invalid @enderror" name="fone" id="phone" value="@if(isset($user->phone)) {{ $user->phone }} @endif" required>
+        <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="@if(isset($user->phone)) {{ $user->phone }} @endif" required>
         @error('fone')
             <div class="invalid-feedback">
                 {{$message}}
