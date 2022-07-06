@@ -4,7 +4,7 @@
 <div class="row form-group mt-3">
     <div class="col-md-8">
         <label>Nome completo: <span class="text-danger">*</span> </label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="@if(isset($user->name)) {{ $user->name }} @endif" required>
         @error('name')
             <div class="invalid-feedback">
                 {{$message}}
@@ -14,7 +14,7 @@
 
     <div class="col-md-4">
         <label>CPF: <span class="text-danger">*</span> </label>
-        <input type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" id="cpf" value="{{ old('cpf') }}" required>
+        <input type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" id="cpf" value="@if(isset($user->cpf)) {{ $user->cpf }} @endif" required>
         @error('cpf')
             <div class="invalid-feedback">
                 {{$message}}
@@ -26,7 +26,7 @@
 <div class="row form-group">
     <div class="col-md-8">
         <label>E-mail: <span class="text-danger">*</span> </label>
-        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
+        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="@if(isset($user->email)) {{ $user->email }} @endif" required>
         @error('email')
             <div class="invalid-feedback">
                 {{$message}}
@@ -36,7 +36,7 @@
 
     <div class="col-md-4">
         <label>Fone: <small>(Preferencialmente WhatsApp)</small> <span class="text-danger">*</span> </label> 
-        <input type="text" class="form-control @error('fone') is-invalid @enderror" name="phone" id="phone" value="{{ old('phone') }}" required>
+        <input type="text" class="form-control @error('fone') is-invalid @enderror" name="fone" id="phone" value="@if(isset($user->phone)) {{ $user->phone }} @endif" required>
         @error('fone')
             <div class="invalid-feedback">
                 {{$message}}

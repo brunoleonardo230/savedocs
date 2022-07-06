@@ -101,4 +101,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Address::class);
     }
+
+    public function representative()
+    {
+        return $this->belongsTo(Representative::class);
+    }
 }

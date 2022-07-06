@@ -81,6 +81,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+		// dd($user->representative);
 		if (!$user) {
 			return redirect()
 					->route('users.index')

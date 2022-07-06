@@ -12,32 +12,38 @@
                 @csrf
                 @method('PUT')
 
-                <strong> Dados pessoais </strong>
-                <small class="form-text text-muted">Mantenha dados atualizados.</small>
-
-                <div class="row form-group mt-2">
+                <div class="row form-group">
                     <div class="col-md-12">
-                        <label>Nome completo: <span class="text-danger">*</span> </label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$user->name}}" required>
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                        @enderror
+                        <label> Conta para pessoa:  <span class="text-danger">*</span> </label> <br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="physical_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="1" @if($user->type_user_id == App\Models\TypeUser::PHYSICAL_PERSON) checked @endif>
+                            <label class="custom-control-label" for="physical_person">Física</label>
+                        </div>
+        
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="legal_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="2" @if($user->type_user_id == App\Models\TypeUser::LEGAL_PERSON) checked @endif>
+                            <label class="custom-control-label" for="legal_person">Jurídica</label>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row form-group">
-                    <div class="col-md-6">
-                        <label>E-mail: <span class="text-danger">*</span> </label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$user->email}}" required>
-                        @error('email')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                        @enderror
-                    </div>
+                <hr class="mt-4">
 
+                <div id="div_physical_person" class="mt-3 isVisible">
+                    
+                    @include('admin.users.includes.edit-physical-person')
+
+                </div>
+
+                <div id="div_legal_person" class="mt-3 isInvisible">
+
+                    @include('admin.users.includes.edit-legal-person')
+            
+                </div>
+
+                <hr class="mt-4">
+
+                <div class="row form-group mt-3">
                     <div class="col-md-6">
                         <label>Perfil: <span class="text-danger">*</span> </label>
                         <select name="role_id" class="form-control" required>
@@ -48,6 +54,19 @@
                                 >{{$role->name}}
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label> Este usuário está ativo:  <span class="text-danger">*</span> </label> <br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="active_user" name="is_active" class="form-control @error('is_active') is-invalid @enderror" value="1" @if($user->is_active) checked @endif>
+                            <label class="custom-control-label" for="active_user">Sim</label>
+                        </div>
+        
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="inactive_user" name="is_active" class="form-control @error('is_active') is-invalid @enderror" value="0" @if(!$user->is_active) checked @endif>
+                            <label class="custom-control-label" for="inactive_user">Não</label>
+                        </div>
                     </div>
                 </div>
 
@@ -164,17 +183,37 @@
     </div>
 
     @section('scripts')
+        <script>
+            $(document).ready( function () {
+                
+                addMaskInputs();
 
-    <script>
-        $(document).ready(function() {
-    
-            @if(!isset($user->address))
-                clearAddressForm();
-            @endif
-        
-        });
-    </script>
+                @if(!isset($user->address))
+                    clearAddressForm();
+                @endif
 
+                @if($user->type_user_id == App\Models\TypeUser::PHYSICAL_PERSON)
+                    $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
+                    $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
+                @else
+                    $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
+                    $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
+                @endif
+
+            });
+
+            $("#physical_person" ).click(function() {
+
+                $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
+                $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
+            });
+
+            $("#legal_person" ).click(function() {
+
+                $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
+                $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
+            });
+        </script>
     @endsection
 
 </x-app-layout>

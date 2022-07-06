@@ -200,9 +200,6 @@
                 $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
             });
         </script>
-
-
-        
     @endsection
 
 
