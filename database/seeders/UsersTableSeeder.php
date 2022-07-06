@@ -124,7 +124,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'id'                => 6,
             'type_user_id'      => 2,
-            'name'              => '',
+            'name'              => NULL,
             'cpf'               => NULL,
             'email'             => NULL,
             'fantasy_name'      => 'Save Docs',
