@@ -34,15 +34,15 @@
         <div class="row">
             <div class="col-md-8">
                 <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-8 col-md-8 mb-4">
+                <div class="col-xl-12 col-md-8 mb-4">
                     <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        {{$comment->status->name}} -{{$comment->created_at->format('d/m/Y H:i:s')}}
+                                    {{$comment->user->name}}: {{$comment->status->name}} - {{$comment->created_at->format('d/m/Y H:i:s')}}
                                     </div>                                    
-                                    <p>{{$comment->comment_text}}</p>
+                                    <p>{{$comment->comment_text}}</p>                                    
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
