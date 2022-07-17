@@ -3,7 +3,9 @@
 use App\Http\Controllers\ {
     SiteController, PortalController, TicketController };
 use App\Http\Controllers\Admin\{
-        UserController, RoleController, ResourceController, ModuleController, PlanController, FeatureController, CategoryController, ServiceController,StatusController};
+    UserController, RoleController, ResourceController, ModuleController, PlanController, 
+    FeatureController, CategoryController, ServiceController, StatusController, AccountController
+};
 use App\Http\Controllers\Subscription\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,10 @@ Route::get('laravel-version', function() {
 
 Route::group([ 'middleware' => ['auth','access.control.list']], function() {
     Route::resource('users', UserController::class);
+
+    Route::resource('accounts', AccountController::class);
+
+    Route::get('/accounts/show', [AccountController::class, 'show'])->name('accounts.show');
 
     Route::resource('roles', RoleController::class);
     Route::get('/roles/{role}/resources', [RoleController::class, 'syncResources'])->name('roles.resources');
