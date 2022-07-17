@@ -20,7 +20,7 @@ class AccountController extends Controller
 		return view('admin.accounts.show', compact('user', 'roles'));
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try{
 
@@ -28,22 +28,28 @@ class AccountController extends Controller
 
         	$userRequest = $request->all();
 
-			$user = User::find($id);
-			if (!$user) {
-				return redirect()->route('users.index')
-									->with('danger', 'Usuário inexistente!');
+			$user = auth()->user();
+
+			if( $request->type_user_id == TypeUser::LEGAL_PERSON ){
+				$user->representative->update($request->representativeArray);
+			}
+
+			if( !empty($request->addressArray['zip_code']) ) {
+				if ($user->address_id) {
+					$address = $user->address->update($request->addressArray);
+				} else {
+					$address = Address::create($request->addressArray);	
+					if($address)
+						$userRequest['address_id'] = $address->id;
+				}
 			}
 
 			$user->update($userRequest);
 
-			$role = Role::find($userRequest['role_id']);
-			$user = $user->role()->associate($role);
-			$user->save();
-
 			DB::commit();
 
 			return redirect()
-					->route('users.index')
+					->route('accounts.show')
 					->with('success', 'Usuário atualizado com sucesso!');
 
         } catch (\Exception $e) {
@@ -52,29 +58,6 @@ class AccountController extends Controller
 	        $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
 
 	        return redirect()->back()->with('danger', $message);
-        }
-    }
-
-	public function destroy($id)
-    {
-        try {
-
-			$user = User::find($id);
-			if (!$user) {
-				return redirect()->route('users.index')
-									->with('danger', 'Usuário inexistente!');
-			}
-
-            $user->delete();
-
-            return redirect()->route('users.index')
-								->with('success', 'Usuário removido com sucesso!');
-
-        } catch (\Exception $e) {
-
-			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar remoção...';
-			return redirect()->route('users.index')
-								->with('danger', $message);
         }
     }
 }

@@ -8,7 +8,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{route('users.update', $user->id)}}"  method="POST">
+            <form action="{{route('accounts.update', $user->id)}}"  method="POST">
                 @csrf
                 @method('PUT')
 
@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <div id="div_address" @if(!isset($user->address)) style="display:none;" @endif>
+                <div id="div_address" class="{{ !isset($user->address) ? 'isInvisible' : '' }}">
 
                     <div class="row form-group">
                         <div class="col-md-9">
@@ -153,7 +153,7 @@
 
                 <div class="form-group text-right mt-5">
                     <a href="{{ route('dashboard')}}" class="btn btn-danger"> Cancelar </a>
-                    <button class="btn btn-success"> Atualizar </button>
+                    <button type="button" class="btn btn-success" onclick="validateRequiredInputs(this);"> Atualizar </button>
                 </div>
                 
             </form>
@@ -163,33 +163,21 @@
     @section('scripts')
         <script>
             $(document).ready( function () {
-                
-                addMaskInputs();
+                @if($user->type_user_id == App\Models\TypeUser::PHYSICAL_PERSON)
+                    showPhysicalPersonForm();
+                @endif
 
-                @if(!isset($user->address))
+                @if($user->type_user_id == App\Models\TypeUser::LEGAL_PERSON)
+                    showLegalPersonForm();
+                @endif
+
+                @if(old('addressArray.*'))
+                    showAddressForm();
+                @endif
+
+                @if(!isset($user->address) && !is_null($user->address))
                     clearAddressForm();
                 @endif
-
-                @if($user->type_user_id == App\Models\TypeUser::PHYSICAL_PERSON)
-                    $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
-                    $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
-                @else
-                    $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
-                    $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
-                @endif
-
-            });
-
-            $("#physical_person" ).click(function() {
-
-                $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
-                $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
-            });
-
-            $("#legal_person" ).click(function() {
-
-                $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
-                $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
             });
         </script>
     @endsection
