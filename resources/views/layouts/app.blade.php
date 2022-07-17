@@ -90,21 +90,22 @@
             </div>
         </div>
 
-        <!-- Bootstrap core JavaScript-->
+        {{-- Bootstrap core JavaScript --}}
         <script src="{{ asset('themes/vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('themes/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <!-- Core plugin JavaScript-->
+        {{-- Core plugin JavaScript --}}
         <script src="{{ asset('themes/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-        <!-- Custom scripts for all pages-->
+        {{-- Custom scripts for all pages --}}
         <script src="{{ asset('themes/js/sb-admin-2.min.js') }}"></script>
-        <!-- Page level plugins -->
+        {{-- Page level plugins --}}
         <script src="{{ asset('themes/vendor/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('themes/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>     
         
         <script src="{{ asset('themes/vendor/jquery-mask/jquery.mask.min.js') }}"></script>
 
-        <!-- Page level custom scripts -->
-        <!-- <script src="{{ asset('themes/js/demo/datatables-demo.js') }}"></script> -->
+        {{-- Scripts utilizados no formulário de usuários --}}
+        <script src="{{ asset('js/user.js') }}"></script>
+
 
         <script>
             $(document).ready( function () {
@@ -137,135 +138,25 @@
                     "autoWidth": true
                 }); 
             });
-        </script>
-
-        <script>
-            //  Adicionando Javascript Para Cadastro de Usuários
-            function searchZipCode(isUserEdit) {
-                const inputZipCode = $('input#zip_code').val();
-
-                errorZipCodeHTML();
-
-                //Nova variável "CEP" somente com dígitos.
-                var zipCode = $("input#zip_code").val().replace(/\D/g, '');
-
-                //Verifica se campo CEP possui valor informado.
-                if (zipCode != "") {
-
-                    //Expressão regular para validar o CEP.
-                    var validateZipCode = /^[0-9]{8}$/;
-
-                    //Valida o formato do CEP.
-                    if (validateZipCode.test(zipCode)) {
-
-                        //Consulta o webservice viacep.com.br/
-                        $.getJSON("https://viacep.com.br/ws/"+ zipCode +"/json/?callback=?", function(data) {
-                            
-                            if (!("erro" in data)) {
-
-                                showAddressForm();
-
-                                //Atualiza os campos com os valores da consulta.
-                                $("input#address").val(data.logradouro);
-                                $("input#number").prop('readonly', false);
-                                $("input#complement").val(data.complemento).prop('readonly', false);
-                                $("input#neighborhood").val(data.bairro);
-                                $("input#city").val(data.localidade);
-                                $("input#state").val(data.uf);
-                            } else {
-                                //CEP pesquisado não foi encontrado.
-                                clearAddressForm();
-                                hideAddressForm();
-                                errorZipCodeHTML(true, "CEP não encontrado.");
-                            }
-                        });
-                    }  else {
-                        //CEP é inválido.
-                        clearAddressForm();
-                        hideAddressForm();
-                        errorZipCodeHTML(true, "Formato de CEP inválido.");
-                    }
-                } else {
-                    //CEP sem valor, limpa formulário.
-                    if (!isUserEdit) {
-                        clearAddressForm();
-                        hideAddressForm();
-                    }
-
-                    errorZipCodeHTML(true, "Informe um CEP para busca.");
-                }
-            }
-
-            function addMaskInputs() {
-                $("input#cnpj").mask('00.000.000/0000-00', {reverse: true});
-                
-                $("input#cpf").mask("000.000.000-00", {reverse: true});
-                $("input#representative_cpf").mask("000.000.000-00", {reverse: true});
-
-                $("input#phone").mask('(00) 00000-0000');
-                $("input#representative_fone").mask('(00) 00000-0000');
-
-                $("input#zip_code").mask("00000-000");
-
-                $("input#number").mask("0000");
-            }
-
-            function clearAddressForm() {
-                $("input#zip_code").val("");
-                $("input#address").val("");
-                $("input#number").val("");
-                $("input#complement").val("");
-                $("input#neighborhood").val("");
-                $("input#city").val("");
-                $("input#state").val("");
-            }
-
-            function hideAddressForm() {
-                $("#div_address").removeClass('isVisible').addClass('isInvisible');
-            }
-
-            function showAddressForm() {
-                $("#div_address").removeClass('isInvisible').addClass('isVisible');
-            }
-
-            function errorZipCodeHTML(isVisible = false, msg = '') {
-                const errorZipCodeMessage = $("#errorZipCodeMessage");
-
-                if (isVisible) {
-
-                    const content =  `
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Ops!</strong> ${msg}.
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    `;
-
-                   return $(errorZipCodeMessage).html(content);
-                }
-
-                return $(errorZipCodeMessage).text('');
-            }
 
             function validateRequiredInputs(input) {
-
+            
                 const form = $(input).closest('form');
                 
                 $(form).find('.error_required_input').remove();
                 $(form).find('.isInvisible').remove();
-
+            
                 const inputs = $(form).find('input:required');
                 const selects = $(form).find('select:required');
-
-
+            
+            
                 let toSubmit = true;
-
+            
                 $.each(inputs, function(i, input){
                     if( !$(input).val() ) {
                         
                         var div = $(input).closest('div');
-
+            
                         if(div.hasClass('form-group')){
                             $(div).parent().find('.error_required_input').remove();
                             
@@ -273,38 +164,35 @@
                         } else {
                             $(div).append('<span class="error_required_input text-danger">Este campo é obrigatório</span>');
                         }
-
+            
                         toSubmit = false;
                     }
                 });
-
+            
                 $.each(selects, function(i, select){
                     if( !$(select).val().length ) {
                         
                         var div = $(select).closest('div');
-
+            
                         if(div.hasClass('form-group')){
                             div = $(div).closest('div');
                         }
-
+            
                         $(div).append('<span class="error_required_input text-danger">Este campo é obrigatório</span>');
                         toSubmit = false;
                     }
                 });
-
+            
                 if (toSubmit) {
                     $(form).submit(); 
                 }
-
+            
                 return toSubmit;
-
+            
             }
-
-
         </script>
 
-
-        @yield('scripts')
+    @yield('scripts')
 
     </body>
 </html>

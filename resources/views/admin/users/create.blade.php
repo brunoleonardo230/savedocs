@@ -185,39 +185,17 @@
     @section('scripts')
         <script>
             $(document).ready( function () {
-                addMaskInputs();
-
                 @if(!old('type_user_id'))
                     $("#physical_person").prop('checked',true);
                 @endif
 
                 @if(old('type_user_id') == App\Models\TypeUser::PHYSICAL_PERSON)
-                    $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
-                    $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
-
-                    $("#physical_person").prop('checked',true);
-                    $("#legal_person").prop('checked',false);
+                    showPhysicalPersonForm();
                 @endif
 
                 @if(old('type_user_id') == App\Models\TypeUser::LEGAL_PERSON)
-                    $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
-                    $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
-
-                    $("#legal_person").prop('checked',true);
-                    $("#physical_person").prop('checked',false);
+                    showLegalPersonForm();
                 @endif
-            });
-
-            $("#physical_person" ).click(function() {
-
-                $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
-                $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
-            });
-
-            $("#legal_person" ).click(function() {
-
-                $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
-                $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
             });
         </script>
     @endsection

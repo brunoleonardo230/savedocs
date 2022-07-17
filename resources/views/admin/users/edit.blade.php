@@ -185,33 +185,17 @@
     @section('scripts')
         <script>
             $(document).ready( function () {
-                
-                addMaskInputs();
-
                 @if(!isset($user->address) && !is_null($user->address))
                     clearAddressForm();
                 @endif
 
                 @if($user->type_user_id == App\Models\TypeUser::PHYSICAL_PERSON)
-                    $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
-                    $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
-                @else
-                    $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
-                    $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
+                    showPhysicalPersonForm();
                 @endif
 
-            });
-
-            $("#physical_person" ).click(function() {
-
-                $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
-                $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
-            });
-
-            $("#legal_person" ).click(function() {
-
-                $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
-                $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
+                @if($user->type_user_id == App\Models\TypeUser::LEGAL_PERSON)
+                    showLegalPersonForm();
+                @endif
             });
         </script>
     @endsection

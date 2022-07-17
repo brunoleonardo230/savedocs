@@ -105,6 +105,21 @@ class UserController extends Controller
 									->with('danger', 'Usuário inexistente!');
 			}
 
+			if( $request->type_user_id == TypeUser::LEGAL_PERSON ){
+				$user->representative->update($request->representativeArray);
+			}
+
+			if( !empty($request->addressArray['zip_code']) ) {
+				if ($user->address_id) {
+					$address = Address::update($request->addressArray);
+				} else {
+					$address = Address::create($request->addressArray);	
+				}
+
+				if($address)
+					$userRequest['address_id'] = $address->id;
+			}
+
 			$user->update($userRequest);
 
 			$role = Role::find($userRequest['role_id']);
