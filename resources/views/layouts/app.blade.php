@@ -206,6 +206,8 @@
                 $("input#representative_fone").mask('(00) 00000-0000');
 
                 $("input#zip_code").mask("00000-000");
+
+                $("input#number").mask("0000");
             }
 
             function clearAddressForm() {
@@ -291,7 +293,6 @@
                 });
 
                 if (toSubmit) {
-                    console.log('boooom!')
                     $(form).submit(); 
                 }
 

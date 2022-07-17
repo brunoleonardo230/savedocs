@@ -106,7 +106,7 @@
     
                         <div class="col-md-3">
                             <label>Número: <span class="text-danger">*</span> </label>
-                            <input type="number" class="form-control @error('number') is-invalid @enderror" name="addressArray[number]" id="number" value="@if(isset($user->address)){{ $user->address->number }} @endif" required placeholder="Ex: 1000">
+                            <input type="text" class="form-control @error('number') is-invalid @enderror" name="addressArray[number]" id="number" value="@if(isset($user->address)){{ $user->address->number }} @endif" required placeholder="Ex: 1000">
                             @error('number')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -188,7 +188,7 @@
                 
                 addMaskInputs();
 
-                @if(!isset($user->address))
+                @if(!isset($user->address) && !is_null($user->address))
                     clearAddressForm();
                 @endif
 

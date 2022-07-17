@@ -16,12 +16,12 @@
                     <div class="col-md-12">
                         <label> Conta para pessoa:  <span class="text-danger">*</span> </label> <br>
                         <div class="form-check form-check-inline">
-                            <input type="radio" id="physical_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="1" checked>
+                            <input type="radio" id="physical_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="1">
                             <label class="custom-control-label" for="physical_person">Física</label>
                         </div>
         
                         <div class="form-check form-check-inline">
-                            <input type="radio" id="legal_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="2">
+                            <input type="radio" id="legal_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="2" >
                             <label class="custom-control-label" for="legal_person">Jurídica</label>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
     
                         <div class="col-md-3">
                             <label>Número: <span class="text-danger">*</span> </label>
-                            <input type="number" class="form-control @error('number') is-invalid @enderror" name="addressArray[number]" id="number" value="{{ old('addressArray[number]') }}" readonly required placeholder="Ex: 1000">
+                            <input type="text" class="form-control @error('number') is-invalid @enderror" name="addressArray[number]" id="number" value="{{ old('addressArray[number]') }}" readonly required placeholder="Ex: 1000">
                             @error('number')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -186,6 +186,26 @@
         <script>
             $(document).ready( function () {
                 addMaskInputs();
+
+                @if(!old('type_user_id'))
+                    $("#physical_person").prop('checked',true);
+                @endif
+
+                @if(old('type_user_id') == App\Models\TypeUser::PHYSICAL_PERSON)
+                    $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
+                    $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
+
+                    $("#physical_person").prop('checked',true);
+                    $("#legal_person").prop('checked',false);
+                @endif
+
+                @if(old('type_user_id') == App\Models\TypeUser::LEGAL_PERSON)
+                    $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
+                    $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
+
+                    $("#legal_person").prop('checked',true);
+                    $("#physical_person").prop('checked',false);
+                @endif
             });
 
             $("#physical_person" ).click(function() {

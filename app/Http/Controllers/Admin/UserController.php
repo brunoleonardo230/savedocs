@@ -24,7 +24,7 @@ class UserController extends Controller
         return view('admin.users.create', compact('roles'));
     }
 
-	public function store(Request $request)
+	public function store(UserRequest $request)
     {
 
 		try {
@@ -69,7 +69,6 @@ class UserController extends Controller
 					->with('success', 'Usuário adicionado com sucesso!');
 
 		} catch (\Exception $e) {
-			dd($e->getMessage());
 			DB::rollBack();
 
 			return redirect()->back()
@@ -81,7 +80,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-		// dd($user->representative);
+		
 		if (!$user) {
 			return redirect()
 					->route('users.index')
