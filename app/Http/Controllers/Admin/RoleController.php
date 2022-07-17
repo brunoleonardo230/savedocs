@@ -114,8 +114,17 @@ class RoleController extends Controller
 	{
 		try{
 			$role = $this->role->find($role);
-			$role->resources()->sync($request->resources);
 
+			$moduleIDs = [];
+			if (!empty($request->resources)) {
+				foreach ($request->resources as $key => $resource) {
+					$moduleID = ( \App\Models\Resource::find($resource) )->module->id;
+					array_push($moduleIDs, strval($moduleID));					
+				}
+			} 
+
+			$role->modules()->sync($moduleIDs);
+			$role->resources()->sync($request->resources);
 
 			return redirect()
 						->route('roles.resources', $role)
