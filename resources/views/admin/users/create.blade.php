@@ -49,7 +49,7 @@
                         <select name="role_id" class="form-control" required>
                             <option value=""> -- Selecione -- </option>
                             @foreach($roles as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                <option value="{{$role->id}}" @if(old('role_id') == $role->id) selected @endif )>{{$role->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -77,9 +77,9 @@
                 <div class="row form-group mt-2">
                     <div class="col-md-3">
                         <label>CEP: </label>
-                        <input type="text" class="form-control @error('zip_code') is-invalid @enderror" name="addressArray[zip_code]" id="zip_code" value="{{ old('addressArray[zip_code]') }}">
+                        <input type="text" class="form-control @error('addressArray.zip_code') is-invalid @enderror" name="addressArray[zip_code]" id="zip_code" value="{{ old('addressArray.zip_code') }}">
                         <div class="mt-2" id="errorZipCodeMessage"> </div>
-                        @error('zip_code')
+                        @error('addressArray.zip_code')
                         <div class="invalid-feedback">
                             {{$message}}
                         </div>
@@ -96,8 +96,8 @@
                     <div class="row form-group">
                         <div class="col-md-9">
                             <label>Logradouro: <span class="text-danger">*</span> </label>
-                            <input type="text" class="form-control @error('address') is-invalid @enderror" name="addressArray[address]" id="address" value="{{ old('addressArray[address]') }}" readonly required placeholder="Ex: Avenida Beira Mar">
-                            @error('address')
+                            <input type="text" class="form-control @error('addressArray.address') is-invalid @enderror" name="addressArray[address]" id="address" value="{{ old('addressArray.address') }}" readonly required placeholder="Ex: Avenida Beira Mar">
+                            @error('addressArray.address')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -106,8 +106,8 @@
     
                         <div class="col-md-3">
                             <label>Número: <span class="text-danger">*</span> </label>
-                            <input type="text" class="form-control @error('number') is-invalid @enderror" name="addressArray[number]" id="number" value="{{ old('addressArray[number]') }}" readonly required placeholder="Ex: 1000">
-                            @error('number')
+                            <input type="text" class="form-control @error('addressArray.number') is-invalid @enderror" name="addressArray[number]" id="number" value="{{ old('addressArray.number') }}" required placeholder="Ex: 1000">
+                            @error('addressArray.number')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -118,8 +118,8 @@
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label>Complemento: <span class="text-danger">*</span> </label>
-                            <input type="text" class="form-control @error('complement') is-invalid @enderror" name="addressArray[complement]" id="complement" value="{{ old('addressArray[complement]') }}" readonly required placeholder="Ex: Quadra 01...">
-                            @error('complement')
+                            <input type="text" class="form-control @error('addressArray.complement') is-invalid @enderror" name="addressArray[complement]" id="complement" value="{{ old('addressArray.complement') }}" required placeholder="Ex: Quadra 01...">
+                            @error('addressArray.complement')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -130,8 +130,8 @@
                     <div class="row form-group">
                         <div class="col-md-4">
                             <label>Bairro: <span class="text-danger">*</span> </label>
-                            <input type="text" class="form-control @error('neighborhood') is-invalid @enderror" name="addressArray[neighborhood]" id="neighborhood" value="{{ old('addressArray[neighborhood]') }}" readonly required placeholder="Ex: Centro">
-                            @error('neighborhood')
+                            <input type="text" class="form-control @error('addressArray.neighborhood') is-invalid @enderror" name="addressArray[neighborhood]" id="neighborhood" value="{{ old('addressArray.neighborhood') }}" readonly required placeholder="Ex: Centro">
+                            @error('addressArray.neighborhood')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -140,8 +140,8 @@
     
                         <div class="col-md-4">
                             <label>Cidade: <span class="text-danger">*</span> </label>
-                            <input type="text" class="form-control @error('city') is-invalid @enderror" name="addressArray[city]" id="city" value="{{ old('addressArray[city]') }}" readonly required placeholder="Ex: São Luís">
-                            @error('city')
+                            <input type="text" class="form-control @error('addressArray.city') is-invalid @enderror" name="addressArray[city]" id="city" value="{{ old('addressArray.city') }}" readonly required placeholder="Ex: São Luís">
+                            @error('addressArray.city')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -150,8 +150,8 @@
     
                         <div class="col-md-4">
                             <label>UF: <span class="text-danger">*</span> </label>
-                            <input type="text" class="form-control @error('state') is-invalid @enderror" name="addressArray[state]" id="state" value="{{ old('addressArray[state]') }}" readonly required placeholder="Ex: MA" >
-                            @error('state')
+                            <input type="text" class="form-control @error('addressArray.state') is-invalid @enderror" name="addressArray[state]" id="state" value="{{ old('addressArray.state') }}" readonly required placeholder="Ex: MA" >
+                            @error('addressArray.state')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -162,8 +162,8 @@
                     {{-- <div class="row form-group">
                         <div class="col-md-12">
                             <label>Observação: </label>
-                            <input type="text" class="form-control @error('note') is-invalid @enderror" name="addressArray[note]" value="{{ old('addressArray[note]') }}">
-                            @error('note')
+                            <input type="text" class="form-control @error('addressArray.note') is-invalid @enderror" name="addressArray[note]" value="{{ old('addressArray.note') }}">
+                            @error('addressArray.note')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -187,6 +187,10 @@
             $(document).ready( function () {
                 @if(!old('type_user_id'))
                     $("#physical_person").prop('checked',true);
+                @endif
+
+                @if(old('addressArray.zip_code'))
+                    showAddressForm();
                 @endif
 
                 @if(old('type_user_id') == App\Models\TypeUser::PHYSICAL_PERSON)

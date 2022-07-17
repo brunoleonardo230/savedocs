@@ -111,13 +111,13 @@ class UserController extends Controller
 
 			if( !empty($request->addressArray['zip_code']) ) {
 				if ($user->address_id) {
-					$address = Address::update($request->addressArray);
+					$address = $user->address->update($request->addressArray);
 				} else {
 					$address = Address::create($request->addressArray);	
+					if($address)
+						$userRequest['address_id'] = $address->id;
 				}
 
-				if($address)
-					$userRequest['address_id'] = $address->id;
 			}
 
 			$user->update($userRequest);
@@ -129,7 +129,7 @@ class UserController extends Controller
 			DB::commit();
 
 			return redirect()
-					->route('users.index')
+					->route('users.edit', $id)
 					->with('success', 'Usuário atualizado com sucesso!');
 
         } catch (\Exception $e) {
