@@ -49,5 +49,11 @@ class ResourceRoleTableSeeder extends Seeder
             'role_id'     => 2,
             'resource_id' => 4
         ]);
+
+        // Cliente | Minha conta
+        DB::table('resource_role')->insert([
+            'role_id'     => 3,
+            'resource_id' => 8
+        ]);
     }
 }

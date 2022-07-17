@@ -28,5 +28,10 @@ class ModuleRoleTableSeeder extends Seeder
             'role_id'     => 2,
             'module_id' => 2
         ]);
+
+        DB::table('module_role')->insert([
+            'role_id'     => 3,
+            'module_id' => 3
+        ]);
     }
 }
