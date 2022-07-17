@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ {
-    SiteController, PortalController, TicketController };
+    SiteController, PortalController, TicketController, CommentController };
 use App\Http\Controllers\Admin\{
     UserController, RoleController, ResourceController, ModuleController, PlanController, 
     FeatureController, CategoryController, ServiceController, StatusController, AccountController
@@ -71,4 +71,6 @@ Route::group([ 'middleware' => ['auth','access.control.list']], function() {
     Route::resource('services', ServiceController::class);
 
     Route::resource('statuses', StatusController::class);
+
+    Route::resource('comments', CommentController::class);
 });

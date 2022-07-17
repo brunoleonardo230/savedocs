@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{ DB, Hash };
-use App\Http\Requests\Admin\TicketRequest;
+use App\Http\Requests\Admin\CommentRequest;
 
-use App\Models\{ Priority,Type,Service,Ticket,Status, Comment};    
+use App\Models\{Comment,Ticket};
 
-class TicketController extends Controller
+class CommentController extends Controller
 {
-    private $ticket;
+    private $comment;
 
-	public function __construct(Ticket $ticket)
+	public function __construct(Comment $comment)
 	{
-		$this->ticket = $ticket;
+		$this->comment = $comment;
 	}
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +24,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::paginate(10);
-        
-        return view('admin.tickets.ticket-index', compact('tickets'));
+        //
     }
 
     /**
@@ -36,11 +34,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        $priorities = Priority::all('id', 'name');
-        $types = Type::all('id', 'name');
-        $services = Service::all('id', 'name');
-
-        return view('admin.tickets.create', compact('priorities','types','services'));
+        //
     }
 
     /**
@@ -49,25 +43,25 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TicketRequest $request)
+    public function store(CommentRequest $request)
     {
-        $ticket_code = 'TICKET';
-        $ticket_code .= $request->type_id;
-        $ticket_code .= sprintf("%03s", $request->service_id);
-        $ticket_code .= time();
-
         $user_id = auth()->user()->id;        
-        $request->request->add(['ticket_code' => $ticket_code, 'status_id' => 1,'assigned_to_user_id' => $user_id]);
-        
+        $request->request->add(['user_id' => $user_id]);
+
+        if($request->status_id <> 5){
+            $ticket = Ticket::find($request->ticket_id);
+            $ticket->status_id = $request->status_id;
+		    $ticket->save();
+        }        
         try {
-			$this->ticket->create($request->all());
+			$this->comment->create($request->all());
 
 			return redirect()
-					->route('tickets.index')
-					->with('success', 'Ticket criado com sucesso!');
+                    ->back()
+					->with('success', 'Alteração Confirmada!');
 
 		} catch (\Exception $e) {
-			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao criar ticket...';
+			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro na alteração...';
 
 			//flash($message)->error();
 			return redirect()->back()->with('danger', $message);
@@ -93,13 +87,7 @@ class TicketController extends Controller
      */
     public function edit($id)
     {
-        $ticket = $this->ticket->find($id);
-        $statuses = Status::all('id', 'name')->whereNotIn('name',$ticket->status->name);
-
-        $comments = Comment::all()->where('ticket_id',$id);
-        //dd($comments);
-
-	    return view('admin.tickets.edit', compact('ticket','statuses','comments'));
+        //
     }
 
     /**

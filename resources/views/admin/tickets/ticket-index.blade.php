@@ -16,7 +16,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered data-table" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -29,20 +29,7 @@
                             <th>Priorodade</th>
                             <th>Ações</th>
                         </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>#</th>
-                            <th>Ticket</th>                        
-                            <th>Status</th>
-                            <th>Criado</th>
-                            <th>Serviço</th>
-                            <th>Cliente</th>
-                            <th>Email</th>
-                            <th>Priorodade</th>
-                            <th>Ações</th>
-                        </tr>
-                    </tfoot>
+                    </thead>                    
                     <tbody>
                     @forelse($tickets as $key => $ticket)
                         <tr class="text-center">
