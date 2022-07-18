@@ -59,7 +59,7 @@ class ResourcesTableSeeder extends Seeder
 
         DB::table('resources')->insert([
             'id'   => 4,
-            'name' => 'Tickets',
+            'name' => 'Solicitações',
             'resource' => 'tickets.index',
             'is_menu' => true,
             'icon'  => 'fas fa-fw fa-headset',
@@ -67,6 +67,7 @@ class ResourcesTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+        
 
         // Modules ------------------------
 
@@ -116,6 +117,61 @@ class ResourcesTableSeeder extends Seeder
             'is_menu' => false,
             'icon'  => 'fas fa-fw fa-user',
             'module_id' => 3,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('resources')->insert([
+            'id'   => 9,
+            'name' => 'Solicitações-Edit',
+            'resource' => 'tickets.edit',
+            'is_menu' => false,
+            'icon'  => 'fas fa-fw fa-headset',
+            'module_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('resources')->insert([
+            'id'   => 10,
+            'name' => 'Solicitações-Update',
+            'resource' => 'tickets.update',
+            'is_menu' => false,
+            'icon'  => 'fas fa-fw fa-headset',
+            'module_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('resources')->insert([
+            'id'   => 11,
+            'name' => 'Solicitações-Create',
+            'resource' => 'tickets.create',
+            'is_menu' => false,
+            'icon'  => 'fas fa-fw fa-headset',
+            'module_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('resources')->insert([
+            'id'   => 12,
+            'name' => 'Solicitações-Store',
+            'resource' => 'tickets.store',
+            'is_menu' => false,
+            'icon'  => 'fas fa-fw fa-headset',
+            'module_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('resources')->insert([
+            'id'   => 13,
+            'name' => 'Comentários-Store',
+            'resource' => 'comments.store',
+            'is_menu' => false,
+            'icon'  => 'fas fa-fw fa-headset',
+            'module_id' => 2,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{ DB, Hash };
 use App\Http\Requests\Admin\CommentRequest;
 
-use App\Models\{Comment,Ticket};
+use App\Models\{Comment,Ticket,User};
 
 class CommentController extends Controller
 {
@@ -45,10 +45,25 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        $user_id = auth()->user()->id;        
-        $request->request->add(['user_id' => $user_id]);
+        $user = auth()->user();
+        $users = User::find($user->id);
+        //dd(auth()->user()->role_id);
+        if(auth()->user()->role_id == 2){
+            $tecnico_name = $users->name;
+            
+            $request->request->add(['tecnico_name' => $users->name]);
+            $ticket = Ticket::find($request->ticket_id);
+            $ticket->tecnico_name = $tecnico_name;
+            //dd($ticket->tecnico_name);
+		    $ticket->save();
+            
+        }    
 
-        if($request->status_id <> 5){
+        $request->request->add(['user_id' => $user->id]);
+
+        //dd( $request->request);
+
+        if($request->status_id <> 4){
             $ticket = Ticket::find($request->ticket_id);
             $ticket->status_id = $request->status_id;
 		    $ticket->save();

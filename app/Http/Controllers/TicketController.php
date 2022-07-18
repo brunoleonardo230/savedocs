@@ -96,7 +96,7 @@ class TicketController extends Controller
         $ticket = $this->ticket->find($id);
         $statuses = Status::all('id', 'name')->whereNotIn('name',$ticket->status->name);
 
-        $comments = Comment::all()->where('ticket_id',$id);
+        $comments = Comment::all()->where('ticket_id',$id)->sortByDesc('created_at');
         //dd($comments);
 
 	    return view('admin.tickets.edit', compact('ticket','statuses','comments'));

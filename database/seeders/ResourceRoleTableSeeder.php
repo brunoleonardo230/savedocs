@@ -55,5 +55,30 @@ class ResourceRoleTableSeeder extends Seeder
             'role_id'     => 3,
             'resource_id' => 8
         ]);
+
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 9
+        ]);
+
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 10
+        ]);
+
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 11
+        ]);
+
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 12
+        ]);
+
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 12
+        ]);
     }
 }
