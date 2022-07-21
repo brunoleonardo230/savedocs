@@ -176,5 +176,18 @@ class ResourcesTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
+        // Tickets ------------------------
+
+        DB::table('resources')->insert([
+            'id'   => 14,
+            'name' => 'Monitoramento',
+            'resource' => 'tickets.open',
+            'is_menu' => true,
+            'icon'  => 'fas fa-fw fa-desktop',
+            'module_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
     }
 }

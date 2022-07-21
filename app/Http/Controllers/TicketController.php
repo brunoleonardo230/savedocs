@@ -24,9 +24,10 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::paginate(10);
+        $tickets = Ticket::all();
+        $statuses = Status::all('id', 'name');//->whereNotIn('name',$ticket->status->name);
         
-        return view('admin.tickets.ticket-index', compact('tickets'));
+        return view('admin.tickets.ticket-index', compact('tickets','statuses'));
     }
 
     /**

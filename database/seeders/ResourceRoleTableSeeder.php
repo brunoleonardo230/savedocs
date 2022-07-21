@@ -78,7 +78,7 @@ class ResourceRoleTableSeeder extends Seeder
 
         DB::table('resource_role')->insert([
             'role_id'     => 2,
-            'resource_id' => 12
+            'resource_id' => 13
         ]);
     }
 }

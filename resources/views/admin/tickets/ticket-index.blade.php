@@ -36,7 +36,55 @@
                         <tr class="text-center">
                             <td> {{$ticket->id}} </td>
                             <td> {{$ticket->ticket_code}} </td>
-                            <td><font color="{{$ticket->status->color}}"> <strong>{{$ticket->status->name}}<strong></font></td>
+                            <td>
+                                <a href="{{route('tickets.edit', $ticket->id)}}" data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-sm btn-outline-primary mr-1">
+                                    <font color="{{$ticket->status->color}}"> <strong>{{$ticket->status->name}}<strong></font>
+                                </a>                            
+                            </td>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Alterar Status</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{route('comments.store')}}"  method="post" id="mail_form">
+                                            @csrf
+                                                <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
+                                                <div class="row form-group">            
+                                                    <div class="col-md-12">
+                                                        <label>Status: <span class="text-danger">*</span> </label>
+                                                        <select name="status_id" class="form-control" required>
+                                                            <option value=""> -- Selecione -- </option>
+                                                            @foreach($statuses as $status)
+                                                                <option value="{{$status->id}}">{{$status->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Comentário: <span class="text-danger">*</span> </label>
+                                                        <textarea id="comment_text" name="comment_text" class="form-control ">{{ old('comment_text', isset($commet) ? $commet->comment_text : '') }}</textarea>
+                                                    </div>
+                                                </div>                    
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                            <!-- <button class="btn btn-success"> Confirmar </button> -->
+                                            <a href="#" onClick="document.getElementById('mail_form').submit();" class="btn btn-outline-success">
+                                                Confirmar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FIM Modal -->
                             <td><strong>{{$ticket->tecnico_name}}<strong></td>
                             <td> {{$ticket->created_at->format('d/m/Y H:i:s')}} </td>                            
                             <td> {{$ticket->service->name}} </td>
@@ -58,4 +106,5 @@
         </div>
     </div>
 <!-- </div> -->
+
 </x-app-layout>
