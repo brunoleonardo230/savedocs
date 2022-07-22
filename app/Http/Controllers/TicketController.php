@@ -64,7 +64,7 @@ class TicketController extends Controller
 			$this->ticket->create($request->all());
 
 			return redirect()
-					->route('tickets.index')
+					->route('tickets.ticketsopen')
 					->with('success', 'Ticket criado com sucesso!');
 
 		} catch (\Exception $e) {
@@ -124,5 +124,16 @@ class TicketController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ticketsOpen()
+    {
+        //dd($tickets);
+        $ticketsopen = Ticket::all()->whereIn('status_id',1);
+        
+        $ticketsinprogress = Ticket::all()->whereNotIn('status_id',[3,1]);
+        $statuses = Status::all('id', 'name');//->whereNotIn('name',$ticket->status->name);
+        
+        return view('admin.tickets.ticket-open', compact('ticketsopen','ticketsinprogress','statuses'));
     }
 }

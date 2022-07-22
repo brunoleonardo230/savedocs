@@ -57,9 +57,10 @@ Route::group([ 'middleware' => ['auth','access.control.list']], function() {
     Route::resource('resources', ResourceController::class);
 
     Route::resource('modules', ModuleController::class);
-
+    
+    Route::get('/tickets/ticketsopen', [TicketController::class, 'ticketsOpen'])->name('tickets.ticketsopen');
     Route::resource('tickets', TicketController::class);
-    Route::get('/tickets/open', [TicketController::class, 'open'])->name('tickets.open');
+    
 
     Route::resource('plans', PlanController::class);
     Route::get('/plans/{plan}/features', [PlanController::class, 'syncFeatures'])->name('plans.features');
