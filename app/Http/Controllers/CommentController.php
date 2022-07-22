@@ -48,7 +48,7 @@ class CommentController extends Controller
         $user = auth()->user();
         $users = User::find($user->id);
         //dd(auth()->user()->role_id);
-        if(auth()->user()->role_id == 2){
+        if(auth()->user()->role_id == 2 || auth()->user()->role_id == 1){
             $tecnico_name = $users->name;
             
             $request->request->add(['tecnico_name' => $users->name]);

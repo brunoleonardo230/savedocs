@@ -49,12 +49,12 @@
                                     <td> {{$ticket->id}} </td>
                                     <td> {{$ticket->ticket_code}} </td>
                                     <td>
-                                        <a href="{{route('tickets.edit', $ticket->id)}}" data-toggle="modal" data-target="#Modal{{$key}}" type="button" class="btn btn-sm btn-outline-primary mr-1">
+                                        <a href="{{route('tickets.edit', $ticket->id)}}" data-toggle="modal" data-target="#{{$ticket->ticket_code}}" type="button" class="btn btn-sm btn-outline-primary mr-1">
                                             <font color="{{$ticket->status->color}}"> <strong>{{$ticket->status->name}}<strong></font>
                                         </a>                            
                                     </td>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="Modal{{$key}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="{{$ticket->ticket_code}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -64,7 +64,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('comments.store')}}"  method="post" id="mail_form{{$key}}">
+                                                    <form action="{{route('comments.store')}}"  method="post" id="mail_form{{$ticket->ticket_code}}">
                                                     @csrf
                                                         <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
                                                         <div class="row form-group">            
@@ -89,7 +89,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                     <!-- <button class="btn btn-success"> Confirmar </button> -->
-                                                    <a href="#" onClick="document.getElementById('mail_form{{$key}}').submit();" class="btn btn-outline-success">
+                                                    <a href="#" onClick="document.getElementById('mail_form{{$ticket->ticket_code}}').submit();" class="btn btn-outline-success">
                                                         Confirmar
                                                     </a>
                                                 </div>
@@ -141,12 +141,12 @@
                                     <td> {{$ticket->id}} </td>
                                     <td> {{$ticket->ticket_code}} </td>
                                     <td>
-                                        <a href="{{route('tickets.edit', $ticket->id)}}" data-toggle="modal" data-target="#Modal{{$key}}" type="button" class="btn btn-sm btn-outline-primary mr-1">
+                                        <a href="{{route('tickets.edit', $ticket->id)}}" data-toggle="modal" data-target="#{{$ticket->ticket_code}}" type="button" class="btn btn-sm btn-outline-primary mr-1">
                                             <font color="{{$ticket->status->color}}"> <strong>{{$ticket->status->name}}<strong></font>
                                         </a>                            
                                     </td>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="Modal{{$key}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="{{$ticket->ticket_code}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -156,7 +156,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('comments.store')}}"  method="post" id="mail_form{{$key}}">
+                                                    <form action="{{route('comments.store')}}"  method="post" id="mail_form{{$ticket->ticket_code}}">
                                                     @csrf
                                                         <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
                                                         <div class="row form-group">            
@@ -181,7 +181,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                     <!-- <button class="btn btn-success"> Confirmar </button> -->
-                                                    <a href="#" onClick="document.getElementById('mail_form{{$key}}').submit();" class="btn btn-outline-success">
+                                                    <a href="#" onClick="document.getElementById('mail_form{{$ticket->ticket_code}}').submit();" class="btn btn-outline-success">
                                                         Confirmar
                                                     </a>
                                                 </div>

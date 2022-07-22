@@ -59,7 +59,7 @@ class ResourcesTableSeeder extends Seeder
 
         DB::table('resources')->insert([
             'id'   => 4,
-            'name' => 'Solicitações',
+            'name' => 'Todas Solicitações',
             'resource' => 'tickets.index',
             'is_menu' => true,
             'icon'  => 'fas fa-fw fa-headset',
@@ -180,10 +180,10 @@ class ResourcesTableSeeder extends Seeder
 
         DB::table('resources')->insert([
             'id'   => 14,
-            'name' => 'Monitoramento',
+            'name' => 'Minhas Solicitações',
             'resource' => 'tickets.open',
             'is_menu' => true,
-            'icon'  => 'fas fa-fw fa-desktop',
+            'icon'  => 'fas fa-fw fa-headset',
             'module_id' => 2,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

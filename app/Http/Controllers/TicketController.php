@@ -129,9 +129,9 @@ class TicketController extends Controller
     public function ticketsOpen()
     {
         //dd($tickets);
-        $ticketsopen = Ticket::all()->whereIn('status_id',1);
+        $ticketsopen = Ticket::all()->whereIn('status_id',1)->whereIn('assigned_to_user_id',auth()->user()->id);
         
-        $ticketsinprogress = Ticket::all()->whereNotIn('status_id',[3,1]);
+        $ticketsinprogress = Ticket::all()->whereNotIn('status_id',[3,1])->whereIn('assigned_to_user_id',auth()->user()->id);
         $statuses = Status::all('id', 'name');//->whereNotIn('name',$ticket->status->name);
         
         return view('admin.tickets.ticket-open', compact('ticketsopen','ticketsinprogress','statuses'));
