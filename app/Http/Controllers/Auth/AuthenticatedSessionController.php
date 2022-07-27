@@ -26,13 +26,28 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store(Request $request)
     {
-        $request->authenticate();
+        $credentials = $request->validate([
+            'email'    => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            $user = auth()->user();
+            if ($user->is_active) {
+                $request->session()->regenerate();
+     
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
+
+        }
+ 
+        return back()->withErrors([
+            'email' => 'As credenciais fornecidas não correspondem aos nossos registros.',
+        ]);
+        
     }
 
     /**
