@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'id'                => 1,
+            'user_login'        => 'admin01',
             'type_user_id'      => 1,
             'name'              => 'Administrador_01',
             'cpf'               => NULL,
@@ -39,6 +40,7 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'id'                => 2,
+            'user_login'        => 'tecnico01',
             'type_user_id'      => 1,
             'name'              => 'Tecnico_01',
             'cpf'               => NULL,
@@ -60,6 +62,7 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'id'                => 3,
+            'user_login'        => 'cliente01',
             'type_user_id'      => 1,
             'name'              => 'Cliente_01',
             'cpf'               => NULL,
@@ -81,6 +84,7 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'id'                => 4,
+            'user_login'        => 'thiel.serra',
             'type_user_id'      => 1,
             'name'              => 'Thiel Serra',
             'cpf'               => NULL,
@@ -102,6 +106,7 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'id'                => 5,
+            'user_login'        => 'bruno.silva',
             'type_user_id'      => 1,
             'name'              => 'Bruno Leonardo',
             'cpf'               => NULL,
@@ -123,6 +128,7 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'id'                => 6,
+            'user_login'        => 'savedocs',
             'type_user_id'      => 2,
             'name'              => NULL,
             'cpf'               => NULL,

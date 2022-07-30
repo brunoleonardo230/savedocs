@@ -28,13 +28,7 @@ Route::get('subscriptions/premium', [SubscriptionController::class, 'premium'])-
 Route::get('/assinar/{url}', [SiteController::class, 'createSessionPlan'])->name('choice.plan');
 //Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
-
-
 
 Route::get('laravel-version', function() {
     $laravel = app();
@@ -44,6 +38,11 @@ Route::get('laravel-version', function() {
 
 
 Route::group([ 'middleware' => ['auth','access.control.list']], function() {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
     Route::resource('users', UserController::class);
 
     Route::resource('accounts', AccountController::class);
