@@ -35,8 +35,6 @@ Route::get('laravel-version', function() {
     return "Your Laravel version is ".$laravel::VERSION;
 });
 
-
-
 Route::group([ 'middleware' => ['auth','access.control.list']], function() {
 
     Route::get('/dashboard', function () {
