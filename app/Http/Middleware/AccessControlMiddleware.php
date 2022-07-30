@@ -19,18 +19,28 @@ class AccessControlMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = auth()->user();
+        try {
+            //code...
+            $user = auth()->user();
+            
+            if ($user->is_active) {
+                $this->authorize( $request->route()->getName() );
         
-        if ($user->is_active) {
-            $this->authorize( $request->route()->getName() );
+                return $next($request);
+            }
+
+            throw new Exception("Acesso não autorizado", 1);
+            
+        } catch (\Exception $e) {
+
+            // dd($e->getMessage());
+            
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
     
-            return $next($request);
+            return view('auth.login')->with("danger", "Acesso interrompido, entre em contato com o administrador do sistema através do E-mail: 'suporte.savedocs@teste.com', para mais informações.");
         }
 
-        Auth::guard('web')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return view('auth.login')->with("danger", "Acesso interrompido, entre em contato com o administrador do sistema através do E-mail: 'suporte.savedocs@teste.com', para mais informações.");
     }
 }

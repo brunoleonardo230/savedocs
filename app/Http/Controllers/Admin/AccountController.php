@@ -22,7 +22,7 @@ class AccountController extends Controller
 
     public function update(Request $request, $id)
     {
-        try{
+		try{
 
 			DB::beginTransaction();
 
@@ -30,7 +30,7 @@ class AccountController extends Controller
 
 			$user = auth()->user();
 
-			if( $request->type_user_id == TypeUser::LEGAL_PERSON ){
+			if( $user->type_user_id == TypeUser::LEGAL_PERSON ){
 				$user->representative->update($request->representativeArray);
 			}
 
@@ -50,7 +50,7 @@ class AccountController extends Controller
 
 			return redirect()
 					->route('accounts.show')
-					->with('success', 'Usuário atualizado com sucesso!');
+					->with('success', 'Seus dados foram atualizados com sucesso!');
 
         } catch (\Exception $e) {
 			

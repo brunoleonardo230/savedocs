@@ -120,11 +120,22 @@ class ResourcesTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
+        DB::table('resources')->insert([
+            'id'   => 9,
+            'name' => 'Minha conta',
+            'resource' => 'accounts.update',
+            'is_menu' => false,
+            'icon'  => 'fas fa-fw fa-user',
+            'module_id' => 3,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
 
         // Dashboard ------------------------
 
         DB::table('resources')->insert([
-            'id'   => 9,
+            'id'   => 10,
             'name' => 'Dashboard',
             'resource' => 'dashboard',
             'is_menu' => false,
