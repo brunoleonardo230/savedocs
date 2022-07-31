@@ -77,14 +77,22 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <div class="d-sm-flex mb-4">
-                            <h1 class="h3 mb-0 text-gray-800"> {{ $header }} </h1>
+                        <div class="row d-sm-flex mb-4">
+                            <div class="col-md-6">
+                                <span class="h3 mb-0 text-gray-800"> {{ $header }} </span>
+                            </div>
+                            @if(isset($button))
+                                <div class="col-md-6 text-right">
+                                    <span class="mb-0"> {{ $button }} </span>
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Session Status -->
                         @include('components.session-flash')
 
                         {{ $slot }}
+                        
                     </div>
                 </div>
             </div>

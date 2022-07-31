@@ -28,7 +28,7 @@
                                         <div class="form-group">
                                             <input type="text" name="user_login" class="form-control form-control-user"
                                                 id="exampleInputuserLogin" aria-describedby="userLoginHelp"
-                                                placeholder="joão.silva">
+                                                placeholder="Login">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control form-control-user"

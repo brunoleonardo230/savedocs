@@ -45,6 +45,7 @@ Route::group([ 'middleware' => ['auth','access.control.list']], function() {
 
     Route::resource('accounts', AccountController::class);
     Route::get('/accounts/show', [AccountController::class, 'show'])->name('accounts.show');
+    Route::put('/accounts/{id}/update-access', [AccountController::class, 'updateAccess'])->name('accounts.access.update');
     
     Route::resource('roles', RoleController::class);
     Route::get('/roles/{role}/resources', [RoleController::class, 'syncResources'])->name('roles.resources');

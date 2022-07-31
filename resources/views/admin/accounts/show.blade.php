@@ -6,6 +6,10 @@
         </h2>
     </x-slot>
 
+    <x-slot name="button">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-data-update-for-access" data-whatever="@mdo"> <i class="fas fa-fw fa-key"></i> Atualizar dados para acesso </button>
+    </x-slot>
+
     <div class="card">
         <div class="card-body">
             <form action="{{route('accounts.update', $user->id)}}"  method="POST">
@@ -158,7 +162,11 @@
                 
             </form>
         </div>
+        
+        @include('components.modal-data-update-for-access')
+
     </div>
+
 
     @section('scripts')
         <script>

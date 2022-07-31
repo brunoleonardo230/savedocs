@@ -10,8 +10,7 @@ use App\Models\{ User, Role, Address, TypeUser, Representative };
 
 class AccountController extends Controller
 {
-
-    public function show()
+	public function show()
     {
 		$user = auth()->user();
 
@@ -60,4 +59,19 @@ class AccountController extends Controller
 	        return redirect()->back()->with('danger', $message);
         }
     }
+
+	public function updateAccess(Request $request, $id)
+	{
+		if (is_null($request->user_login) || empty($request->user_login))
+			return redirect()->back()->with('danger', "Erro ao processar atualização..."); 
+		
+		$user = auth()->user();
+		$user->user_login = $request->user_login;
+		$user->password   = $request->password ? Hash::make($request->password) : $user->password;
+
+		$user->save();
+		return redirect()
+					->route('accounts.show')
+					->with('success', 'Seus dados de acesso foram atualizados com sucesso!');
+	}
 }

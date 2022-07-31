@@ -1,0 +1,35 @@
+@php
+  $user = auth()->user();
+@endphp
+
+<div class="modal fade" id="modal-data-update-for-access" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-gradient-primary">
+        <h3 class="modal-title text-white" id="exampleModalLabel"> Dados para acesso de {{ $user->name ? $user->name : $user->fantasy_name }} </h3>
+      </div>
+      <form action="{{route('accounts.access.update', $user->id)}}"  method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="user_login" class="col-form-label">Login:</label>
+            <input type="text" class="form-control" id="user_login" name="user_login" value="{{$user->user_login}}" required>
+            <small class="form-text text-muted">
+              Você pode usar seu E-mail, CPF ou nome personalizado, ex: save.docs
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-form-label">Senha:</label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <input type="submit" value="Atualizar" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
