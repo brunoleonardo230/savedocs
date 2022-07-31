@@ -14,7 +14,7 @@
 
         <div class="modal-body">
           <div class="form-group">
-            <label for="user_login" class="col-form-label">Login:</label>
+            <label for="user_login" class="col-form-label">Login:  <span class="text-danger">*</span> </label>
             <input type="text" class="form-control" id="user_login" name="user_login" value="{{$user->user_login}}" required>
             <small class="form-text text-muted">
               Você pode usar seu E-mail, CPF ou nome personalizado, ex: save.docs
@@ -23,6 +23,9 @@
           <div class="form-group">
             <label for="password" class="col-form-label">Senha:</label>
             <input type="password" class="form-control" id="password" name="password">
+            <small class="form-text text-muted">
+              Caso você não informe nova senha, seu acesso continuará validado com a senha atual
+            </small>
           </div>
         </div>
         <div class="modal-footer">
