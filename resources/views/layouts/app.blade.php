@@ -92,6 +92,8 @@
                         @include('components.session-flash')
 
                         {{ $slot }}
+
+                        @include('components.modal-data-update-for-access')
                         
                     </div>
                 </div>
@@ -145,6 +147,10 @@
                     }, 
                     "autoWidth": true
                 }); 
+
+                @if(session()->has('first-access'))
+                    $('#modal-data-update-for-access').modal('show')
+                @endif
             });
 
             function validateRequiredInputs(input) {

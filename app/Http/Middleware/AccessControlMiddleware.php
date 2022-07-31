@@ -24,7 +24,17 @@ class AccessControlMiddleware
             $user = auth()->user();
             
             if ($user->is_active) {
+
+                if (empty($user->last_access)) {
+                    session()->put('first-access', true);
+                } else {
+                    session()->forget('first-access');
+                }
+
                 $this->authorize( $request->route()->getName() );
+
+                $user->last_access = date('Y-m-d H:i:s');
+                $user->save();
         
                 return $next($request);
             }

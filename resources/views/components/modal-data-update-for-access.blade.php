@@ -13,6 +13,15 @@
         @method('PUT')
 
         <div class="modal-body">
+
+          @if(session()->has('first-access'))
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Bem-vindo(a)!!</h4>
+              <p> Estamos muito feliz com seu primeiro acesso, sugerimos que você atualize sua senha, 
+                mas caso prefira deixar para outro momento, você poderá fazer através da opção: <strong>"Minha conta" </strong> no canto superior direito.</p>
+            </div>
+          @endif
+
           <div class="form-group">
             <label for="user_login" class="col-form-label">Login:  <span class="text-danger">*</span> </label>
             <input type="text" class="form-control" id="user_login" name="user_login" value="{{$user->user_login}}" required>
