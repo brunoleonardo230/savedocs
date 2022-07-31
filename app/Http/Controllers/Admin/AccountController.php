@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\{ DB, Hash };
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Models\{ User, Role, Address, TypeUser, Representative };
+use App\Traits\ValidatorTrait;
 
 class AccountController extends Controller
 {
+	use ValidatorTrait;
+
 	public function show()
     {
 		$user = auth()->user();
@@ -29,7 +32,17 @@ class AccountController extends Controller
 
 			$user = auth()->user();
 
+			if( $user->type_user_id == TypeUser::PHYSICAL_PERSON && !$this->validateCPF($request->cpf))
+				throw new \Exception("O CPF informado não é válido", 1);
+
 			if( $user->type_user_id == TypeUser::LEGAL_PERSON ){
+
+				if (!$this->validateCNPJ($request->cnpj))
+					throw new \Exception("O CNPJ informado não é válido", 1);
+
+				if (!$this->validateCPF($request->representativeArray['cpf']))
+					throw new \Exception("O CPF informado para o representante não é válido", 1);
+
 				$user->representative->update($request->representativeArray);
 			}
 
@@ -54,9 +67,12 @@ class AccountController extends Controller
         } catch (\Exception $e) {
 			
 			DB::rollBack();
-	        $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
 
-	        return redirect()->back()->with('danger', $message);
+			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
+			return redirect()->back()
+					->withInput()
+					->withErrors($request->all())
+					->with('danger', $message);
         }
     }
 
