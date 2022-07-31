@@ -22,7 +22,7 @@
           </div>
           <div class="form-group">
             <label for="password" class="col-form-label">Senha:</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="password" name="password" placeholder="********">
             <small class="form-text text-muted">
               Caso você não informe nova senha, seu acesso continuará validado com a senha atual
             </small>
