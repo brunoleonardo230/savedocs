@@ -27,7 +27,7 @@
           @endif
 
           <div class="form-group">
-            <label for="user_login" class="col-form-label">Login:  <span class="text-danger">*</span> </label>
+            <label for="user_login">Nome usuário: <small> <b>(Login)</b> </small> <span class="text-danger">*</span> </label>
             <input type="text" class="form-control" id="user_login" name="user_login" value="{{$user->user_login}}" required>
             <small class="form-text text-muted">
               Você pode usar seu E-mail, CPF ou nome personalizado, ex: save.docs
