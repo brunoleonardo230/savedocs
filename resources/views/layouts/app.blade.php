@@ -44,8 +44,8 @@
                 bottom: 10px;
                 width: 10px;
                 height: 20px;
-                border-right: solid 3px green;
-                border-bottom: solid 3px green;
+                border-right: solid 3px blue;
+                border-bottom: solid 3px blue;
                 transform: rotate(45deg);
             }
 
