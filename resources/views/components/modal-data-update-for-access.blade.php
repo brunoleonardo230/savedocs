@@ -17,8 +17,12 @@
           @if(session()->has('first-access'))
             <div class="alert alert-success" role="alert">
               <h4 class="alert-heading">Bem-vindo(a)!!</h4>
-              <p> Estamos muito feliz com seu primeiro acesso, sugerimos que você atualize sua senha, 
-                mas caso prefira deixar para outro momento, você poderá fazer através da opção: <strong>"Minha conta" </strong> no canto superior direito.</p>
+              <p> 
+                Estamos muito felizes com seu primeiro acesso, sugerimos que você atualize sua senha para maior segurança, 
+                mas caso prefira deixar isso para outro momento, clique no botão cancelar. 
+              </p>
+                
+              <p> Você poderá atualizar seus dados de acesso a qualquer momento através da opção: <strong>"Minha conta" </strong> no canto superior direito.</p>
             </div>
           @endif
 

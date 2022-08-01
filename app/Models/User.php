@@ -30,7 +30,8 @@ class User extends Authenticatable
         'role_id',
         'address_id',
         'type_user_id',
-        'representative_id'
+        'representative_id',
+        'user_login'
     ];
 
     /**

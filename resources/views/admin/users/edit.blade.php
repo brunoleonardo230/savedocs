@@ -44,7 +44,21 @@
                 <hr class="mt-4">
 
                 <div class="row form-group mt-3">
-                    <div class="col-md-6">
+                    
+                    <div class="col-md-4">
+                        <label>Nome usuário: <small> <b>(Login)</b> </small> <span class="text-danger">*</span> </label>
+                        <input type="text" class="form-control @error('user_login') is-invalid @enderror" name="user_login" value="@if(isset($user->user_login)) {{ $user->user_login }} @endif" required>
+                        <small class="form-text text-muted">
+                            Você pode usar seu E-mail, CPF ou nome personalizado, ex: save.docs
+                        </small>
+                        @error('user_login')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-4">
                         <label>Perfil: <span class="text-danger">*</span> </label>
                         <select name="role_id" class="form-control" required>
                             <option value=""> -- Selecione -- </option>
