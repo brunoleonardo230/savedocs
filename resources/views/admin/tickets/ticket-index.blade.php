@@ -8,7 +8,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Tickets') }}
+                {{ __('Solicitações') }}
             </h2>
             <div class="col-md-12 mt-4 text-right">
                 <a href="{{route('tickets.create')}}" class="btn btn-success" title="Criar ticket"> <i class="fas fa-fw fa-plus"></i> Criar Ticket</a>
@@ -20,8 +20,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Ticket</th>                        
+                            <th>Solicitação</th>                        
                             <th>Status</th>
+                            <th>Técnico</th>
                             <th>Criado</th>
                             <th>Serviço</th>
                             <th>Cliente</th>
@@ -36,6 +37,7 @@
                             <td> {{$ticket->id}} </td>
                             <td> {{$ticket->ticket_code}} </td>
                             <td><font color="{{$ticket->status->color}}"> <strong>{{$ticket->status->name}}<strong></font></td>
+                            <td><strong>{{$ticket->tecnico_name}}<strong></td>
                             <td> {{$ticket->created_at->format('d/m/Y H:i:s')}} </td>                            
                             <td> {{$ticket->service->name}} </td>
                             <td> {{$ticket->author_name}} </td>

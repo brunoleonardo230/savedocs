@@ -19,7 +19,7 @@ class ResourceController extends Controller
 
 	public function index()
 	{
-		$resources = $this->resource->paginate(10);
+		$resources = $this->resource->all();
 
 		return view('admin.resources.index', compact('resources'));
 	}
