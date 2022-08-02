@@ -123,15 +123,24 @@ class ResourcesTableSeeder extends Seeder
 
         DB::table('resources')->insert([
             'id'   => 9,
+<<<<<<< HEAD
             'name' => 'Solicitações-Edit',
             'resource' => 'tickets.edit',
             'is_menu' => false,
             'icon'  => 'fas fa-fw fa-headset',
             'module_id' => 2,
+=======
+            'name' => 'Minha conta',
+            'resource' => 'accounts.update',
+            'is_menu' => false,
+            'icon'  => 'fas fa-fw fa-user',
+            'module_id' => 3,
+>>>>>>> 066e1526245ccd46f8fc7bb92c1d6a3ffd7f43f4
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
+<<<<<<< HEAD
         DB::table('resources')->insert([
             'id'   => 10,
             'name' => 'Solicitações-Update',
@@ -185,6 +194,18 @@ class ResourcesTableSeeder extends Seeder
             'is_menu' => true,
             'icon'  => 'fas fa-fw fa-headset',
             'module_id' => 2,
+=======
+
+        // Dashboard ------------------------
+
+        DB::table('resources')->insert([
+            'id'   => 10,
+            'name' => 'Dashboard',
+            'resource' => 'dashboard',
+            'is_menu' => false,
+            'icon'  => 'fas fa-fw fa-user',
+            'module_id' => 3,
+>>>>>>> 066e1526245ccd46f8fc7bb92c1d6a3ffd7f43f4
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

@@ -28,28 +28,25 @@ Route::get('subscriptions/premium', [SubscriptionController::class, 'premium'])-
 Route::get('/assinar/{url}', [SiteController::class, 'createSessionPlan'])->name('choice.plan');
 //Route::get('/', [SiteController::class, 'index'])->name('site.home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
-
-
 
 Route::get('laravel-version', function() {
     $laravel = app();
     return "Your Laravel version is ".$laravel::VERSION;
 });
 
-
-
 Route::group([ 'middleware' => ['auth','access.control.list']], function() {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
     Route::resource('users', UserController::class);
 
     Route::resource('accounts', AccountController::class);
-
     Route::get('/accounts/show', [AccountController::class, 'show'])->name('accounts.show');
-
+    Route::put('/accounts/{id}/update-access', [AccountController::class, 'updateAccess'])->name('accounts.access.update');
+    
     Route::resource('roles', RoleController::class);
     Route::get('/roles/{role}/resources', [RoleController::class, 'syncResources'])->name('roles.resources');
 	Route::put('/roles/{role}/resources', [RoleController::class, 'updateSyncResources'])->name('roles.resources.update');

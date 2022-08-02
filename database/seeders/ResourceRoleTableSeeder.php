@@ -50,12 +50,25 @@ class ResourceRoleTableSeeder extends Seeder
             'resource_id' => 4
         ]);
 
-        // Cliente | Minha conta
+        // Administrador | Minha conta - INDEX
+        DB::table('resource_role')->insert([
+            'role_id'     => 1,
+            'resource_id' => 8
+        ]);
+
+        // Técnico | Minha conta - INDEX
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 8
+        ]);
+
+        // Cliente | Minha conta - INDEX
         DB::table('resource_role')->insert([
             'role_id'     => 3,
             'resource_id' => 8
         ]);
 
+<<<<<<< HEAD
         DB::table('resource_role')->insert([
             'role_id'     => 2,
             'resource_id' => 9
@@ -84,6 +97,42 @@ class ResourceRoleTableSeeder extends Seeder
         DB::table('resource_role')->insert([
             'role_id'     => 2,
             'resource_id' => 14
+=======
+        // Administrador | Minha conta - UPDATE
+        DB::table('resource_role')->insert([
+            'role_id'     => 1,
+            'resource_id' => 9
+        ]);
+
+        // Técnico | Minha conta - UPDATE
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 9
+        ]);
+
+        // Cliente | Minha conta - UPDATE
+        DB::table('resource_role')->insert([
+            'role_id'     => 3,
+            'resource_id' => 9
+        ]);
+
+        // Administrador | Dashboard
+        DB::table('resource_role')->insert([
+            'role_id'     => 1,
+            'resource_id' => 10
+        ]);
+
+        // Técnico | Dashboard
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 10
+        ]);
+
+        // Cliente | Dashboard
+        DB::table('resource_role')->insert([
+            'role_id'     => 3,
+            'resource_id' => 10
+>>>>>>> 066e1526245ccd46f8fc7bb92c1d6a3ffd7f43f4
         ]);
     }
 }

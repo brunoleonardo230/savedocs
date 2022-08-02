@@ -26,9 +26,9 @@
                                         @csrf
 
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="E-mail">
+                                            <input type="text" name="user_login" class="form-control form-control-user"
+                                                id="exampleInputuserLogin" aria-describedby="userLoginHelp"
+                                                placeholder="Login">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control form-control-user"

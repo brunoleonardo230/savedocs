@@ -55,6 +55,9 @@ class UserRequest extends FormRequest
                 'addressArray.state' => 'required|string'
             ];
         }
+
+        $data += ['user_login' => 'required|string'];
+        
         return $data;
     }
 }

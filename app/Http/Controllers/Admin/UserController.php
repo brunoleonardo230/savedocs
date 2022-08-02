@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\{ DB, Hash };
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Models\{ User, Role, Address, TypeUser, Representative };
+use App\Traits\ValidatorTrait;
 
 class UserController extends Controller
 {
+	use ValidatorTrait;
 
     public function index()
     {
@@ -26,7 +28,6 @@ class UserController extends Controller
 
 	public function store(UserRequest $request)
     {
-
 		try {
 
 			DB::beginTransaction();
@@ -35,13 +36,22 @@ class UserController extends Controller
 			
 			if( $request->type_user_id == TypeUser::PHYSICAL_PERSON ){
 
-				if( User::whereEmail($request->email)->first())
+				if (!$this->validateCPF($request->cpf))
+					throw new \Exception("O CPF informado não é válido", 1);				
+
+				if ( User::whereEmail($request->email)->first())
 					return redirect()->back()->withErrors( $request );
 			}
 
 			if( $request->type_user_id == TypeUser::LEGAL_PERSON ){
 
+				if (!$this->validateCNPJ($request->cnpj))
+					throw new \Exception("O CNPJ informado não é válido", 1);
+
 				if( isset($request->representativeArray) && !empty($request->representativeArray['name']) ) {
+
+					if (!$this->validateCPF($request->representativeArray['cpf']))
+						throw new \Exception("O CPF informado para o representante não é válido", 1);	
 
 					$representative = Representative::create($request->representativeArray);
 					if($representative)
@@ -71,8 +81,12 @@ class UserController extends Controller
 		} catch (\Exception $e) {
 			DB::rollBack();
 
+			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar cadastro...';
+
 			return redirect()->back()
-						->withErrors( $request );
+						->withInput()
+						->withErrors($request->all())
+						->with('danger', $message);
 		}
 		
     }
@@ -80,7 +94,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-		
+
 		if (!$user) {
 			return redirect()
 					->route('users.index')
@@ -105,7 +119,17 @@ class UserController extends Controller
 									->with('danger', 'Usuário inexistente!');
 			}
 
+			if( $request->type_user_id == TypeUser::PHYSICAL_PERSON && !$this->validateCPF($request->cpf))
+				throw new \Exception("O CPF informado não é válido", 1);
+
 			if( $request->type_user_id == TypeUser::LEGAL_PERSON ){
+
+				if (!$this->validateCNPJ($request->cnpj))
+					throw new \Exception("O CNPJ informado não é válido", 1);
+
+				if (!$this->validateCPF($request->representativeArray['cpf']))
+					throw new \Exception("O CPF informado para o representante não é válido", 1);
+
 				$user->representative->update($request->representativeArray);
 			}
 
@@ -135,9 +159,13 @@ class UserController extends Controller
         } catch (\Exception $e) {
 			
 			DB::rollBack();
-	        $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
 
-	        return redirect()->back()->with('danger', $message);
+			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
+
+			return redirect()->back()
+					->withInput()
+					->withErrors($request->all())
+					->with('danger', $message);
         }
     }
 

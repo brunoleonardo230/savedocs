@@ -21,8 +21,10 @@ class AlterUsersTableAddColumns extends Migration
             $table->string('phone')->nullable();
             $table->boolean('is_active')->default(1);
             $table->string('access_token')->nullable();
+            $table->dateTime('last_access')->nullable();
+            $table->string('user_login')->nullable()->after('id');
 
-            $table->unsignedBigInteger('type_user_id')->after('id');
+            $table->unsignedBigInteger('type_user_id');
             $table->unsignedBigInteger('representative_id')->nullable();
 
             $table->foreign('type_user_id')
@@ -56,6 +58,8 @@ class AlterUsersTableAddColumns extends Migration
             $table->dropColumn('phone');
             $table->dropColumn('is_active');
             $table->dropColumn('access_token');
+            $table->dropColumn('last_access');
+            $table->dropColumn('user_login');
         });
     }
 }

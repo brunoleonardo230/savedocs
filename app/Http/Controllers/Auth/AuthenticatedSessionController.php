@@ -26,13 +26,23 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store(Request $request)
     {
-        $request->authenticate();
+        $credentials = $request->validate([
+            'user_login' => ['required'],
+            'password'   => ['required'],
+        ]);
+        
+        if (Auth::attempt($credentials)) {
+            // ACESSO LIBERADO
+            $request->session()->regenerate();
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return back()->withErrors([
+            "user_login" => "As credenciais fornecidas não correspondem aos nossos registros."
+        ]);
+        
     }
 
     /**

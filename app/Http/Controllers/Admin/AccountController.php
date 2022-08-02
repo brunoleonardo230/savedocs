@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\{ DB, Hash };
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Models\{ User, Role, Address, TypeUser, Representative };
+use App\Traits\ValidatorTrait;
 
 class AccountController extends Controller
 {
+	use ValidatorTrait;
 
-    public function show()
+	public function show()
     {
 		$user = auth()->user();
 
@@ -22,7 +24,7 @@ class AccountController extends Controller
 
     public function update(Request $request, $id)
     {
-        try{
+		try{
 
 			DB::beginTransaction();
 
@@ -30,7 +32,17 @@ class AccountController extends Controller
 
 			$user = auth()->user();
 
-			if( $request->type_user_id == TypeUser::LEGAL_PERSON ){
+			if( $user->type_user_id == TypeUser::PHYSICAL_PERSON && !$this->validateCPF($request->cpf))
+				throw new \Exception("O CPF informado não é válido", 1);
+
+			if( $user->type_user_id == TypeUser::LEGAL_PERSON ){
+
+				if (!$this->validateCNPJ($request->cnpj))
+					throw new \Exception("O CNPJ informado não é válido", 1);
+
+				if (!$this->validateCPF($request->representativeArray['cpf']))
+					throw new \Exception("O CPF informado para o representante não é válido", 1);
+
 				$user->representative->update($request->representativeArray);
 			}
 
@@ -50,14 +62,32 @@ class AccountController extends Controller
 
 			return redirect()
 					->route('accounts.show')
-					->with('success', 'Usuário atualizado com sucesso!');
+					->with('success', 'Seus dados foram atualizados com sucesso!');
 
         } catch (\Exception $e) {
 			
 			DB::rollBack();
-	        $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
 
-	        return redirect()->back()->with('danger', $message);
+			$message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
+			return redirect()->back()
+					->withInput()
+					->withErrors($request->all())
+					->with('danger', $message);
         }
     }
+
+	public function updateAccess(Request $request, $id)
+	{
+		if (is_null($request->user_login) || empty($request->user_login))
+			return redirect()->back()->with('danger', "Erro ao processar atualização..."); 
+		
+		$user = auth()->user();
+		$user->user_login = $request->user_login;
+		$user->password   = $request->password ? Hash::make($request->password) : $user->password;
+
+		$user->save();
+		return redirect()
+					->route('accounts.show')
+					->with('success', 'Seus dados de acesso foram atualizados com sucesso!');
+	}
 }

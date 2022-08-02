@@ -22,8 +22,25 @@
                                         <h1 class="h5 text-gray-900 mb-4">Crie a sua conta aqui!</h1>
                                     </div>
 
+                                    <hr>
+
                                     <form class="user" method="POST" action="{{ route('register') }}">
                                         @csrf
+
+                                        <div class="row form-group">
+                                            <div class="col-md-12 text-center">
+                                                <label> A conta é para pessoa: </label> <br>
+                                                <div class="form-check form-check-inline">
+                                                    <input type="radio" id="physical_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="1" checked>
+                                                    <label class="custom-control-label" for="physical_person">Física</label>
+                                                </div>
+                                
+                                                <div class="form-check form-check-inline">
+                                                    <input type="radio" id="legal_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="2" >
+                                                    <label class="custom-control-label" for="legal_person">Jurídica</label>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <!-- Name -->
                                         <div>
@@ -74,5 +91,50 @@
             </div>
         </div>
     </div>
+    
+    <style>
+        input[type='radio'] {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+        }
+    
+        input[type='radio'] + label {
+            position: relative;
+            cursor: pointer;
+            padding-left: 30px;
+        }
+    
+        input[type='radio'] + label::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 0;
+            bottom: 0;
+            border: solid 2px;
+            vertical-align: bottom;
+        }
+        input[type='radio']:checked + label::after {
+            content: '';
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            width: 10px;
+            height: 20px;
+            border-right: solid 3px blue;
+            border-bottom: solid 3px blue;
+            transform: rotate(45deg);
+        }
+
+        .isVisible {
+            display: block;
+        }
+
+        .isInvisible {
+            display: none;
+        }
+
+    </style>
     
 </x-guest-layout>
