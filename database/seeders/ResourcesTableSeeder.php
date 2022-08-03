@@ -192,7 +192,7 @@ class ResourcesTableSeeder extends Seeder
             'name' => 'Minhas Solicitações',
             'resource' => 'tickets.ticketsopen',
             'is_menu' => true,
-            'icon'  => 'fas fa-fw fa-descktop',
+            'icon'  => 'fas fa-fw fa-desktop',
             'module_id' => 2,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
