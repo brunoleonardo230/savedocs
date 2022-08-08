@@ -14,6 +14,10 @@
                                     <div class="text-center d-none d-lg-block p-0">
                                         <img src="{{ asset('themes/img/logo.png') }}" alt="Logo SaveDocs">
                                     </div>
+
+                                    <div class="text-center d-sm-block d-md-none d-md-block d-lg-none p-0">
+                                        <img src="{{ asset('themes/img/logo.png') }}" alt="Logo SaveDocs" width="250px;">
+                                    </div>
                                 
                                     <!-- Validation Errors -->
                                     <x-auth-validation-errors class="mb-4 alert alert-danger" :errors="$errors" />
@@ -31,48 +35,102 @@
                                             <div class="col-md-12 text-center">
                                                 <label> A conta é para pessoa: </label> <br>
                                                 <div class="form-check form-check-inline">
-                                                    <input type="radio" id="physical_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="1" checked>
+                                                    <input type="radio" id="physical_person" name="type_user_id" class="form-control form-control-user @error('type_user_id') is-invalid @enderror" value="1">
                                                     <label class="custom-control-label" for="physical_person">Física</label>
                                                 </div>
                                 
                                                 <div class="form-check form-check-inline">
-                                                    <input type="radio" id="legal_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="2" >
+                                                    <input type="radio" id="legal_person" name="type_user_id" class="form-control form-control-user @error('type_user_id') is-invalid @enderror" value="2" >
                                                     <label class="custom-control-label" for="legal_person">Jurídica</label>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div id="div_physical_person" class="isVisible">
+                                            <div class="row form-group">
+                                                <div class="col-md-12">
+                                                    <input type="text" class="mt-4 form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus placeholder="Informe seu nome completo" >
+                                                    @error('name')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                    @enderror
+                                                </div>
 
-                                        <!-- Name -->
-                                        <div>
-                                            <x-input id="name" class="form-control form-control-user" type="text" name="name" :value="old('name')" required autofocus placeholder="Informe seu nome completo" />
+                                                <div class="col-md-12">
+                                                    <input type="text" class="mt-4 form-control form-control-user @error('user_login') is-invalid @enderror" name="user_login" value="{{ old('user_login') }}" required placeholder="Informe seu nome de usuário. Ex: save.docs" >
+                                                    @error('user_login')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <input type="text" class="mt-4 form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="Informe seu melhor E-mail" >
+                                                    @error('email')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <!-- Email Address -->
-                                        <div class="mt-4">
-                                            <x-input id="email" class="form-control form-control-user" type="email" name="email" :value="old('email')" required placeholder="Informe seu melhor e-mail"  />
+                                        <div id="div_legal_person" class="mt-3 isInvisible">
+                                            <div class="row form-group">
+                                                <div class="col-md-12">
+                                                    <input type="text" class="mt-4 form-control form-control-user @error('fantasy_name') is-invalid @enderror" name="fantasy_name" value="{{ old('fantasy_name') }}" required autofocus placeholder="Informe o nome de sua empresa" >
+                                                    @error('fantasy_name')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <input type="text" class="mt-4 form-control form-control-user @error('user_login') is-invalid @enderror" name="user_login" value="{{ old('user_login') }}" required placeholder="Informe seu nome de usuário. Ex: save.docs" >
+                                                    @error('user_login')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <input type="text" class="mt-4 form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="Informe o E-mail da empresa ou de um representante" >
+                                                    @error('email')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div class="form-group row">
+                                        <div class="row">
                                             <div class="col-sm-6">
                                                 <!-- Password -->
-                                                <div class="mt-4">
+                                                <div class="mt-2">
                                                     <x-input id="password" class="form-control form-control-user"
-                                                                    type="password"
-                                                                    name="password"
-                                                                    required autocomplete="new-password" placeholder="Informe sua senha"/>
+                                                        type="password"
+                                                        name="password"
+                                                        required autocomplete="new-password" placeholder="Informe sua senha"/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <!-- Confirm Password -->
-                                                <div class="mt-4">
+                                                <div class="mt-2">
                                                     <x-input id="password_confirmation" class="form-control form-control-user"
-                                                                    type="password"
-                                                                    name="password_confirmation" required placeholder="Confirme sua senha"/>
+                                                        type="password"
+                                                        name="password_confirmation" required placeholder="Confirme sua senha"/>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <input type="submit" value="Criar conta" class="btn btn-primary btn-user btn-block"> 
+
+                                        {{-- <input type="submit" value="Criar conta" class="mt-4 btn btn-primary btn-user btn-block">  --}}
+                                        <button type="button" class="mt-4 btn btn-primary btn-user btn-block" onclick="validateRequiredInputs(this);"> Criar conta </button>
+
                                     </form>
 
                                     <hr>
@@ -136,5 +194,44 @@
         }
 
     </style>
+
+
+    @section('scripts')
+        <script>
+
+            $(document).ready( function () {
+                @if(!old('type_user_id'))
+                    $("#physical_person").prop('checked',true);
+                @endif
+
+                @if(old('type_user_id') == App\Models\TypeUser::PHYSICAL_PERSON)
+                    $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
+                    $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
+
+                    $("#physical_person").prop('checked',true);
+                    $("#legal_person").prop('checked',false);
+                @endif
+
+                @if(old('type_user_id') == App\Models\TypeUser::LEGAL_PERSON)
+                    $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
+                    $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
+
+                    $("#legal_person").prop('checked',true);
+                    $("#physical_person").prop('checked',false);
+                @endif
+            });
+
+            $("#physical_person" ).click(function() {
+                $("#div_legal_person").removeClass('isVisible').addClass('isInvisible');
+                $("#div_physical_person").removeClass('isInvisible').addClass('isVisible');
+            });
+
+            $("#legal_person" ).click(function() {
+                $("#div_physical_person").removeClass('isVisible').addClass('isInvisible');
+                $("#div_legal_person").removeClass('isInvisible').addClass('isVisible');
+            });
+            
+        </script>
+    @endsection
     
 </x-guest-layout>
