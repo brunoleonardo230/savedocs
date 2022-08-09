@@ -13,8 +13,12 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="p-5">
-                                    <div class="text-center d-none d-lg-block">
+                                    <div class="text-center d-none d-lg-block p-0">
                                         <img src="{{ asset('themes/img/logo.png') }}" alt="Logo SaveDocs">
+                                    </div>
+
+                                    <div class="text-center d-sm-block d-md-none d-md-block d-lg-none p-0">
+                                        <img src="{{ asset('themes/img/logo.png') }}" alt="Logo SaveDocs" width="250px;">
                                     </div>
 
                                     <div class="text-center">

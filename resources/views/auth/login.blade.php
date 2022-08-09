@@ -16,6 +16,12 @@
                                         <img src="{{ asset('themes/img/logo.png') }}" alt="Logo SaveDocs">
                                     </div>
 
+                                    <div class="text-center d-sm-block d-md-none d-md-block d-lg-none">
+                                        <img src="{{ asset('themes/img/logo.png') }}" alt="Logo SaveDocs" width="250px;">
+                                    </div>
+
+                                   
+
                                      <!-- Session Status -->
                                     <x-auth-session-status class="mb-4 alert alert-success" :status="session('status')" />
                                     
