@@ -26,93 +26,99 @@ class UserService
         return User::all();
     }
 
-    public function storeOrUpdatePhysicalPerson($data, $userId = NULL)
+    public function storeOrUpdatePhysicalPerson($request, $userId = NULL, $userInstance = NULL)
     {   
-        $user = User::firstOrNew(['id' => $userId]);
+        $user = !is_null($userInstance) ? $userInstance : User::firstOrNew(['id' => $userId]);
+
         if (!is_null($userId) && !isset($user->id))
             throw new \Exception("Não foi possível localizar este usuário", 1);
 
-        if (!$this->validateCPF($data['cpf']))
+        if (!$this->validateCPF($request['cpf']))
             throw new \Exception("O CPF informado não é válido", 1);
 
-        if (User::whereEmail($data['email'])->first() && !isset($user->id))
+        if (User::whereEmail($request['email'])->first() && !isset($user->id))
             throw new \Exception("O E-mail informado está vinculado a outra conta", 1);
 
-        if (!empty($data['addressArray']['zip_code'])) {
+        if (!empty($request['addressArray']['zip_code'])) {
             if (isset($user->address_id)) {
-                $address = $user->address->update($data['addressArray']);
+                $address = $user->address->update($request['addressArray']);
 
             } else {
-                $address = Address::create($data['addressArray']);
+                $address = Address::create($request['addressArray']);
                 if (!$address)
                     throw new \Exception("Não foi possível cadastrar o endereço informado", 1);
                     
-                $data['address_id'] = $address->id;
+                $request['address_id'] = $address->id;
             }
         }
 
         if(!isset($user->id)) {
-            $data['password'] = Hash::make('savedocs');
-            return $user->create($data);
+            $request['password'] = Hash::make('savedocs');
+            return $user->create($request);
 
         } else {
-            $user->update($data);
+            $user->update($request);
 
-			$role = \App\Models\Role::find($data['role_id']);
-			$user = $user->role()->associate($role);
-			$user->save();
+            if (isset($request['role_id'])) {
+                $role = \App\Models\Role::find($request['role_id']);
+                $user = $user->role()->associate($role);
+                $user->save();
+            }
         }
     }
 
-    public function storeOrUpdateLegalPerson($data, $userId = NULL)
+    public function storeOrUpdateLegalPerson($request, $userId = NULL, $userInstance = NULL)
     {
-        $user = User::firstOrNew(['id' => $userId]);
+        $user = !is_null($userInstance) ? $userInstance : User::firstOrNew(['id' => $userId]);
+
         if (!is_null($userId) && !isset($user->id))
             throw new \Exception("Não foi possível localizar este usuário", 1);
 
-        if(!$this->validateCNPJ($data['cnpj']))
+        if(!$this->validateCNPJ($request['cnpj']))
             throw new \Exception("O CNPJ informado não é válido", 1);
 
-        if(isset($data['representativeArray']) && !empty($data['representativeArray']['name'])) {
+        if(isset($request['representativeArray']) && !empty($request['representativeArray']['name'])) {
 
-            if(!$this->validateCPF($data['representativeArray']['cpf']))
+            if(!$this->validateCPF($request['representativeArray']['cpf']))
                 throw new \Exception("O CPF informado para o representante não é válido", 1);	
 
             if (isset($user->representative_id)) {
-                $representative = $user->representative->update($data['representativeArray']);
+                $representative = $user->representative->update($request['representativeArray']);
 
             } else {
-                $representative = Representative::create($data['representativeArray']);
+                $representative = Representative::create($request['representativeArray']);
                 if(!$representative)
                     throw new \Exception("Não foi possível cadastrar o endereço informado", 1);
                 
-                $data['representative_id'] = $representative->id;
+                $request['representative_id'] = $representative->id;
             }  
         }
 
-        if (!empty($data['addressArray']['zip_code'])) {
+        if (!empty($request['addressArray']['zip_code'])) {
             if (isset($user->address_id)) {
-                $address = $user->address->update($data['addressArray']);
+                $address = $user->address->update($request['addressArray']);
 
             } else {
-                $address = Address::create($data['addressArray']);
+                $address = Address::create($request['addressArray']);
                 if (!$address)
                     throw new \Exception("Não foi possível cadastrar o endereço informado", 1);
                     
-                $data['address_id'] = $address->id;
+                $request['address_id'] = $address->id;
             }
         }
 
         if(!isset($user->id)) {
-            $data['password'] = Hash::make('savedocs');
-            return $user->create($data);
+            $request['password'] = Hash::make('savedocs');
+            return $user->create($request);
 
         } else {
-            $user->update($data);
-
-			$role = \App\Models\Role::find($data['role_id']);
-			$user = $user->role()->associate($role);
-			$user->save();
+            $user->update($request);
+			
+            if (isset($request['role_id'])) {
+                $role = \App\Models\Role::find($request['role_id']);
+                $user = $user->role()->associate($role);
+                $user->save();
+            }
         }
     }
 
@@ -124,4 +130,26 @@ class UserService
 
         return $user->delete();
     }
+
+    public function updateAccess($request, $userId = NULL, $userInstance = NULL)
+	{
+		if (is_null($request['user_login']) || empty($request['user_login']))
+            throw new \Exception("Informe um nome para acesso", 1);
+
+        $user = !is_null($userInstance) ? $userInstance : User::firstOrNew(['id' => $userId]);
+
+        if (!is_null($userId) && !isset($user->id))
+            throw new \Exception("Não foi possível localizar este usuário", 1);
+		
+		$data = [
+            'user_login' => $request['user_login'],
+            'password'   => $request['password'] ? Hash::make($request['password']) : $user->password
+        ];
+		
+        $user->update($data);
+
+		return redirect()
+					->route('accounts.show')
+					->with('success', 'Seus dados de acesso foram atualizados com sucesso!');
+	}
 }

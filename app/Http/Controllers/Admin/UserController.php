@@ -6,12 +6,9 @@ use Illuminate\Support\Facades\{ DB };
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Services\UserService;
-use App\Traits\ValidatorTrait;
 
 class UserController extends Controller
 {
-	use ValidatorTrait;
-
 	private $service;
 
 	public function __construct(UserService $service)
@@ -76,7 +73,7 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id)
     {
-        try{
+        try {
 			DB::beginTransaction();
 
         	if($request->type_user_id == \App\Models\TypeUser::PHYSICAL_PERSON)
@@ -86,7 +83,6 @@ class UserController extends Controller
 				$this->service->storeOrUpdateLegalPerson($request->all(), $id);
 
 			DB::commit();
-
 			return redirect()
 					->route('users.edit', $id)
 					->with('success', 'Usuário atualizado com sucesso!');
