@@ -104,19 +104,48 @@
 <section class='parasuacasa-adquira-after'>
     <div class="container">
         <div class="col-md-12">
+        <div class="section-title">
+            
+            <h3 class=''>PLANOS PESSOA FISICA.</h3>
+            
+        </div>
             <div class="row plans">
             @foreach ($plans as $plan)
-                <div class="parasuacasa-plan">
-                    <h4>{{ $plan->name }}</h4>
-                    <h5>R$ {{ $plan->price_br }}</h5>
-                    <ul class='parasuacasa-pay'>
-                    @foreach ($plan->features as $feature)
-                        <li>{{ $feature->name }}</li>
-                        <br>
-                    @endforeach
-                    </ul>
-                    <a href="{{ route('choice.plan', $plan->url) }}" class="btn btn-danger">Assinar Agora Mesmo</a>
-                </div>
+                @if($plan->id <= 3)
+                    <div class="parasuacasa-plan">
+                        <h4>{{ $plan->name }}</h4>
+                        <h5>R$ {{ $plan->price_br }}</h5>
+                        <ul class='parasuacasa-pay'>
+                        @foreach ($plan->features as $feature)
+                            <li>{{ $feature->name }}</li>
+                            <br>
+                        @endforeach
+                        </ul>
+                        <a href="{{ route('choice.plan', $plan->url) }}" class="btn btn-danger">Assinar Agora Mesmo</a>
+                    </div>
+                @endif
+            @endforeach                
+            </div>
+        </div>
+        <div class="col-md-12">
+        <div class="section-title">
+            <h3 class=''>PLANOS PESSOA JURIDICA.</h3>
+        </div>
+            <div class="row plans">
+            @foreach ($plans as $plan)
+                @if($plan->id > 3)
+                    <div class="parasuacasa-plan">
+                        <h4>{{ $plan->name }}</h4>
+                        <h5>R$ {{ $plan->price_br }}</h5>
+                        <ul class='parasuacasa-pay'>
+                        @foreach ($plan->features as $feature)
+                            <li>{{ $feature->name }}</li>
+                            <br>
+                        @endforeach
+                        </ul>
+                        <a href="{{ route('choice.plan', $plan->url) }}" class="btn btn-danger">Assinar Agora Mesmo</a>
+                    </div>
+                @endif
             @endforeach                
             </div>
         </div>

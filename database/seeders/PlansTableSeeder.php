@@ -17,24 +17,72 @@ class PlansTableSeeder extends Seeder
     {
         DB::table('plans')->insert([
             'id'   => 1,
-            'name' => 'Plano 1 Mensal',
-            'url' => 'plano-1-mensal',
-            'stripe_id' => 'price_1L21zHKMf06caMPMcP08qaAl',
-            'price' => 37.0,
-            'recomended' => 1,
-            'description' => 'Plano 1 Mensal',
+            'name' => 'PF - PLANO A',
+            'url' => 'pf-plano-a',
+            'stripe_id' => 'price_1LXZ7TAeOcvnEld9G1XxQldp',
+            'price' => 39.9,
+            'recomended' => 0,
+            'description' => 'PF - PLANO A',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('plans')->insert([
             'id'   => 2,
-            'name' => 'Plano 2 Mensal',
-            'url' => 'plano-2-mensal',
-            'stripe_id' => 'price_1L220lKMf06caMPMQekdwgi7',
-            'price' => 57.0,
+            'name' => 'PF - PLANO B',
+            'url' => 'pf-plano-b',
+            'stripe_id' => 'price_1LXZ8FAeOcvnEld9M7HggeDQ',
+            'price' => 59.9,
+            'recomended' => 1,
+            'description' => 'PF - PLANO B',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('plans')->insert([
+            'id'   => 3,
+            'name' => 'PF - PLANO C',
+            'url' => 'pf-plano-c',
+            'stripe_id' => 'price_1LXZ8jAeOcvnEld9KZZBVF5g',
+            'price' => 79.9,
             'recomended' => 0,
-            'description' => 'Plano 2 Mensal',
+            'description' => 'PF - PLANO C',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('plans')->insert([
+            'id'   => 4,
+            'name' => 'PJ - PLANO A',
+            'url' => 'pj-plano-a',
+            'stripe_id' => 'price_1LXZ9lAeOcvnEld9fAfkwy0T',
+            'price' => 330.0,
+            'recomended' => 0,
+            'description' => 'PJ - PLANO A',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('plans')->insert([
+            'id'   => 5,
+            'name' => 'PJ - PLANO B',
+            'url' => 'pj-plano-b',
+            'stripe_id' => 'price_1LXZADAeOcvnEld9YuoJyEi9',
+            'price' => 640.0,
+            'recomended' => 0,
+            'description' => 'PJ - PLANO B',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('plans')->insert([
+            'id'   => 6,
+            'name' => 'PJ - PLANO C',
+            'url' => 'pj-plano-c',
+            'stripe_id' => 'price_1LXZAcAeOcvnEld9dPy0Wruj',
+            'price' => 1120.0,
+            'recomended' => 0,
+            'description' => 'PJ - PLANO C',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
