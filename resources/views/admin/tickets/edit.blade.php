@@ -75,7 +75,9 @@
                                 <select name="status_id" class="form-control" required>
                                     <option value=""> -- Selecione -- </option>
                                     @foreach($statuses as $status)
-                                        <option value="{{$status->id}}">{{$status->name}}</option>
+                                        @if($status->id <> 1)
+                                            <option value="{{$status->id}}">{{$status->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>

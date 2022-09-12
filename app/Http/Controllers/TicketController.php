@@ -40,8 +40,9 @@ class TicketController extends Controller
         $priorities = Priority::all('id', 'name');
         $types = Type::all('id', 'name');
         $services = Service::all('id', 'name');
+        $user = auth()->user();
 
-        return view('admin.tickets.create', compact('priorities','types','services'));
+        return view('admin.tickets.create', compact('priorities','types','services','user'));
     }
 
     /**

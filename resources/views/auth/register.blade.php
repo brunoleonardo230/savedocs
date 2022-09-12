@@ -39,10 +39,10 @@
                                                     <label class="custom-control-label" for="physical_person">Física</label>
                                                 </div>
                                 
-                                                <div class="form-check form-check-inline">
+                                                <!-- <div class="form-check form-check-inline">
                                                     <input type="radio" id="legal_person" name="type_user_id" class="form-control form-control-user @error('type_user_id') is-invalid @enderror" value="2" >
                                                     <label class="custom-control-label" for="legal_person">Jurídica</label>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                         <div id="div_physical_person" class="isVisible">

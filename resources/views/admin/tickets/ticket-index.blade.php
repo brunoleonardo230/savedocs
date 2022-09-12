@@ -11,7 +11,7 @@
                 {{ __('Solicitações') }}
             </h2>
             <div class="col-md-12 mt-4 text-right">
-                <a href="{{route('tickets.create')}}" class="btn btn-success" title="Criar ticket"> <i class="fas fa-fw fa-plus"></i> Criar Ticket</a>
+                <a href="{{route('tickets.create')}}" class="btn btn-success" title="Criar ticket"> <i class="fas fa-fw fa-plus"></i> Criar Solicitação</a>
             </div>
         </div>
         <div class="card-body">
@@ -61,7 +61,9 @@
                                                         <select name="status_id" class="form-control" required>
                                                             <option value=""> -- Selecione -- </option>
                                                             @foreach($statuses as $status)
-                                                                <option value="{{$status->id}}">{{$status->name}}</option>
+                                                                <@if($status->id <> 1)
+                                                                    <option value="{{$status->id}}">{{$status->name}}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>

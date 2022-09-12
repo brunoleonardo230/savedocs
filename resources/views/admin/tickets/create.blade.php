@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Criar Ticket') }}
+            {{ __('Criar Solicitação') }}
         </h2>
     </x-slot>
 
@@ -13,7 +13,7 @@
         <div class="row form-group">
             <div class="col-md-6">
                 <label>Nome do Cliente: <span class="text-danger">*</span> </label>
-                <input type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="Seu nome" value="{{old('author_name')}}" required>
+                <input type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="Seu nome" value="{{$user->name}}" disabled >
     
                 @error('author_name')
                 <div class="invalid-feedback">{{$message}}</div>
@@ -21,7 +21,7 @@
             </div>  
             <div class="col-md-6">
                 <label>E-mail para contato: <span class="text-danger">*</span> </label>
-                <input type="author_email" class="form-control @error('author_email') is-invalid @enderror" name="author_email" value="{{ old('author_email') }}" required>
+                <input type="author_email" class="form-control @error('author_email') is-invalid @enderror" name="author_email" value="{{$user->email}}" disabled>
                 @error('author_email')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -71,8 +71,7 @@
             </div>
             <div class="col-md-6">
                 <label>Tipo de Atendimento: <span class="text-danger">*</span> </label>
-                <select name="type_id" class="form-control" required>
-                    <option value=""> -- Selecione -- </option>
+                <select name="type_id" class="form-control" required>                    
                     @foreach($types as $type)
                         <option value="{{$type->id}}">{{$type->name}}</option>
                     @endforeach

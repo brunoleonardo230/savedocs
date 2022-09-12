@@ -89,36 +89,45 @@
                         </div>
                         
                     @else
-                        <div class="alert alert-danger text-center" role="alert">
-                            Você não possui plano
-                        </div>
-                        <!-- <h1>Escolha seu plano</h1> -->
-                        <div class="row">
-                            @foreach ($plans as $plan)
-                                <div class="col-xl-3 col-md-6 mb-4">
-                                    <div class="card border-left-primary shadow h-100 py-2">
-                                        <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">
-                                                    <h3 class="text-uppercase">
-                                                        {{ $plan->name }}
-                                                    </h3>
-                                                    <h2 class="text-primary text-uppercase">R$ {{ $plan->price_br }}</h2>                                                    
+                        @if($user->type_user_id == 1)
+                            <div class="alert alert-danger text-center" role="alert">
+                                Você não possui plano
+                            </div>
+                        
+                            <!-- <h1>Escolha seu plano</h1> -->
+                            <div class="row">
+                                @foreach ($plans as $plan)
+                                    @if($plan->id <= 3 )
+                                        <div class="col-xl-3 col-md-6 mb-4">
+                                            <div class="card border-left-primary shadow h-100 py-2">
+                                                <div class="card-body">
+                                                    <div class="row no-gutters align-items-center">
+                                                        <div class="col mr-2">
+                                                            <h3 class="text-uppercase">
+                                                                {{ $plan->name }}
+                                                            </h3>
+                                                            <h2 class="text-primary text-uppercase">R$ {{ $plan->price_br }}</h2>                                                    
+                                                        </div>
+                                                        <div>
+                                                            <a href="{{ route('choice.plan', $plan->url) }}" class="btn btn-success">Assinar</a>
+                                                        </div>
+                                                    
+                                                        @foreach ($plan->features as $feature)
+                                                            <p>* {{ $feature->name }}</p>                                                    
+                                                        @endforeach
+                                                        
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <a href="{{ route('choice.plan', $plan->url) }}" class="btn btn-success">Assinar</a>
-                                                </div>
-                                               
-                                                @foreach ($plan->features as $feature)
-                                                    <p>* {{ $feature->name }}</p>                                                    
-                                                @endforeach
-                                                
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>                                      
+                                    @endif
+                                @endforeach
+                            </div>   
+                        @else
+                            <div class="alert alert-danger text-center" role="alert">
+                                Você não possui plano, entre em contato conosco ( contato@savedocs.com.br )
+                            </div>
+                        @endif
                     @endif
                 </div>
             </div>

@@ -143,7 +143,7 @@
                             <br>
                         @endforeach
                         </ul>
-                        <a href="{{ route('choice.plan', $plan->url) }}" class="btn btn-danger">Assinar Agora Mesmo</a>
+                        <a href="{{ url('/#contact') }}" class="btn btn-danger">Fale conosco</a>
                     </div>
                 @endif
             @endforeach                
