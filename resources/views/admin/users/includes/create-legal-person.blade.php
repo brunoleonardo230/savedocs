@@ -38,7 +38,7 @@
         @enderror
     </div>
 
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
         <label>CPF: <span class="text-danger">*</span> </label>
         <input type="text" class="form-control @error('representative_cpf') is-invalid @enderror" name="representativeArray[cpf]" id="representative_cpf" value="{{ old('representativeArray[cpf]') }}" required>
         @error('representative_cpf')
@@ -46,7 +46,7 @@
                 {{$message}}
             </div>
         @enderror
-    </div>
+    </div> -->
 </div>
 
 <div class="row form-group">

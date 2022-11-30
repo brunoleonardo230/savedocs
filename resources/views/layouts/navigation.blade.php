@@ -6,7 +6,7 @@
         {{-- <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div> --}}
-        <div class="sidebar-brand-text mx-3"> SAVEDOCS <sup>v1.0</sup></div>
+        <div class="sidebar-brand-text mx-3"> <img src="{{ asset('themes/img/logo.png') }}" alt="" width="70%"> <sup>v1.0</sup></div>
     </a>
 
     <!-- Divider -->

@@ -73,6 +73,9 @@
                                             @csrf 
                                             @method('DELETE')
                                         </form>
+                                        <a href="#" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-fw fa-list"></i> Equipamentos
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

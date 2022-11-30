@@ -127,7 +127,7 @@
             @endforeach                
             </div>
         </div>
-        <div class="col-md-12">
+        <!-- <div class="col-md-12">
         <div class="section-title">
             <h3 class=''>PLANOS PESSOA JURIDICA.</h3>
         </div>
@@ -148,7 +148,7 @@
                 @endif
             @endforeach                
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 
