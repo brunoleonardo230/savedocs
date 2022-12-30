@@ -133,5 +133,11 @@ class ResourceRoleTableSeeder extends Seeder
             'role_id'     => 2,
             'resource_id' => 15
         ]);
+
+        // Administrador | Setor - INDEX
+        DB::table('resource_role')->insert([
+            'role_id'     => 1,
+            'resource_id' => 17
+        ]);
     }
 }

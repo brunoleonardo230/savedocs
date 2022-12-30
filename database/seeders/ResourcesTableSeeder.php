@@ -210,7 +210,19 @@ class ResourcesTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-       
+
+        // Parâmetros ------------------------
+
+        DB::table('resources')->insert([
+            'id'   => 17,
+            'name' => 'Setor',
+            'resource' => 'sector.index',
+            'is_menu' => true,
+            'icon'  => 'fas fa-fw fa-cogs',
+            'module_id' => 4,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);      
 
     }
 }

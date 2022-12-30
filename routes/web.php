@@ -4,7 +4,7 @@ use App\Http\Controllers\ {
     SiteController, PortalController, TicketController, CommentController };
 use App\Http\Controllers\Admin\{
     UserController, RoleController, ResourceController, ModuleController, PlanController, 
-    FeatureController, CategoryController, ServiceController, StatusController, AccountController
+    FeatureController, CategoryController, ServiceController, StatusController, AccountController, SectorController
 };
 use App\Http\Controllers\Subscription\SubscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -72,4 +72,6 @@ Route::group([ 'middleware' => ['auth','access.control.list']], function() {
     Route::resource('statuses', StatusController::class);
 
     Route::resource('comments', CommentController::class);
+
+    Route::resource('sector', SectorController::class);
 });
