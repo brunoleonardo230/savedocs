@@ -19,7 +19,7 @@
             <table class="table data-table table-striped">
                 <thead>
                     <tr>
-                        <th class="w-50">Nome</th>
+                        <th class="w-75">Nome</th>
                         <th>Criado Em</th>
                         <th class="w-5">Ações</th>
                     </tr>
@@ -30,7 +30,22 @@
                         <td>{{$sector->name}}</td>
                         <td>{{$sector->created_at->format('d/m/Y H:i:s')}}</td>
                         <td>
-                            
+                            <div class="btn-group">
+                                <a href="{{route('sector.edit', $sector->id)}}" class="btn btn-sm btn-outline-primary mr-1">EDITAR</a>
+                                
+                                <a href="#" class="btn btn-sm btn-outline-danger mr-1"
+                                    onclick="event.preventDefault(); 
+                                    if(confirm('Deseja realmente remover o setor: {{$sector->name}} ?')){
+                                        return document.querySelector('form#module-rm{{$key}}').submit();
+                                    }"> <i class="fas fa-fw fa-eraser"></i> 
+                                    Remover
+                                </a>
+                                
+                                <form action="{{route('sector.destroy', $sector->id)}}" id="module-rm{{$key}}" method="post">
+                                    @csrf 
+                                    @method('DELETE')
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
