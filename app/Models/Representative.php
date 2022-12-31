@@ -12,7 +12,7 @@ class Representative extends Model
     protected $fillable = [
         'name',
         'email',
-        'cpf',
+        'sector_id',
         'phone'
     ];
 

@@ -79,9 +79,6 @@ class UserService
 
         if(isset($request['representativeArray']) && !empty($request['representativeArray']['name'])) {
 
-            if(!$this->validateCPF($request['representativeArray']['cpf']))
-                throw new \Exception("O CPF informado para o representante não é válido", 1);	
-
             if (isset($user->representative_id)) {
                 $representative = $user->representative->update($request['representativeArray']);
 

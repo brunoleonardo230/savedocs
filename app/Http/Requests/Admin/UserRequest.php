@@ -39,7 +39,7 @@ class UserRequest extends FormRequest
                 'cnpj' => 'required|string',
                 'representativeArray.name' => 'required|string|max:255',
                 'representativeArray.email' => 'required|string|email|max:255|unique:users,email,' . $this->route('user'),
-	            'representativeArray.cpf' => 'required|string',
+	            'representativeArray.sector_id' => 'required',
 	            'representativeArray.phone' => 'required|string'
             ];
         }
