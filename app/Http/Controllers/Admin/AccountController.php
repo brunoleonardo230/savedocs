@@ -20,8 +20,9 @@ class AccountController extends Controller
     {
 		$user = auth()->user();
 		$roles = \App\Models\Role::all('id', 'name');
+		$sectors = \App\Models\Sector::where('is_active', true)->get();
 		
-		return view('admin.accounts.show', compact('user', 'roles'));
+		return view('admin.accounts.show', compact('user', 'roles', 'sectors'));
     }
 
     public function update(Request $request)
