@@ -107,4 +107,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Representative::class);
     }
+
+    public function equipments()
+    {
+        return $this->belongsToMany(Equipament::class);
+    }
 }
