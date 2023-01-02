@@ -5,6 +5,7 @@
         </h2>
     </x-slot>
 
+    @if (auth()->user()->isAdmin() || auth()->user()->isTechnician())
     <!-- Content Row -->
     <div class="row">
 
@@ -159,5 +160,35 @@
             </div>
         </div>
     </div>
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Minhas últimas solicitações </h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table data-table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th>Solicitação</th>                        
+                                    <th>Status</th>
+                                    <th>Técnico</th>
+                                    <th>Serviço</th>
+                                    <th>Criado em</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6" class="text-center">Nenhum chamado cadastrado!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </x-app-layout>
 

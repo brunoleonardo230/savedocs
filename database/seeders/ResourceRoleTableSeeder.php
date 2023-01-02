@@ -55,6 +55,12 @@ class ResourceRoleTableSeeder extends Seeder
             'resource_id' => 4
         ]);
 
+        // Cliente | Chamados
+        DB::table('resource_role')->insert([
+            'role_id'     => 3,
+            'resource_id' => 4
+        ]);
+
         // Administrador | Minha conta - INDEX
         DB::table('resource_role')->insert([
             'role_id'     => 1,
@@ -131,6 +137,12 @@ class ResourceRoleTableSeeder extends Seeder
 
         DB::table('resource_role')->insert([
             'role_id'     => 2,
+            'resource_id' => 15
+        ]);
+
+        // Cliente | Minhas Solicitações - INDEX
+        DB::table('resource_role')->insert([
+            'role_id'     => 3,
             'resource_id' => 15
         ]);
 
