@@ -108,8 +108,8 @@ class User extends Authenticatable
         return $this->belongsTo(Representative::class);
     }
 
-    public function equipments()
+    public function equipaments()
     {
-        return $this->belongsToMany(Equipament::class);
+        return $this->hasMany(Equipament::class, 'user_id', 'id');
     }
 }

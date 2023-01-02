@@ -31,9 +31,10 @@
                     </thead>
                     <tbody>
                         @forelse($users as $key => $user)
+                            <?php $name = $user->name ? $user->name : $user->fantasy_name; ?>
                             <tr>
                                 <td>
-                                    {{ mb_convert_case( $user->name ? $user->name : $user->fantasy_name , MB_CASE_UPPER, "UTF-8") }}    
+                                    {{ mb_convert_case($name , MB_CASE_UPPER, "UTF-8") }}    
                                 </td>
                                 <td>
                                     @if($user->type_user_id == 1)
@@ -59,26 +60,61 @@
                                 <td>{{$user->created_at->format('d/m/Y H:i')}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('users.edit', $user->id)}}" type="button" class="btn btn-sm btn-outline-primary mr-1" title="Atualize os dados de: {{$user->name}}"> <i class="fas fa-fw fa-edit"></i> Editar</a>
+                                        <a href="{{ route('users.edit', $user->id)}}" type="button" class="btn btn-sm btn-outline-primary mr-1" title="Atualize os dados de: {{$user->name}}"> 
+                                            <i class="fas fa-fw fa-edit"></i> <br>
+                                            Editar
+                                        </a>
                                         
                                         <a href="#" class="btn btn-sm btn-outline-danger"
                                             onclick="event.preventDefault(); 
                                             if(confirm('Deseja realmente remover {{$user->name}}?')){
                                                 return document.querySelector('form#user-rm{{$key}}').submit();
-                                            }"> <i class="fas fa-fw fa-eraser"></i> 
+                                            }"> <i class="fas fa-fw fa-eraser"></i> <br>
                                             Remover
                                         </a>
                                         <form action="{{route('users.destroy', $user->id)}}" id="user-rm{{$key}}" method="post">
                                             @csrf 
                                             @method('DELETE')
                                         </form>
-
-                                        <a href="#" class="btn btn-sm btn-outline-dark ml-1">
-                                            <i class="fas fa-fw fa-desktop"></i> 
-                                            Equipamentos
-                                        </a>
+                                        @if (count($user->equipaments))
+                                            <button type="button" class="btn btn-sm btn-outline-dark ml-1" data-toggle="modal" data-target="#m-equipaments-{{$key}}">
+                                                <i class="fas fa-fw fa-desktop"></i> <br>
+                                                Equipamentos
+                                            </button>
+                                        @endif
                                     </div>
                                 </td>
+                                @if (count($user->equipaments))
+                                    <div class="modal fade" id="m-equipaments-{{$key}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
+                                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"> {{ $name }} | Equipamentos vinculados </h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @foreach($user->equipaments as $keyEquipament => $equipament)
+                                                    <?php $type = $equipament->getEquipamentType(); ?>
+                                                        <strong> {{$keyEquipament+1}}) </strong> {{$type->name}}
+                                                        
+                                                        <div class="row ml-4">
+                                                            <div class="col-md-6">
+                                                                <strong>Apelido:</strong> {{ $equipament->name }} <br>
+                                                                <strong>Código de identificação:</strong> {{ $equipament->identification_code }} <br>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                    @endforeach
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </tr>
                         @empty
                             <tr>

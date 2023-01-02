@@ -23,7 +23,7 @@ class UserService
 
     public function getUserList()
     {
-        return User::all();
+        return User::get();
     }
 
     public function storeOrUpdatePhysicalPerson($request, $userId = NULL, $userInstance = NULL)
