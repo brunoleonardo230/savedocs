@@ -11,6 +11,8 @@ class Status extends Model
 
     protected $fillable = ['name','color'];
 
+    const TICKET_FINALIZED = 3; 
+
 
     public function tickets()
     {
