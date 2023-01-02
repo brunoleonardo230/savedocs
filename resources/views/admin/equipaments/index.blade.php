@@ -19,7 +19,7 @@
             <table class="table data-table table-striped">
                 <thead>
                     <tr>
-                        <th class="w-50">Apelido <small>equipamento</small></th>
+                        <th class="w-50">Nome <small>equipamento</small></th>
                         <th>Nome <small>proprietário</small></th>
                         <th>Criado Em</th>
                         <th class="w-5">Ações</th>
@@ -37,7 +37,7 @@
                                 
                                 <a href="#" class="btn btn-sm btn-outline-danger mr-1"
                                     onclick="event.preventDefault(); 
-                                    if(confirm('Deseja realmente remover o setor: {{$equipament->name}} ?')){
+                                    if(confirm('Deseja realmente remover este equipamento de: {{$equipament->user->name}} ?')){
                                         return document.querySelector('form#module-rm{{$key}}').submit();
                                     }"> <i class="fas fa-fw fa-eraser"></i> 
                                     Remover

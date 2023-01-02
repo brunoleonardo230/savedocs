@@ -13,4 +13,14 @@ class Equipament extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getEquipamentType()
+    {
+        $equipamentType = config('savedocs.equipament_type');
+        if (array_key_exists($this->equipment_type, $equipamentType)) {
+            return (object) $equipamentType[$this->equipment_type];
+        }
+
+        return [];
+    }
+
 }
