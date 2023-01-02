@@ -81,11 +81,14 @@
                             <div class="col-md-6">
                                 <span class="h3 mb-0 text-gray-800"> {{ $header }} </span>
                             </div>
-                            @if(isset($button))
-                                <div class="col-md-6 text-right">
+                            <div class="col-md-6 text-right">
+                                @if(isset($button))
                                     <span class="mb-0"> {{ $button }} </span>
-                                </div>
-                            @endif
+                                @endif
+                                @if(isset($button_2))
+                                    <span class="mt-1 mb-0"> {{ $button_2 }} </span>
+                                @endif
+                            </div>
                         </div>
 
                         <!-- Session Status -->

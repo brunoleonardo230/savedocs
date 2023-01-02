@@ -9,6 +9,14 @@
     <x-slot name="button">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-data-update-for-access" data-whatever="@mdo"> <i class="fas fa-fw fa-key"></i> Atualizar dados para acesso </button>
     </x-slot>
+    @if (count($user->equipaments))
+        <x-slot name="button_2">
+            <button type="button" class="btn btn-dark ml-1" data-toggle="modal" data-target="#m-equipaments-{{$user->id}}">
+                <i class="fas fa-fw fa-desktop"></i>
+                Meus equipamentos
+            </button>
+        </x-slot>
+    @endif
 
     <div class="card">
         <div class="card-body">
@@ -164,6 +172,14 @@
         </div>
         
         @include('components.modal-data-update-for-access')
+        @if (count($user->equipaments))
+            <?php
+                $userId = $user->id;
+                $userName = $user->name ? $user->name : $user->fantasy_name;
+                $equipaments = $user->equipaments;
+            ?>
+            @include('components.modal-equipaments', compact('userId', 'userName', 'equipaments'))
+        @endif
 
     </div>
 

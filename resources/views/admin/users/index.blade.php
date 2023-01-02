@@ -31,10 +31,9 @@
                     </thead>
                     <tbody>
                         @forelse($users as $key => $user)
-                            <?php $name = $user->name ? $user->name : $user->fantasy_name; ?>
                             <tr>
                                 <td>
-                                    {{ mb_convert_case($name , MB_CASE_UPPER, "UTF-8") }}    
+                                    {{ mb_convert_case($user->name ? $user->name : $user->fantasy_name , MB_CASE_UPPER, "UTF-8") }}    
                                 </td>
                                 <td>
                                     @if($user->type_user_id == 1)
@@ -77,7 +76,7 @@
                                             @method('DELETE')
                                         </form>
                                         @if (count($user->equipaments))
-                                            <button type="button" class="btn btn-sm btn-outline-dark ml-1" data-toggle="modal" data-target="#m-equipaments-{{$key}}">
+                                            <button type="button" class="btn btn-sm btn-outline-dark ml-1" data-toggle="modal" data-target="#m-equipaments-{{$user->id}}">
                                                 <i class="fas fa-fw fa-desktop"></i> <br>
                                                 Equipamentos
                                             </button>
@@ -85,35 +84,12 @@
                                     </div>
                                 </td>
                                 @if (count($user->equipaments))
-                                    <div class="modal fade" id="m-equipaments-{{$key}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
-                                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title"> {{ $name }} | Equipamentos vinculados </h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @foreach($user->equipaments as $keyEquipament => $equipament)
-                                                    <?php $type = $equipament->getEquipamentType(); ?>
-                                                        <strong> {{$keyEquipament+1}}) </strong> {{$type->name}}
-                                                        
-                                                        <div class="row ml-4">
-                                                            <div class="col-md-6">
-                                                                <strong>Apelido:</strong> {{ $equipament->name }} <br>
-                                                                <strong>Código de identificação:</strong> {{ $equipament->identification_code }} <br>
-                                                            </div>
-                                                        </div>
-                                                        <hr>
-                                                    @endforeach
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php
+                                        $userId = $user->id;
+                                        $userName = $user->name ? $user->name : $user->fantasy_name;
+                                        $equipaments = $user->equipaments;
+                                    ?>
+                                    @include('components.modal-equipaments', compact('userId', 'userName', 'equipaments'))
                                 @endif
                             </tr>
                         @empty
