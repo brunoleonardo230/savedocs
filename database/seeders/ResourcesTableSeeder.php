@@ -25,7 +25,8 @@ class ResourcesTableSeeder extends Seeder
             'icon'  => 'fas fa-fw fa-users',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'ordination' => 1
         ]);
             
         // Roles ---------------------------
@@ -38,7 +39,8 @@ class ResourcesTableSeeder extends Seeder
             'icon'  => 'fas fa-fw fa-id-badge',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'ordination' => 5
         ]);
 
         // Resources ------------------------
@@ -51,7 +53,8 @@ class ResourcesTableSeeder extends Seeder
             'icon'  => 'fas fa-fw fa-list',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'ordination' => 4
         ]);
 
 
@@ -79,7 +82,8 @@ class ResourcesTableSeeder extends Seeder
             'icon'  => 'fas fa-fw fa-check',
             'module_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'ordination' => 3
         ]);
 
         // Plans ------------------------
@@ -222,7 +226,19 @@ class ResourcesTableSeeder extends Seeder
             'module_id' => 4,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);      
+        ]); 
+        
+        DB::table('resources')->insert([
+            'id'   => 18,
+            'name' => 'Equipamentos',
+            'resource' => 'equipaments.index',
+            'is_menu' => true,
+            'icon'  => 'fas fa-fw fa-desktop',
+            'module_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'ordination' => 2
+        ]); 
 
     }
 }

@@ -145,5 +145,17 @@ class ResourceRoleTableSeeder extends Seeder
             'role_id'     => 2,
             'resource_id' => 17
         ]);
+
+        // Administrador | Equipamentos - INDEX
+        DB::table('resource_role')->insert([
+            'role_id'     => 1,
+            'resource_id' => 18
+        ]);
+
+         // Técnico | Equipamentos - INDEX
+         DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 18
+        ]);
     }
 }
