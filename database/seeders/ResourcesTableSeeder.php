@@ -90,7 +90,7 @@ class ResourcesTableSeeder extends Seeder
             'resource' => 'plans.index',
             'is_menu' => true,
             'icon'  => 'fas fa-fw fa-file',
-            'module_id' => 1,
+            'module_id' => 4,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
@@ -103,7 +103,7 @@ class ResourcesTableSeeder extends Seeder
             'resource' => 'statuses.index',
             'is_menu' => true,
             'icon'  => 'fas fa-fw fa-circle',
-            'module_id' => 1,
+            'module_id' => 4,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

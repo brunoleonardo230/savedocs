@@ -68,13 +68,14 @@
                                             }"> <i class="fas fa-fw fa-eraser"></i> 
                                             Remover
                                         </a>
-                                        
                                         <form action="{{route('users.destroy', $user->id)}}" id="user-rm{{$key}}" method="post">
                                             @csrf 
                                             @method('DELETE')
                                         </form>
-                                        <a href="#" class="btn btn-sm btn-outline-secondary">
-                                            <i class="fas fa-fw fa-list"></i> Equipamentos
+
+                                        <a href="#" class="btn btn-sm btn-outline-dark ml-1">
+                                            <i class="fas fa-fw fa-desktop"></i> 
+                                            Equipamentos
                                         </a>
                                     </div>
                                 </td>
