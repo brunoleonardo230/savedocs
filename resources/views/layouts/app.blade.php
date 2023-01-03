@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'SaveDocs') }}</title>
+        <title> SaveDocs </title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -81,11 +81,14 @@
                             <div class="col-md-6">
                                 <span class="h3 mb-0 text-gray-800"> {{ $header }} </span>
                             </div>
-                            @if(isset($button))
-                                <div class="col-md-6 text-right">
+                            <div class="col-md-6 text-right">
+                                @if(isset($button))
                                     <span class="mb-0"> {{ $button }} </span>
-                                </div>
-                            @endif
+                                @endif
+                                @if(isset($button_2))
+                                    <span class="mt-1 mb-0"> {{ $button_2 }} </span>
+                                @endif
+                            </div>
                         </div>
 
                         <!-- Session Status -->

@@ -52,7 +52,7 @@ class MenuViewComposer {
     public function getModules($module)
     {
         return $module->where('is_active', true)->with(['resources' => function($queryBuilder){
-                    return $queryBuilder->where('is_menu', true);
+                    return $queryBuilder->where('is_menu', true)->orderBy('ordination', 'ASC');
                 }])->get();
     }
 }

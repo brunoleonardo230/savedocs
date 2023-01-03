@@ -38,15 +38,20 @@
         @enderror
     </div>
 
-    <!-- <div class="col-md-4">
-        <label>CPF: <span class="text-danger">*</span> </label>
-        <input type="text" class="form-control @error('representative_cpf') is-invalid @enderror" name="representativeArray[cpf]" id="representative_cpf" value="{{ old('representativeArray[cpf]') }}" required>
-        @error('representative_cpf')
+    <div class="col-md-4">
+        <label>Setor: <span class="text-danger">*</span> </label>
+        <select name="representativeArray[sector_id]" class="form-control  @error('sector_id') is-invalid @enderror" required>
+            <option value="">-- selecione --</option>
+            @foreach($sectors as $sector)
+                <option value="{{$sector->id}}">{{$sector->name}}</option>
+            @endforeach
+        </select>
+        @error('sector_id')
             <div class="invalid-feedback">
                 {{$message}}
             </div>
         @enderror
-    </div> -->
+    </div>
 </div>
 
 <div class="row form-group">

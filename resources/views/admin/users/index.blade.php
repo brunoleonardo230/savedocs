@@ -33,7 +33,7 @@
                         @forelse($users as $key => $user)
                             <tr>
                                 <td>
-                                    {{ mb_convert_case( $user->name ? $user->name : $user->fantasy_name , MB_CASE_UPPER, "UTF-8") }}    
+                                    {{ mb_convert_case($user->name ? $user->name : $user->fantasy_name , MB_CASE_UPPER, "UTF-8") }}    
                                 </td>
                                 <td>
                                     @if($user->type_user_id == 1)
@@ -59,25 +59,38 @@
                                 <td>{{$user->created_at->format('d/m/Y H:i')}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('users.edit', $user->id)}}" type="button" class="btn btn-sm btn-outline-primary mr-1" title="Atualize os dados de: {{$user->name}}"> <i class="fas fa-fw fa-edit"></i> Editar</a>
+                                        <a href="{{ route('users.edit', $user->id)}}" type="button" class="btn btn-sm btn-outline-primary mr-1" title="Atualize os dados de: {{$user->name}}"> 
+                                            <i class="fas fa-fw fa-edit"></i> <br>
+                                            Editar
+                                        </a>
                                         
                                         <a href="#" class="btn btn-sm btn-outline-danger"
                                             onclick="event.preventDefault(); 
                                             if(confirm('Deseja realmente remover {{$user->name}}?')){
                                                 return document.querySelector('form#user-rm{{$key}}').submit();
-                                            }"> <i class="fas fa-fw fa-eraser"></i> 
+                                            }"> <i class="fas fa-fw fa-eraser"></i> <br>
                                             Remover
                                         </a>
-                                        
                                         <form action="{{route('users.destroy', $user->id)}}" id="user-rm{{$key}}" method="post">
                                             @csrf 
                                             @method('DELETE')
                                         </form>
-                                        <a href="#" class="btn btn-sm btn-outline-secondary">
-                                            <i class="fas fa-fw fa-list"></i> Equipamentos
-                                        </a>
+                                        @if (count($user->equipaments))
+                                            <button type="button" class="btn btn-sm btn-outline-dark ml-1" data-toggle="modal" data-target="#m-equipaments-{{$user->id}}">
+                                                <i class="fas fa-fw fa-desktop"></i> <br>
+                                                Equipamentos
+                                            </button>
+                                        @endif
                                     </div>
                                 </td>
+                                @if (count($user->equipaments))
+                                    <?php
+                                        $userId = $user->id;
+                                        $userName = $user->name ? $user->name : $user->fantasy_name;
+                                        $equipaments = $user->equipaments;
+                                    ?>
+                                    @include('components.modal-equipaments', compact('userId', 'userName', 'equipaments'))
+                                @endif
                             </tr>
                         @empty
                             <tr>

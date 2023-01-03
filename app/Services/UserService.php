@@ -23,7 +23,7 @@ class UserService
 
     public function getUserList()
     {
-        return User::all();
+        return User::get();
     }
 
     public function storeOrUpdatePhysicalPerson($request, $userId = NULL, $userInstance = NULL)
@@ -78,9 +78,6 @@ class UserService
             throw new \Exception("O CNPJ informado não é válido", 1);
 
         if(isset($request['representativeArray']) && !empty($request['representativeArray']['name'])) {
-
-            if(!$this->validateCPF($request['representativeArray']['cpf']))
-                throw new \Exception("O CPF informado para o representante não é válido", 1);	
 
             if (isset($user->representative_id)) {
                 $representative = $user->representative->update($request['representativeArray']);

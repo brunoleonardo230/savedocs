@@ -29,7 +29,9 @@ class DatabaseSeeder extends Seeder
             ServicesTableSeeder::class,
             PrioritiesTableSeeder::class,
             TypesTableSeeder::class,
-            PlanServiceTableSeeder::class
+            PlanServiceTableSeeder::class,
+            SectorsTableSeeder::class,
+            EquipamentsTableSeeder::class
         ]);
     }
 }

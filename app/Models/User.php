@@ -92,10 +92,20 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-
+    
     public function isAdmin()
     {
         return $this->role->id == Role::ROLE_ADMINISTRATOR;
+    }
+
+    public function isClient()
+    {
+        return $this->role->id == Role::ROLE_CLIENT;
+    }
+
+    public function isTechnician()
+    {
+        return $this->role->id == Role::ROLE_TECHNICIAN;
     }
 
     public function address()
@@ -106,5 +116,10 @@ class User extends Authenticatable
     public function representative()
     {
         return $this->belongsTo(Representative::class);
+    }
+
+    public function equipaments()
+    {
+        return $this->hasMany(Equipament::class, 'user_id', 'id');
     }
 }
