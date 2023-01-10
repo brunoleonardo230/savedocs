@@ -27,6 +27,15 @@ class DashboardController extends Controller
         $countCalled =  $this->ticket->count();
         $countCalledFinalized = $this->ticket->where('status_id', Status::TICKET_FINALIZED)->count();
 
-        return view('dashboard', compact('users', 'countUsersPF', 'countUsersPJ', 'countCalled', 'countCalledFinalized'));
+        $user = auth()->user();
+        $ticketsopen = Ticket::all()->whereIn('assigned_to_user_id',auth()->user()->id);
+        $countCalledUser =  Ticket::all()->whereIn('assigned_to_user_id',auth()->user()->id)->count();
+        //dd($countCalledUser);
+        $ticketUser = $user->ticket_remote;
+
+        $tickets = Ticket::all();
+        $statuses = Status::all('id', 'name');
+
+        return view('dashboard', compact('users', 'countUsersPF', 'countUsersPJ', 'countCalled', 'countCalledFinalized','tickets','statuses','ticketUser','ticketsopen','countCalledUser'));
     }
 }
