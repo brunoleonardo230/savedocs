@@ -78,7 +78,22 @@
             <span class="sr-only">Next</span>
         </a> -->
     </div>
-
+    <section class="parasuacasa-contact" style='padding-top:60px; padding-bottom:60px;'>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 text-center">
+                <h2 style='font-weight: 100;padding-top: 19px;'>CONHEÇA NOSSOS PLANOS PARA SUA CASA</h2>
+            </div>
+            <div class="col-md-4">
+                <a class="nav-link scrollto {{ Request::is('parasuacasa*') ? 'active' : '' }}" href="{{ url('/parasuacasa') }}">
+                <button class="btn"
+                    style='background: #ece8e9;font-size: 21px;border-radius: 38px;padding: 6px 40px;margin-top: 14px;color: #0a8793;'>CLIQUE AQUI!</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>>
+    </div>
 <main id="main">
 
     <!-- ======= Services Section ======= -->
