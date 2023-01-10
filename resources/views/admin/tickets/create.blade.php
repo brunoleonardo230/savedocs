@@ -10,25 +10,48 @@
 
     <form action="{{route('tickets.store')}}"  method="post">
         @csrf
-        <div class="row form-group">
-            <div class="col-md-6">
-                <label>Nome do Cliente: <span class="text-danger">*</span> </label>
-                <input type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="Seu nome" value="{{$user->name}}" disabled >
-    
-                @error('author_name')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
-            </div>  
-            <div class="col-md-6">
-                <label>E-mail para contato: <span class="text-danger">*</span> </label>
-                <input type="author_email" class="form-control @error('author_email') is-invalid @enderror" name="author_email" value="{{$user->email}}" disabled>
-                @error('author_email')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                @enderror
+        @if($user->role_id == 3)
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Nome do Cliente: <span class="text-danger">*</span> </label>
+                    <input type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="Seu nome" value="{{$user->name}}" disabled >
+                    <input type="hidden" id="assigned_to_user_id" name="assigned_to_user_id" value="{{$user->id}}" />
+                    @error('author_name')
+                    <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>  
+                <div class="col-md-6">
+                    <label>E-mail para contato: <span class="text-danger">*</span> </label>
+                    <input type="author_email" class="form-control @error('author_email') is-invalid @enderror" name="author_email" value="{{$user->email}}">
+                    @error('author_email')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
             </div>
-        </div>
+        @else
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Cliente: <span class="text-danger">*</span> </label>
+                    <select name="assigned_to_user_id" class="form-control" required>
+                        <option value=""> -- Selecione -- </option>
+                        @foreach($users as $userAutor)
+                            <option value="{{$userAutor->id}}">{{$userAutor->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label>E-mail para contato: <span class="text-danger">*</span> </label>
+                    <input type="author_email" class="form-control @error('author_email') is-invalid @enderror" name="author_email" value="{{old('author_email')}}">
+                    @error('author_email')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+        @endif
 
         <div class="row form-group">
             <div class="col-md-12">

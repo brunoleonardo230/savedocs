@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{ DB, Hash };
 use App\Http\Requests\Admin\TicketRequest;
 
-use App\Models\{ Priority,Type,Service,Ticket,Status, Comment};    
+use App\Models\{ Priority,Type,Service,Ticket,Status, Comment,User};    
 
 class TicketController extends Controller
 {
@@ -41,8 +41,9 @@ class TicketController extends Controller
         $types = Type::all('id', 'name');
         $services = Service::all('id', 'name');
         $user = auth()->user();
+        $users = User::orderBy('id', 'desc')->get();
 
-        return view('admin.tickets.create', compact('priorities','types','services','user'));
+        return view('admin.tickets.create', compact('priorities','types','services','user','users'));
     }
 
     /**
@@ -58,8 +59,12 @@ class TicketController extends Controller
         $ticket_code .= sprintf("%03s", $request->service_id);
         $ticket_code .= time();
 
-        $user_id = auth()->user()->id;        
-        $request->request->add(['ticket_code' => $ticket_code, 'status_id' => 1,'assigned_to_user_id' => $user_id]);
+       //$user_id = auth()->user()->id;   
+        
+        $user = User::find($request->assigned_to_user_id);
+        //dd($user->name);
+            
+        $request->request->add(['ticket_code' => $ticket_code, 'status_id' => 1,'assigned_to_user_id' => $request->assigned_to_user_id,'author_name' => $user->name]);
         
         try {
 			$this->ticket->create($request->all());

@@ -130,7 +130,7 @@ class UsersTableSeeder extends Seeder
             'id'                => 6,
             'user_login'        => 'savedocs',
             'type_user_id'      => 2,
-            'name'              => NULL,
+            'name'              => 'Savedocs',
             'cpf'               => NULL,
             'email'             => NULL,
             'fantasy_name'      => 'Save Docs',
