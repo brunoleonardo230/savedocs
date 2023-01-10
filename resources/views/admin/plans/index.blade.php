@@ -20,6 +20,8 @@
             <thead>
                 <tr>
                     <th>Nome</th>
+                    <th>Atendimento Remoto</th>
+                    <th>Atendimento Presencial</th>
                     <th>Criado Em</th>
                     <th>Ações</th>
                 </tr>
@@ -28,6 +30,8 @@
             @forelse($plans as $key => $plan)
                 <tr>
                     <td>{{$plan->name}}: <span class="badge badge-danger">{{$plan->plan}}</span></td>
+                    <td>{{$plan->ticket_remote}}</td>
+                    <td>{{$plan->ticket_in_person}}</td>
                     <td>{{$plan->created_at->format('d/m/Y H:i:s')}}</td>
                     <td>
                         <div class="btn-group">

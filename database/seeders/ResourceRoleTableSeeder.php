@@ -169,5 +169,17 @@ class ResourceRoleTableSeeder extends Seeder
             'role_id'     => 2,
             'resource_id' => 18
         ]);
+
+        // Técnico | Solicitações - EDIT
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 14
+        ]);
+
+        // Técnico | Comentarios - STORE
+        DB::table('resource_role')->insert([
+            'role_id'     => 2,
+            'resource_id' => 13
+        ]);
     }
 }

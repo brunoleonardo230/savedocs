@@ -27,6 +27,8 @@ class User extends Authenticatable
         'password',
         'is_active',
         'phone',
+        'ticket_remote',
+        'ticket_in_person',
         'role_id',
         'address_id',
         'type_user_id',

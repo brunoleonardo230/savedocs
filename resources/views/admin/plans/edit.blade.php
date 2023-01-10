@@ -20,9 +20,27 @@
                 @error('name')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
-            </div>            
+            </div> 
         </div>
-
+        <div class="row form-group">     
+            <div class="col-md-3">
+                <label>Atendimento Remoto:</label>
+                <input type="text" class="form-control @error('ticket_remote') is-invalid @enderror" name="ticket_remote" placeholder="0" value="{{$plan->ticket_remote}}">
+            
+                @error('name')
+                    <div class="invalid-feedback">{{$message}}</div>
+                @enderror
+            </div>
+            <div class="col-md-3">
+                <label>Atendimento Presencial:</label>
+                <input type="text" class="form-control @error('ticket_in_person') is-invalid @enderror" name="ticket_in_person" placeholder="0" value="{{$plan->ticket_in_person}}">
+            
+                @error('name')
+                    <div class="invalid-feedback">{{$message}}</div>
+                @enderror
+            </div>  
+        </div>    
+     
         <div class="form-group text-right">
             <a href="{{route('plans.index')}}" class="btn btn-danger"> Cancelar </a>
             <button class="btn btn-success"> Atualizar </button>
