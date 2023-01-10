@@ -15,15 +15,17 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label> Conta para pessoa:  <span class="text-danger">*</span> </label> <br>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" id="physical_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="1" @if($user->type_user_id == App\Models\TypeUser::PHYSICAL_PERSON) checked @endif>
-                            <label class="custom-control-label" for="physical_person">Física</label>
-                        </div>
-        
-                        <div class="form-check form-check-inline">
-                            <input type="radio" id="legal_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="2" @if($user->type_user_id == App\Models\TypeUser::LEGAL_PERSON) checked @endif>
-                            <label class="custom-control-label" for="legal_person">Jurídica</label>
-                        </div>
+                        @if($user->type_user_id == 1)
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="physical_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="1" @if($user->type_user_id == App\Models\TypeUser::PHYSICAL_PERSON) checked @endif>
+                                <label class="custom-control-label" for="physical_person">Física</label>
+                            </div>
+                        @else
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="legal_person" name="type_user_id" class="form-control @error('type_user_id') is-invalid @enderror" value="2" @if($user->type_user_id == App\Models\TypeUser::LEGAL_PERSON) checked @endif>
+                                <label class="custom-control-label" for="legal_person">Jurídica</label>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
@@ -41,6 +43,27 @@
             
                 </div>
 
+                <hr class="mt-4">
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label>Atendimento Remoto:</label>
+                                <input type="text" class="form-control @error('ticket_remote') is-invalid @enderror" name="ticket_remote" id="ticket_remote" value="@if(isset($user->ticket_remote)){{ $user->ticket_remote }}@endif">
+                                @error('cnpj')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
+                        </div>
+                        <div class="col-md-3">
+                            <label>Atendimento Presencial:</label>
+                                <input type="text" class="form-control @error('ticket_in_person') is-invalid @enderror" name="ticket_in_person" id="ticket_in_person" value="@if(isset($user->ticket_in_person)){{ $user->ticket_in_person }}@endif">
+                                @error('cnpj')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
+                        </div>
+                    </div>
                 <hr class="mt-4">
 
                 <div class="row form-group mt-3">

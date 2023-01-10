@@ -84,6 +84,10 @@
                     
                 </div>
 
+                <hr class="mt-4">
+
+                <strong> Dados Atendimento Presencial e Remoto </strong>
+                <small class="form-text text-muted">Será preenchido após a escolha do plano</small>
 
                 <hr class="mt-4">
 

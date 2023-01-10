@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Subscription;
 
+use Illuminate\Support\Facades\{ DB };
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserService;
 use App\Models\Plan;
+use App\Models\User;
 
 class SubscriptionController extends Controller
 {
-    public function __construct()
+    public function __construct(UserService $service)
     {
         $this->middleware(['auth']);
+        $this->service = $service;
     }
 
     public function index()
@@ -28,6 +32,12 @@ class SubscriptionController extends Controller
     public function store(Request $request)
     {
         $plan = session('plan');
+        $user = auth()->user();
+
+        $ticket['ticket_remote'] = $plan->ticket_remote;
+        $ticket['ticket_in_person'] = $plan->ticket_in_person;
+
+        $user->update($ticket);
 
         $request->user()
                 ->newSubscription('default', $plan->stripe_id)
