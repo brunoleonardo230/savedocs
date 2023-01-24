@@ -13,8 +13,16 @@
     </div>
 
     <div class="col-md-4">
-        <label>CPF: <span class="text-danger">*</span> </label>
-        <input type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" id="cpf" value="{{ old('cpf') }}" required>
+        <label>Empresa:</label>
+        <select name="company" class="form-control" required>
+            <option value=""> -- Selecione -- </option>
+            @foreach($companies as $company)
+                <option value="{{$company->id}}" @if(old('company') == $company->id) selected @endif )>{{$company->name}}</option>
+            @endforeach
+        </select>
+
+        <!-- <label>CPF: </label> -->
+        <input type="hidden" class="form-control @error('cpf') is-invalid @enderror" name="cpf" id="cpf" value="{{ old('cpf') }}">
         @error('cpf')
             <div class="invalid-feedback">
                 {{$message}}

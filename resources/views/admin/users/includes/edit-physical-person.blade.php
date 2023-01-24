@@ -12,9 +12,8 @@
         @enderror
     </div>
 
-    <div class="col-md-4">
-        <label>CPF: <span class="text-danger">*</span> </label>
-        <input type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" id="cpf" value="@if(isset($user->cpf)) {{ $user->cpf }} @endif" required>
+    <div class="col-md-4">        
+        <input type="hidden" class="form-control @error('cpf') is-invalid @enderror" name="cpf" id="cpf" value="@if(isset($user->cpf)) {{ $user->cpf }} @endif" required>
         @error('cpf')
             <div class="invalid-feedback">
                 {{$message}}

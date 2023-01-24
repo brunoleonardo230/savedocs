@@ -33,7 +33,8 @@ class User extends Authenticatable
         'address_id',
         'type_user_id',
         'representative_id',
-        'user_login'
+        'user_login',
+        'company'
     ];
 
     /**
@@ -123,5 +124,12 @@ class User extends Authenticatable
     public function equipaments()
     {
         return $this->hasMany(Equipament::class, 'user_id', 'id');
+    }
+
+    public function userCompany($id)
+    {
+        $user_name = User::select('name')->find($id);
+
+        return $user_name;
     }
 }

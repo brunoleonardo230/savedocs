@@ -21,6 +21,19 @@
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div> 
+            <div class="col-md-6">
+                <label>Token plano: <span class="text-danger">*</span> </label>
+                <input type="text" class="form-control @error('stripe_id') is-invalid @enderror" name="stripe_id" placeholder="Ex.: price_1LXZ7TAeOcvnEld9G1XxQldp" value="{{$plan->stripe_id}}" required>
+        
+                @error('name')
+                    <div class="invalid-feedback">{{$message}}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6">
+                <h2>Preço: R$ {{$plan->price}}</h2>
+                </div>
         </div>
         <div class="row form-group">     
             <div class="col-md-3">

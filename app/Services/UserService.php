@@ -33,8 +33,8 @@ class UserService
         if (!is_null($userId) && !isset($user->id))
             throw new \Exception("Não foi possível localizar este usuário", 1);
 
-        if (!$this->validateCPF($request['cpf']))
-            throw new \Exception("O CPF informado não é válido", 1);
+        // if (!$this->validateCPF($request['cpf']))
+        //     throw new \Exception("O CPF informado não é válido", 1);
 
         if (User::whereEmail($request['email'])->first() && !isset($user->id))
             throw new \Exception("O E-mail informado está vinculado a outra conta", 1);

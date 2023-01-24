@@ -8,8 +8,11 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Monitoramento') }}
+                {{ __('Minhas Solicitações') }}
             </h2>
+            <div class="col-md-12 mt-4 text-right">
+                <a href="{{route('tickets.create')}}" class="btn btn-success" title="Criar ticket"> <i class="fas fa-fw fa-plus"></i> Criar Solicitação</a>
+            </div>
             <!-- <div class="col-md-12 mt-4 text-right">
                 <a href="{{route('tickets.create')}}" class="btn btn-success" title="Criar ticket"> <i class="fas fa-fw fa-plus"></i> Criar Ticket</a>
             </div> -->

@@ -14,7 +14,7 @@
 
     <div class="col-md-4">
         <label>CNPJ: <span class="text-danger">*</span> </label>
-        <input type="text" class="form-control @error('cnpj') is-invalid @enderror" name="cnpj" id="cnpj" value="{{ old('cnpj') }}" required>
+        <input type="text" class="form-control @error('cnpj') is-invalid @enderror" name="cnpj" id="cnpj" value="{{ old('cnpj') }}">
         @error('cnpj')
             <div class="invalid-feedback">
                 {{$message}}

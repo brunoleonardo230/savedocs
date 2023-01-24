@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             $data = [
                 'name' => 'required|string|max:255',
 	            'email' => 'required|string|email|max:255|unique:users,email,' . $this->route('user'),
-	            'cpf' => 'required|string',
+	            // 'cpf' => 'required|string',
 	            'phone' => 'required|string'
             ];
         }

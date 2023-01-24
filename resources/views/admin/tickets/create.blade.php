@@ -36,8 +36,8 @@
                     <label>Cliente: <span class="text-danger">*</span> </label>
                     <select name="assigned_to_user_id" class="form-control" required>
                         <option value=""> -- Selecione -- </option>
-                        @foreach($users as $userAutor)
-                            <option value="{{$userAutor->id}}">{{$userAutor->name}}</option>
+                        @foreach($users as $userAutor)                            
+                            <option value="{{$userAutor->id}}">{{$userAutor->userCompany($userAutor->company)}} {{$userAutor->name}}</option>                                
                         @endforeach
                     </select>
                 </div>

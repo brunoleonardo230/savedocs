@@ -27,8 +27,9 @@ class UserController extends Controller
     {
 		$roles = \App\Models\Role::all('id', 'name');
 		$sectors = \App\Models\Sector::where('is_active', true)->get();
+		$companies = \App\Models\User::where('type_user_id', 2)->get();
 		
-        return view('admin.users.create', compact('roles', 'sectors'));
+        return view('admin.users.create', compact('roles', 'sectors','companies'));
     }
 
 	public function store(UserRequest $request)
@@ -63,8 +64,9 @@ class UserController extends Controller
 			$user  = $this->service->getUser($id);
 			$roles = \App\Models\Role::all('id', 'name');
 			$sectors = \App\Models\Sector::where('is_active', true)->get();
-
-        	return view('admin.users.edit', compact('user', 'roles', 'sectors'));
+			$company  = $this->service->getUser($user->company);
+			
+        	return view('admin.users.edit', compact('user', 'roles', 'sectors','company'));
 
 		} catch (\Exception $e) {
 			return redirect()

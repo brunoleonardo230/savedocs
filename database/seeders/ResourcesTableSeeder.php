@@ -240,5 +240,16 @@ class ResourcesTableSeeder extends Seeder
             'ordination' => 2
         ]); 
 
+        DB::table('resources')->insert([
+            'id'   => 19,
+            'name' => 'Alterar Senha',
+            'resource' => 'accounts.access.update',
+            'is_menu' => false,
+            'icon'  => 'fas fa-fw fa-page',
+            'module_id' => 3,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]); 
+
     }
 }
