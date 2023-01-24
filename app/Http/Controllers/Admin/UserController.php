@@ -64,8 +64,13 @@ class UserController extends Controller
 			$user  = $this->service->getUser($id);
 			$roles = \App\Models\Role::all('id', 'name');
 			$sectors = \App\Models\Sector::where('is_active', true)->get();
-			$company  = $this->service->getUser($user->company);
-			
+
+			if($user->company<>null){
+				$company  = $this->service->getUser($user->company);
+				$company = $company->name;
+			}else{
+				$company  = '';
+			}
         	return view('admin.users.edit', compact('user', 'roles', 'sectors','company'));
 
 		} catch (\Exception $e) {

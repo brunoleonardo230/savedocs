@@ -14,7 +14,7 @@
 
     <div class="col-md-4">
         <label>Empresa:</label>
-        <select name="company" class="form-control" required>
+        <select name="company" class="form-control">
             <option value=""> -- Selecione -- </option>
             @foreach($companies as $company)
                 <option value="{{$company->id}}" @if(old('company') == $company->id) selected @endif )>{{$company->name}}</option>
