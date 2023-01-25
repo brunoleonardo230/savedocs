@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ServiceRequest;
 use Illuminate\Http\Request;
 
-use App\Models\{ Service };
+use App\Models\{ Service , Priority};
 
 class ServiceController extends Controller
 {
@@ -34,9 +34,10 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $services = $this->service->all();
+        $services = Service::all();
+        $priorities = Priority::all('id', 'name');
 
-        return view('admin.services.create', compact('services'));
+        return view('admin.services.create', compact('services','priorities'));
     }
 
     /**
@@ -82,7 +83,8 @@ class ServiceController extends Controller
     public function edit($id)
     {
         $service = $this->service->find($id);
-	    return view('admin.services.edit', compact('service'));
+        $priorities = Priority::all('id', 'name');
+	    return view('admin.services.edit', compact('service','priorities'));
     }
 
     /**

@@ -15,5 +15,10 @@ class Priority extends Model
     {
         return $this->hasMany(Ticket::class, 'priority_id', 'id');
     }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'priority_id', 'id');
+    }
         
 }

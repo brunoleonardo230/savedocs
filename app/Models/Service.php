@@ -9,7 +9,7 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','priority_id'];
 
     public function categories()
     {
@@ -26,5 +26,9 @@ class Service extends Model
         return $this->belongsToMany(Plan::class);
     }
 
+    public function priority()
+    {
+        return $this->belongsTo(Priority::class, 'priority_id');
+    }
         
 }

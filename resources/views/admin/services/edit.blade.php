@@ -20,7 +20,19 @@
                 @error('name')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
-            </div>            
+            </div>
+            <div class="col-md-6">
+                <label>Prioridade: <span class="text-danger">*</span> </label>
+                <select name="priority_id" class="form-control" required>
+                    <option value=""> -- Selecione -- </option>
+                    @foreach($priorities as $priority)
+                        <option value="{{$priority->id}}"
+                                    @if($service->priority_id == $priority->id) selected @endif
+                                > {{$priority->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>         
         </div>
 
         <div class="form-group text-right">

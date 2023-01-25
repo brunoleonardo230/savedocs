@@ -83,15 +83,8 @@
 
         </div>
         <div class="row form-group">
-            <div class="col-md-6">
-                <label>Prioridade: <span class="text-danger">*</span> </label>
-                <select name="priority_id" class="form-control" required>
-                    <option value=""> -- Selecione -- </option>
-                    @foreach($priorities as $priority)
-                        <option value="{{$priority->id}}">{{$priority->name}}</option>
-                    @endforeach
-                </select>
-            </div>
+                <!-- <label>Prioridade: <span class="text-danger">*</span> </label> -->
+                <input type="hidden" id="priority_id" name="priority_id" value="0" />
             <div class="col-md-6">
                 <label>Tipo de Atendimento: <span class="text-danger">*</span> </label>
                 <select name="type_id" class="form-control" required>                    

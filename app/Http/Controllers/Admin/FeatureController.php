@@ -34,7 +34,7 @@ class FeatureController extends Controller
      */
     public function create()
     {
-        $features = $this->feature->all();
+        $features = Feature::orderBy('name', 'asc')->get();
 
         return view('admin.features.create', compact('features'));
     }

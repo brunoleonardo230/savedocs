@@ -15,11 +15,18 @@
                         </p>
                     </h5>
                     
-                    <p> <strong> Data Criação:</strong> <small> {{$ticket->created_at->format('d/m/Y H:i:s')}} </small></p>
-                    <p> <strong> Serviço:</strong> <small> {{$ticket->service->name}} </small></p>
-                    <p> <strong> Email:</strong> <small> {{$ticket->author_email}} </small></p>
-                    <p> <strong> Prioridade:</strong> <small> {{$ticket->priority->name}} </small></p>                   
-
+                    <p> <strong> Data Criação:</strong> <small> {{$ticket->created_at->format('d/m/Y H:i:s')}} </small><br>
+                    <strong> Serviço:</strong> <small> {{$ticket->service->name}} </small><br>
+                    <strong> Email:</strong> <small> {{$ticket->author_email}} </small><br>
+                    <strong> Prioridade:</strong> <small> {{$ticket->priority->name}} </small><br>
+                    <strong> Título:</strong> <small> {{$ticket->title}} </small><br>
+                    <strong> Descrição:</strong> <small> {{$ticket->commet}} </small><br></p>
+                    <p>
+                    @foreach($equipaments as $equipament)                        
+                        <strong> Equipamento:</strong> {{$equipament->name}} 
+                        <strong> Codigo:</strong> {{$equipament->identification_code}} <br>                 
+                    @endforeach
+                    </p>                               
                 </div>      
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

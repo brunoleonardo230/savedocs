@@ -54,4 +54,9 @@ class Ticket extends Model
         return $this->hasMany(Comment::class, 'ticket_id');
     }
 
+    public function equipaments()
+    {
+        return $this->hasMany(Equipament::class, 'user_id', 'id');
+    }
+
 }

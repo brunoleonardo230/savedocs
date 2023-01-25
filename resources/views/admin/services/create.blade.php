@@ -19,7 +19,16 @@
                 @error('name')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
-            </div>            
+            </div>
+            <div class="col-md-6">
+                <label>Prioridade: <span class="text-danger">*</span> </label>
+                <select name="priority_id" class="form-control" required>
+                    <option value=""> -- Selecione -- </option>
+                    @foreach($priorities as $priority)
+                        <option value="{{$priority->id}}">{{$priority->name}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div class="form-group text-right">
@@ -35,7 +44,8 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Recursos</th>                    
+                    <th>Recursos</th>
+                    <th>Prioridade</th>             
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -43,7 +53,8 @@
             @forelse($services as $key => $service)
                 <tr>
                     <td>{{$service->id}}</td>
-                    <td>{{$service->name}}</td>                    
+                    <td>{{$service->name}}</td>
+                    <td>@isset($service->priority->name) {{$service->priority->name}} @endif </td>           
                     <td>
                         <div class="btn-group">
                             <a href="{{route('services.edit', $service->id)}}" class="btn btn-sm btn-outline-primary mr-1"> <i class="fas fa-fw fa-edit"></i> EDITAR</a>

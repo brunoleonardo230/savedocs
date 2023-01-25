@@ -39,7 +39,7 @@ class TicketController extends Controller
     {
         $priorities = Priority::all('id', 'name');
         $types = Type::all('id', 'name');
-        $services = Service::all('id', 'name');
+        $services = Service::orderBy('name', 'asc')->get();
         $user = auth()->user();
         $users = User::orderBy('id', 'desc')->get();
         $all_users = User::all('id','Name');
@@ -63,9 +63,15 @@ class TicketController extends Controller
        //$user_id = auth()->user()->id;   
         
         $user = User::find($request->assigned_to_user_id);
-        //dd($user->name);
+        $services = Service::find($request->service_id);
+
+        if(isset($services->priority_id)){
+            $priority_id = $services->priority_id;
+        }else{
+            $priority_id = 3;
+        }
             
-        $request->request->add(['ticket_code' => $ticket_code, 'status_id' => 1,'assigned_to_user_id' => $request->assigned_to_user_id,'author_name' => $user->name]);
+        $request->request->add(['priority_id' => $priority_id, 'ticket_code' => $ticket_code, 'status_id' => 1,'assigned_to_user_id' => $request->assigned_to_user_id,'author_name' => $user->name]);
         
         try {
 			$this->ticket->create($request->all());
@@ -103,11 +109,13 @@ class TicketController extends Controller
     {
         $ticket = $this->ticket->find($id);
         $statuses = Status::all('id', 'name')->whereNotIn('name',$ticket->status->name);
-
+        //dd($ticket->equipaments);
         $comments = Comment::all()->where('ticket_id',$id)->sortByDesc('created_at');
+
+        $equipaments = $ticket->equipaments;
         //dd($comments);
 
-	    return view('admin.tickets.edit', compact('ticket','statuses','comments'));
+	    return view('admin.tickets.edit', compact('ticket','statuses','comments','equipaments'));
     }
 
     /**

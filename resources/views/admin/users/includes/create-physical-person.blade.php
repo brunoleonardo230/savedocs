@@ -17,7 +17,7 @@
         <select name="company" class="form-control">
             <option value=""> -- Selecione -- </option>
             @foreach($companies as $company)
-                <option value="{{$company->id}}" @if(old('company') == $company->id) selected @endif )>{{$company->name}}</option>
+                <option value="{{$company->id}}" @if(old('company') == $company->id) selected @endif )>{{$company->fantasy_name}}</option>
             @endforeach
         </select>
 

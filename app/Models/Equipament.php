@@ -13,6 +13,11 @@ class Equipament extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class);
+    }
+
     public function getEquipamentType()
     {
         $equipamentType = config('savedocs.equipament_type');
