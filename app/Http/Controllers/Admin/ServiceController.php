@@ -34,7 +34,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $services = Service::all();
+        $services = Service::orderBy('name','asc')->get();
         $priorities = Priority::all('id', 'name');
 
         return view('admin.services.create', compact('services','priorities'));
