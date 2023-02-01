@@ -41,7 +41,7 @@ class TicketController extends Controller
         $types = Type::all('id', 'name');
         $services = Service::orderBy('name', 'asc')->get();
         $user = auth()->user();
-        $users = User::orderBy('id', 'desc')->get();
+        $users = User::where('role_id',3)->orderBy('id', 'desc')->get();
         $all_users = User::all('id','Name');
 
         return view('admin.tickets.create', compact('priorities','types','services','user','users','all_users'));
