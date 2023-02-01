@@ -20,7 +20,7 @@
                     <strong> Email:</strong> <small> {{$ticket->author_email}} </small><br>
                     <strong> Prioridade:</strong> <small> {{$ticket->priority->name}} </small><br>
                     <strong> Título:</strong> <small> {{$ticket->title}} </small><br>
-                    <strong> Descrição:</strong> <small> {{$ticket->commet}} </small><br></p>
+                    <strong> Descrição:</strong> <small> {{$ticket->content}} </small><br></p>
                     <p>
                     @foreach($equipaments as $equipament)                        
                         <strong> Equipamento:</strong> {{$equipament->name}} 

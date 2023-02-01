@@ -128,8 +128,8 @@ class User extends Authenticatable
 
     public function userCompany($id)
     {
-        $user_name = User::select('name')->find($id);
-
+        $user_name = User::select('fantasy_name')->find($id);
+        
         return $user_name;
     }
 }
